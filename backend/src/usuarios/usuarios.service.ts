@@ -4,23 +4,31 @@ import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
 @Injectable()
 export class UsuariosService {
-  create(createUsuarioDto: CreateUsuarioDto) {
-    return 'This action adds a new usuario';
+  async create(createUsuarioDto: CreateUsuarioDto) {
+    return await 'This action adds a new usuario';
   }
 
-  findAll() {
-    return `This action returns all usuarios`;
+  async findAll() {
+    return await `This action returns all usuarios`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} usuario`;
+  async findOneByID(id: number) {
+    return await `This action returns a #${id} usuario`;
   }
 
-  update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-    return `This action updates a #${id} usuario`;
+  async findOneByName(name: string) {
+    return await `This action returns a #${name} usuario`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} usuario`;
+  async findOneByEmail(email: string) {
+    return await `This action returns a #${email} usuario`;
+  }
+
+  async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
+    return await `This action updates a #${id} usuario`;
+  }
+
+  async remove(id: number) {
+    return await `This action removes a #${id} usuario`;
   }
 }
