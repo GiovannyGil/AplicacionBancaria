@@ -19,7 +19,17 @@ export class UsuariosController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usuariosService.findOne(+id);
+    return this.usuariosService.findOneByID(+id);
+  }
+
+  @Get(':primerNombre')
+  findOneName(@Param('primerNombre') primerNombre: string) {
+    return this.usuariosService.findOneByNombre(primerNombre);
+  }
+
+  @Get(':correo')
+  findOneEmail(@Param('correo') correo: string) {
+    return this.usuariosService.findOneByCorreo(correo);
   }
 
   @Patch(':id')
@@ -29,6 +39,12 @@ export class UsuariosController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.usuariosService.remove(+id);
+    return this.usuariosService.softDelete(+id);
+  }
+
+  // ejecución manual de eliminaciones permanentes
+  @Delete('cleanup')
+  cleanDeletedRecords() {
+    return this.usuariosService.cleanDeletedRecords();
   }
 }

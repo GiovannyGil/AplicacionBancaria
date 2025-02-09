@@ -7,37 +7,37 @@ export class Usuario {
     id: number
 
     @Column({ name: 'firstName', type: 'varchar', length: 20, nullable: false })
-    firstName: string
+    primerNombre: string
 
     @Column({ name: 'SecondName', type: 'varchar', length: 20, nullable: false })
-    SecondName: string
+    segundoNombre: string
 
     @Column({ name: 'firstLastName', type: 'varchar', length: 20, nullable: false })
-    firstLastName: string
+    primerApellido: string
 
     @Column({ name: 'secondLastName', type: 'varchar', length: 20, nullable: false })
-    secondLastName: string
+    seundoApellido: string
 
     @Column({ name: 'email', type: 'varchar', length: 30, nullable: false })
-    email: string
+    correo: string
 
     @Column({ name: 'passwordUser', type: 'varchar', length: 100, nullable: false })
-    passwordUser: string
+    clave: string
 
-    @Column({ name: 'address', type: 'varchar', length: 50, nullable: false })
-    address: string
+    @Column({ name: 'address', type: 'varchar', length: 50, nullable: true })
+    dirrecion: string
 
     @Column({ name: 'phone', type: 'varchar', length: 10, nullable: false, unique: true })
-    phone: string
+    celular: string
 
     @Column({ name: 'status', type: 'boolean', nullable: false, default: true })
-    status: boolean
+    estado: boolean
 
     @Column({ name: 'gender', type: 'varchar', length: 1, nullable: false })
-    gender: string
+    genero: string
 
     @Column({ name: 'date', type: 'date', nullable: false })
-    date: Date
+    fechaCreacion: Date
 
     @Column({ type: "date", nullable: false })
     createdAt: Date
@@ -47,5 +47,24 @@ export class Usuario {
 
     @Column({ type: "date", nullable: true })
     deletedAt: Date
+
+    @BeforeInsert()
+    setCreatedAt() {
+        this.createdAt = new Date();
+    }
+
+    @BeforeUpdate()
+    setUpdatedAt() {
+        this.updatedAt = new Date();
+    }
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    async hashPassword() {
+        if (this.clave && !this.clave.startsWith('$2b$')) { // Verifica si no está ya encriptada
+            const salt = await bcrypt.genSalt(10);
+            this.clave = await bcrypt.hash(this.clave, salt);
+        }
+    }
 
 }
