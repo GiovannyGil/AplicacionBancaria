@@ -1,4 +1,4 @@
-OneToMany, OneToOne PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
 import { Usuario } from "src/usuarios/entities/usuario.entity"
 
@@ -7,22 +7,49 @@ export class Ahorro {
     @PrimaryGeneratedColumn({ name: 'id', type: 'int' })
     id: number
 
-    @Column({ name: 'numberCard', type: 'varchar', length: 16, nullable: false })
-    numberCard: string
+    @Column({ name: 'nombre', type: 'varchar', length: 30, nullable: false })
+    nombre: string
 
-    @Column({ name: 'codeCard', type: 'varchar', length: 3, nullable: false })
-    codeCard: string
+    @Column({ name: 'fechaMeta', type: 'date', nullable: false })
+    fechaMeta: Date
 
-    @Column({ name: 'dateCard', type: 'date', nullable: false })
-    dateCard: Date
+    @Column({ name: 'cantidadCuotas', type: 'int', nullable: false })
+    cantidadCuotas: number
 
-    @Column({ name: 'goal', type: 'varchar', length: 20, nullable: false })
-    goal: string
+    @Column({ name: 'montoMeta', type: 'varchar', length: 20, nullable: false })
+    montoMeta: string
 
-    @Column({ name: 'MonthContribution', type: 'varchar', nullable: false })
-    MonthContribution: number
+    @Column({ name: 'AhorroMensual', type: 'varchar', nullable: false })
+    AhorroMensual: number
 
-    @ManyToOne(() => Usuario, usuario => usuario.tarjeta)
-    user: Usuario[]
+    @Column({ name: 'tipo', type: 'int', nullable: false, default: 1 })
+    tipo: number
+
+    /**
+     * un usuario tiene uno o mas ahorros
+     * un ahorro pertenece a un usuario
+     */
+    @ManyToOne(() => Usuario, usuario => usuario.ahorros)
+    @JoinColumn({ name: "usuarioID" })
+    usuario: Usuario
+
+    @Column({ type: "date", nullable: false })
+    createdAt: Date
+
+    @Column({ type: "date", nullable: true })
+    updatedAt: Date
+
+    @Column({ type: "date", nullable: true })
+    deletedAt: Date
+
+    @BeforeInsert()
+    setCreatedAt() {
+        this.createdAt = new Date();
+    }
+
+    @BeforeUpdate()
+    setUpdatedAt() {
+        this.updatedAt = new Date();
+    }
 }
 
