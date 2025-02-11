@@ -16,11 +16,11 @@ export class Ahorro {
     @Column({ name: 'cantidadCuotas', type: 'int', nullable: false })
     cantidadCuotas: number
 
-    @Column({ name: 'montoMeta', type: 'varchar', length: 20, nullable: false })
-    montoMeta: string
+    @Column({ name: 'montoMeta', type: 'int', length: 20, nullable: false })
+    montoMeta: number
 
-    @Column({ name: 'AhorroMensual', type: 'varchar', nullable: false })
-    AhorroMensual: number
+    @Column({ name: 'AhorroMensual', type: 'int', nullable: false })
+    ahorroMensual: number
 
     @Column({ name: 'tipo', type: 'int', nullable: false, default: 1 })
     tipo: number

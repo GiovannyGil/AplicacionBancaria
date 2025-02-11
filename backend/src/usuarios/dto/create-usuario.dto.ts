@@ -24,6 +24,11 @@ export class CreateUsuarioDto {
 
     @IsString({ message: 'el campo debe ser un string' })
     @IsNotEmpty({ message: 'el campo no puede estar vacio' })
+    @Length(1, 20, { message: 'el tamaño es de maximo 20 carácteres' })
+    nombreUsuario: string
+
+    @IsString({ message: 'el campo debe ser un string' })
+    @IsNotEmpty({ message: 'el campo no puede estar vacio' })
     @Length(1, 30, { message: 'el tamaño es de maximo 30 carácteres' })
     correo: string
 
@@ -33,7 +38,7 @@ export class CreateUsuarioDto {
     clave: string
 
     @IsString({ message: 'el campo debe ser un string' })
-    @IsOptional({ message: 'the field is Optional' })
+    @IsOptional({ message: 'el campo es opcional' })
     @Length(1, 50, { message: 'el tamaño es de maximo 50 carácteres' })
     direccion: string
 
@@ -42,7 +47,7 @@ export class CreateUsuarioDto {
     @Length(1, 10, { message: 'el tamaño es de maximo 10 carácteres' })
     celular: string
 
-    @IsString({ message: 'the field is a boolean' })
+    @IsString({ message: 'el campo es boolean' })
     @IsNotEmpty({ message: 'el campo no puede estar vacio' })
     estado: boolean
 
@@ -51,8 +56,11 @@ export class CreateUsuarioDto {
     @Length(1, 1, { message: 'el tamaño es de un carácter' })
     genero: string
 
-    @IsString({ message: 'the field is a date' })
+    @IsString({ message: 'el campo  es una fecha' })
     @IsNotEmpty({ message: 'el campo no puede estar vacio' })
     fechaCreacion: Date
 
+    @IsInt({ message: 'El rol debe ser un número' })
+    @IsNotEmpty({ message: 'El rol es requerido' })
+    rolId: number
 }

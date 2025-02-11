@@ -37,7 +37,7 @@ interface JwtPayload {
       
           return {
             id: usuario.id,
-            nombreUsuario: usuario.NombreUsuario,
+            nombreUsuario: usuario.nombreUsuario,
             rol: usuario.rol?.nombreRol || 'Sin rol'
           };
         } catch (error) {

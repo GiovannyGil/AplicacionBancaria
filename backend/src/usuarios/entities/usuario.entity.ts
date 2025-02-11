@@ -4,6 +4,7 @@ import { Ahorro } from "src/ahorros/entities/ahorro.entity";
 import { Gasto } from "src/gastos/entities/gasto.entity";
 import { Credito } from "src/creditos/entities/credito.entity";
 import { Tarjeta } from "src/tarjetas/entities/tarjeta.entity";
+import { Role } from "src/roles/entities/role.entity";
 
 @Entity({ name: 'Usuarios' })
 export class Usuario {
@@ -16,11 +17,14 @@ export class Usuario {
     @Column({ name: 'segundoNombre', type: 'varchar', length: 20, nullable: false })
     segundoNombre: string
 
-    @Column({ name: 'firsprimerApellidotLastName', type: 'varchar', length: 20, nullable: false })
+    @Column({ name: 'primerApellido', type: 'varchar', length: 20, nullable: false })
     primerApellido: string
 
     @Column({ name: 'seundoApellido', type: 'varchar', length: 20, nullable: false })
     seundoApellido: string
+
+    @Column({ name: 'nombreUsuario', type: 'varchar', length: 20, nullable: false })
+    nombreUsuario: string
 
     @Column({ name: 'correo', type: 'varchar', length: 30, nullable: false })
     correo: string
@@ -42,6 +46,15 @@ export class Usuario {
 
     @Column({ name: 'fechaCreacion', type: 'date', nullable: false })
     fechaCreacion: Date
+
+    /**
+     * Relacion N:1 con Role
+     * Un usuario solo tiene un rol
+     * Un rol se puede repetir en varios usuarios
+    */
+    @ManyToOne(() => Role, (role) => role.usuarios) // Relacion N:1 con Role
+    @JoinColumn({ name: "rolId" }) // tabla intermedia (detalles) > se pone en la tabla que tiene la llave foranea
+    rol: Role
 
     /**
      * un usuario tiene uno o mas ahorros
