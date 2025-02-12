@@ -28,7 +28,19 @@ export class AhorrosController {
   }
 
   @Delete(':id')
+  // @Roles('Administrador')
   remove(@Param('id') id: string) {
+    return this.ahorrosService.softDelete(+id);
+  }
+
+  // ejecución manual de eliminaciones permanentes
+  @Delete('cleanup')
+  cleanDeletedRecords() {
+    return this.ahorrosService.cleanDeletedRecords();
+  }
+
+  @Delete(':id')
+  removedefinitive(@Param('id') id: string) {
     return this.ahorrosService.remove(+id);
   }
 }

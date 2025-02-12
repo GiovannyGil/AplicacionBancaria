@@ -19,8 +19,8 @@ export class Credito {
     @Column({ name: 'cantidadCuotas', type: 'int', nullable: false })
     cantidadCuotas: number
 
-    @Column({ name: 'montoMeta', type: 'varchar', length: 20, nullable: false })
-    montoFinal: string
+    @Column({ name: 'montoMeta', type: 'int', nullable: false })
+    montoFinal: number
 
     @Column({ name: 'interesMensual', type: 'int', nullable: false })
     interesMensual: number
@@ -36,7 +36,7 @@ export class Credito {
 
     @ManyToOne(() => Usuario, usuario => usuario.creditos)
     @JoinColumn({ name: "usuarioID" })
-    usuario: Usuario[]
+    usuario: Usuario
 
     @Column({ type: "date", nullable: false })
     createdAt: Date

@@ -81,7 +81,7 @@ export class Usuario {
     * un usuario tiene uno o mas gastos
     * un gasto pertenece a un usuario
     */
-    @OneToMany(() => Tarjeta, tarjeta => tarjeta.usuario)
+    @OneToMany(() => Credito, credito => credito.usuario)
     creditos: Credito[]
 
     @Column({ type: "date", nullable: false })

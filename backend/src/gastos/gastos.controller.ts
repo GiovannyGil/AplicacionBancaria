@@ -28,7 +28,19 @@ export class GastosController {
   }
 
   @Delete(':id')
+  // @Roles('Administrador')
   remove(@Param('id') id: string) {
+    return this.gastosService.softDelete(+id);
+  }
+
+  // ejecución manual de eliminaciones permanentes
+  @Delete('cleanup')
+  cleanDeletedRecords() {
+    return this.gastosService.cleanDeletedRecords();
+  }
+
+  @Delete(':id')
+  removedefinitive(@Param('id') id: string) {
     return this.gastosService.remove(+id);
   }
 }
