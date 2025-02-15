@@ -22,13 +22,20 @@ export class TarjetasController {
     return this.tarjetasService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('update/:id')
   update(@Param('id') id: string, @Body() updateTarjetaDto: UpdateTarjetaDto) {
     return this.tarjetasService.update(+id, updateTarjetaDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.tarjetasService.remove(+id);
   }
+
+  @Get('tarjetasxUsuario/:id')
+  obtenerTarjetasUsuario(@Param('id') id: number) {
+    return this.tarjetasService.obtenerTarjetasUsuario(+id);
+  }
+
+
 }
