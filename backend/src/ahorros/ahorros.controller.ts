@@ -2,33 +2,38 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AhorrosService } from './ahorros.service';
 import { CreateAhorroDto } from './dto/create-ahorro.dto';
 import { UpdateAhorroDto } from './dto/update-ahorro.dto';
+import { Roles } from 'src/roles/decorators/roles.decorator';
 
 @Controller('ahorros')
 export class AhorrosController {
   constructor(private readonly ahorrosService: AhorrosService) {}
 
   @Post()
+  @Roles('Administrador', 'Usuario')
   create(@Body() createAhorroDto: CreateAhorroDto) {
     return this.ahorrosService.create(createAhorroDto);
   }
 
   @Get()
+  @Roles('Administrador', 'Usuario')
   findAll() {
     return this.ahorrosService.findAll();
   }
 
   @Get(':id')
+  @Roles('Administrador', 'Usuario')
   findOne(@Param('id') id: string) {
     return this.ahorrosService.findOne(+id);
   }
 
   @Patch(':id')
+  @Roles('Administrador', 'Usuario')
   update(@Param('id') id: string, @Body() updateAhorroDto: UpdateAhorroDto) {
     return this.ahorrosService.update(+id, updateAhorroDto);
   }
 
   @Delete(':id')
-  // @Roles('Administrador')
+  @Roles('Administrador', 'Usuario')
   remove(@Param('id') id: string) {
     return this.ahorrosService.softDelete(+id);
   }
@@ -40,6 +45,7 @@ export class AhorrosController {
   }
 
   @Delete(':id')
+  @Roles('Administrador', 'Usuario')
   removedefinitive(@Param('id') id: string) {
     return this.ahorrosService.remove(+id);
   }

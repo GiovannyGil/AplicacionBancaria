@@ -8,23 +8,28 @@ export class Tarjeta {
     @PrimaryGeneratedColumn({ name: 'id', type: 'int' })
     id: number
 
-    @Column({ name: 'numero', type: 'varchar', length: 16, nullable: false })
+    @Column({ name: 'numero', type: 'varchar', length: 16, nullable: false, unique: true })
     numero: string
+
+    @Column({ name: 'codigo', type: 'varchar', length: 3, nullable: false })
+    codigo: string
+
+    @Column({ name: 'fechaExpira', type: 'date', nullable: true })
+    fechaExpira: Date
+
+    // -----------
 
     @Column({ name: 'cupoTotal', type: 'decimal', precision: 10, scale: 2, nullable: true })
     cupoTotal: number
 
-    @Column({ name: 'cupoDisponible', type: 'decimal', length: 3, scale: 2, nullable: true })
+    @Column({ name: 'cupoDisponible', type: 'decimal', precision: 10, scale: 2, nullable: true })
     cupoDisponible: number
 
-    @Column({ name: 'deuda', type: 'decimal', length: 3, scale: 2, nullable: false })
+    @Column({ name: 'deuda', type: 'decimal', precision: 10, scale: 2, nullable: false })
     deuda: number
 
     @Column({ name: 'saldoDebito', type: 'decimal', precision: 10, scale: 2, nullable: true })
     saldoDebito: number;
-
-    @Column({ name: 'codigo', type: 'varchar', length: 3, nullable: false })
-    codigo: string
 
     @Column({ name: 'tipo', type: 'int', nullable: false, default: 1 })
     tipo: number
@@ -34,9 +39,6 @@ export class Tarjeta {
 
     @Column({ name: 'fechaCompra', type: 'date', nullable: true })
     fechaCompra: Date
-
-    @Column({ name: 'fechaExpira', type: 'date', nullable: true })
-    fechaExpira: Date
 
     @Column({ name: 'estado', type: 'boolean', nullable: true, default: false })
     estado: boolean

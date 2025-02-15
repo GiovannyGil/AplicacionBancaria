@@ -4,7 +4,8 @@ import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 import { RolesGuard } from 'src/roles/guards/roles.guard';
-import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Roles } from './decorators/roles.decorator';
+
 @Controller('roles')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class RolesController {
@@ -16,19 +17,19 @@ export class RolesController {
   }
 
   @Get()
-  @Roles('Administrador', 'Empleado', 'Contador', 'Analista')
+  @Roles('Administrador')
   async findAll() {
     return await this.rolesService.findAll();
   }
 
   @Get(':id')
-  @Roles('Administrador', 'Empleado', 'Contador', 'Analista')
+  @Roles('Administrador')
   async findOneByID(@Param('id') id: string) {
     return await this.rolesService.findOneByID(+id);
   }
 
   @Get(':nombreRol')
-  @Roles('Administrador', 'Empleado', 'Contador', 'Analista')
+  @Roles('Administrador')
   async findOneByNombre(@Param('nombreRol') nombreRol: string) {
     return await this.rolesService.findOneByNombre(nombreRol);
   }

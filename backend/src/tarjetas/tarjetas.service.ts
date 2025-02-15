@@ -92,13 +92,15 @@ export class TarjetasService {
 
   async remove(id: number) {
     try {
-      const tarjeta = await this.tarjetaRepository.findOneBy({ id });
-      if (!tarjeta) throw new NotFoundException('No se encontraro tarjeta registrada.');
-      const eliminarTarjeta = await this.tarjetaRepository.remove(tarjeta);
-      if (!eliminarTarjeta) throw new NotFoundException('No se pudo eliminar la tarjeta.');
-      return eliminarTarjeta;
+      const tarjeta = await this.tarjetaRepository.findOne({ where: { id, deletedAt: null } });
+      if (!tarjeta) throw new NotFoundException('No se encontró la tarjeta registrada.');
+
+      tarjeta.deletedAt = new Date();
+      await this.tarjetaRepository.save(tarjeta);
+
+      return { message: 'Tarjeta eliminada correctamente' };
     } catch (error) {
-      throw new InternalServerErrorException(`Error al crear la tarjeta: ${error.message}`);
+      throw new InternalServerErrorException(`Error al eliminar la tarjeta: ${error.message}`);
     }
   }
 
@@ -117,7 +119,6 @@ export class TarjetasService {
       throw new InternalServerErrorException(`Error al eliminar la tarjeta: ${error?.message || 'Error desconocido'}`);
     }
   }
-
 
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT) // Tarea programada diariamente a la medianoche
   async cleanDeletedRecords() {
@@ -143,6 +144,35 @@ export class TarjetasService {
   }
 
   // metodo para asignar una tarjeta a un usuario
+  async asignarTarjetaUsuario(idUsuario: number, numero: string): Promise<{ mensaje: string, tarjetaId: number, usuarioId: number }> {
+    try {
+      // Buscar el usuario por id
+      const usuario = await this.usuariosRepository.findOne({ where: { id: idUsuario, deletedAt: null } });
+      if (!usuario) throw new NotFoundException('No se encontró el usuario');
+
+      // Buscar la tarjeta por número y asegurarse de cargar la relación con usuario
+      const tarjeta = await this.tarjetaRepository.findOne({
+        where: { numero, deletedAt: null },
+        relations: ['usuario'],
+      });
+      if (!tarjeta) throw new NotFoundException('No se encontró la tarjeta');
+
+      // Verificar que la tarjeta no esté asignada a otro usuario
+      if (tarjeta.usuario) throw new BadRequestException('La tarjeta ya está asignada a otro usuario');
+
+      // Asignar la tarjeta al usuario
+      tarjeta.usuario = usuario;
+
+      // Guardar los cambios en la base de datos
+      await this.tarjetaRepository.save(tarjeta);
+
+      // Retornar mensaje de éxito con información relevante
+      return { mensaje: 'Tarjeta asignada correctamente', tarjetaId: tarjeta.id, usuarioId: usuario.id };
+    } catch (error) {
+      throw new InternalServerErrorException(`Error al asignar la tarjeta al usuario: ${error.message}`);
+    }
+  }
+
 
   // metodo para obtener las tarjetas de un usuario
   async obtenerTarjetasUsuario(idUsuario: number) {
