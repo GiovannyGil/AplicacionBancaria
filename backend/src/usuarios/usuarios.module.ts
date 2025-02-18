@@ -3,9 +3,14 @@ import { UsuariosService } from './usuarios.service';
 import { UsuariosController } from './usuarios.controller';
 import { Usuario } from './entities/usuario.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Role } from 'src/roles/entities/role.entity';
+import { Credito } from 'src/creditos/entities/credito.entity';
+import { Ahorro } from 'src/ahorros/entities/ahorro.entity';
+import { Gasto } from 'src/gastos/entities/gasto.entity';
+import { Tarjeta } from 'src/tarjetas/entities/tarjeta.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Usuario])],
+  imports: [TypeOrmModule.forFeature([Usuario, Role, Credito, Ahorro, Gasto, Tarjeta])],
   controllers: [UsuariosController],
   providers: [UsuariosService],
   exports: [UsuariosService, TypeOrmModule]

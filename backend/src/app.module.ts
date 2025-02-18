@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import ConnexionDDBB from './DataBase/conexion';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './auth/auth.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
@@ -11,6 +10,9 @@ import { AhorrosModule } from './ahorros/ahorros.module';
 import { GastosModule } from './gastos/gastos.module';
 import { DashModule } from './dash/dash.module';
 import { TarjetasModule } from './tarjetas/tarjetas.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './auth/guards/roles.guard';
+import ConnexionDDBB from './DataBase/conexion';
 
 @Module({
   imports: [
@@ -19,6 +21,12 @@ import { TarjetasModule } from './tarjetas/tarjetas.module';
 
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+    AppService
+  ],
 })
 export class AppModule {}

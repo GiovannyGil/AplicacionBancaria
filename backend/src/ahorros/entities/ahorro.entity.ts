@@ -16,7 +16,7 @@ export class Ahorro {
     @Column({ name: 'cantidadCuotas', type: 'int', nullable: false })
     cantidadCuotas: number
 
-    @Column({ name: 'montoMeta', type: 'int', length: 20, nullable: false })
+    @Column({ name: 'montoMeta', type: 'int', nullable: false })
     montoMeta: number
 
     @Column({ name: 'AhorroMensual', type: 'int', nullable: false })
