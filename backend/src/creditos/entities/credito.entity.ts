@@ -34,8 +34,8 @@ export class Credito {
     @Column({ name: 'tipo', type: 'int', nullable: false, default: 1 })
     tipo: number
 
-    @ManyToOne(() => Usuario, usuario => usuario.creditos)
-    @JoinColumn({ name: "usuarioID" })
+    @ManyToOne(() => Usuario, (usuario) => usuario.creditos)
+    @JoinColumn()
     usuario: Usuario
 
     @Column({ type: "date", nullable: false })

@@ -29,8 +29,8 @@ export class Ahorro {
      * un usuario tiene uno o mas ahorros
      * un ahorro pertenece a un usuario
      */
-    @ManyToOne(() => Usuario, usuario => usuario.ahorros)
-    @JoinColumn({ name: "usuarioID" })
+    @ManyToOne(() => Usuario, (usuario) => usuario.ahorros)
+    @JoinColumn()
     usuario: Usuario
 
     @Column({ type: "date", nullable: false })

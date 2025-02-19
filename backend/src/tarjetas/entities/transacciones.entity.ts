@@ -6,7 +6,7 @@ export class Transaccion {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => Tarjeta, tarjeta => tarjeta.transacciones)
+    @ManyToOne(() => Tarjeta, (tarjeta) => tarjeta.transacciones)
     @JoinColumn({ name: "tarjetaID" })
     tarjeta: Tarjeta;
 

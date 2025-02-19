@@ -51,8 +51,8 @@ export class Tarjeta {
      * un usuario tiene uno o mas gastos
      * un gasto pertenece a un usuario
      */
-    @ManyToOne(() => Usuario, usuario => usuario.tarjetas)
-    @JoinColumn({ name: "usuarioID" })
+    @ManyToOne(() => Usuario, (usuario) => usuario.tarjetas)
+    @JoinColumn()
     usuario: Usuario
 
     @Column({ type: "date", nullable: false })

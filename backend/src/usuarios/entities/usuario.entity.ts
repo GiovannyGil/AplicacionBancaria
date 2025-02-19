@@ -60,28 +60,28 @@ export class Usuario {
      * un usuario tiene uno o mas ahorros
      * un ahorro pertenece a un usuario
      */
-    @OneToMany(() => Ahorro, ahorro => ahorro.usuario)
+    @OneToMany(() => Ahorro, (ahorro) => ahorro.usuario)
     ahorros: Ahorro[]
 
     /**
      * un usuario tiene uno o mas gastos
      * un gasto pertenece a un usuario
      */
-    @OneToMany(() => Gasto, gasto => gasto.usuario)
+    @OneToMany(() => Gasto, (gasto) => gasto.usuario)
     gastos: Gasto[]
 
     /**
     * un usuario tiene uno o mas gastos
     * un gasto pertenece a un usuario
     */
-    @OneToMany(() => Tarjeta, tarjeta => tarjeta.usuario)
+    @OneToMany(() => Tarjeta, (tarjeta) => tarjeta.usuario)
     tarjetas: Tarjeta[]
 
     /**
     * un usuario tiene uno o mas gastos
     * un gasto pertenece a un usuario
     */
-    @OneToMany(() => Credito, credito => credito.usuario)
+    @OneToMany(() => Credito, (credito) => credito.usuario)
     creditos: Credito[]
 
     @Column({ type: "date", nullable: false })
