@@ -1,10 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { TarjetasService } from './tarjetas.service';
 import { CreateTarjetaDto } from './dto/create-tarjeta.dto';
 import { UpdateTarjetaDto } from './dto/update-tarjeta.dto';
 import { Roles } from 'src/roles/decorators/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('tarjetas')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class TarjetasController {
   constructor(private readonly tarjetasService: TarjetasService) {}
 

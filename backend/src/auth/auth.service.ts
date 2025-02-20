@@ -22,11 +22,11 @@ export class AuthService {
             const usuarioCorreo = await this.usuariosService.findOneByCorreo(correo);
             if (!usuario || !usuarioCorreo) throw new UnauthorizedException('Usuario Inválido')
 
-            const claveValida = await bcrypt.compare(clave, usuario.clave || usuarioCorreo.clave);
-            if (!claveValida) throw new UnauthorizedException('Clave inválida')
+            const isPasswordValid = await bcrypt.compare(clave, usuario.clave || usuarioCorreo.clave);
+            if (!isPasswordValid) throw new UnauthorizedException('Clave inválida')
 
             // Asegúrate de cargar el rol
-              await usuario.rol || usuarioCorreo.rol;
+            await usuario.rol || usuarioCorreo.rol;
 
             const payload = {
                 sub: usuario.id || usuarioCorreo.id,

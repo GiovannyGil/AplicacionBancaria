@@ -16,7 +16,7 @@ export class AuthController {
 
   @Post('logout')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('Administrador', 'Empleado', 'Contador', 'Analista')
+  @Roles('Administrador', 'Usuario')
   logout(@Req() req: Request) {
     const token = req.headers.authorization?.split(' ')[1]; // Extraer el token del header
     if (!token) throw new UnauthorizedException('Token no proporcionado')

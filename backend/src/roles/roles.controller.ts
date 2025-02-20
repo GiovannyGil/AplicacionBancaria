@@ -7,7 +7,7 @@ import { RolesGuard } from 'src/roles/guards/roles.guard';
 import { Roles } from './decorators/roles.decorator';
 
 @Controller('roles')
-@UseGuards(JwtAuthGuard, RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard) // comentar esta linea para agregar un rol sin estar obligado a autenticarse
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 

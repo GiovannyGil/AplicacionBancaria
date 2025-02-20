@@ -57,7 +57,7 @@ export class CreateUsuarioDto {
     genero: string
 
     @IsString({ message: 'el campo  es una fecha' })
-    @IsNotEmpty({ message: 'el campo no puede estar vacio' })
+    @IsOptional({ message: 'el campo es opcional' })
     fechaCreacion: Date
 
     @IsInt({ message: 'El rol debe ser un número' })

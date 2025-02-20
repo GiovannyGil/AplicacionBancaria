@@ -13,11 +13,12 @@ import { TarjetasModule } from './tarjetas/tarjetas.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/guards/roles.guard';
 import ConnexionDDBB from './DataBase/conexion';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(ConnexionDDBB), // <- conexión a la base de datos
-    ScheduleModule.forRoot(), AuthModule, UsuariosModule, CreditosModule, AhorrosModule, GastosModule, DashModule, TarjetasModule, // <- para la programación de tareas automaticas
+    ScheduleModule.forRoot(), AuthModule, RolesModule,UsuariosModule, CreditosModule, AhorrosModule, GastosModule, DashModule, TarjetasModule, // <- para la programación de tareas automaticas
 
   ],
   controllers: [AppController],

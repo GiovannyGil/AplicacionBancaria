@@ -44,7 +44,7 @@ export class Usuario {
     @Column({ name: 'genero', type: 'varchar', length: 1, nullable: false })
     genero: string
 
-    @Column({ name: 'fechaCreacion', type: 'date', nullable: false })
+    @Column({ name: 'fechaCreacion', type: 'date', nullable: true, default: () => 'CURRENT_TIMESTAMP' })
     fechaCreacion: Date
 
     /**
