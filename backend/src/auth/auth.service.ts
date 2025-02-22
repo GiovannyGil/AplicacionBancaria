@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
@@ -16,34 +16,55 @@ export class AuthService {
     ) { }
 
     // método para iniciar sesión
-    async login(nombreUsuario: string, correo: string, clave: string): Promise<{ access_token: string }> {
+    async login(nombreUsuario: string, clave: string): Promise<{ access_token: string }> {
         try {
-            const usuario = await this.usuariosService.findOneByNombre(nombreUsuario);
-            const usuarioCorreo = await this.usuariosService.findOneByCorreo(correo);
-            if (!usuario || !usuarioCorreo) throw new UnauthorizedException('Usuario Inválido')
+            console.log('Intentando iniciar sesión con:', nombreUsuario);
 
-            const isPasswordValid = await bcrypt.compare(clave, usuario.clave || usuarioCorreo.clave);
-            if (!isPasswordValid) throw new UnauthorizedException('Clave inválida')
+            // Buscar usuario
+            const usuario = await this.usuariosService.findOneByNombreUsuario(nombreUsuario);
+            if (!usuario) {
+                console.log(`Usuario ${nombreUsuario} no encontrado`);
+                throw new NotFoundException(`El usuario con NombreUsuario "${nombreUsuario}" no existe o ya fue eliminado.`);
+            }
 
-            // Asegúrate de cargar el rol
-            await usuario.rol || usuarioCorreo.rol;
+            console.log('Usuario encontrado:', usuario);
 
+            // Verificar contraseña
+            const isPasswordValid = await bcrypt.compare(clave, usuario.clave);
+            if (!isPasswordValid) {
+                console.log('Clave incorrecta');
+                throw new UnauthorizedException('Clave inválida');
+            }
+
+            console.log('Clave correcta');
+
+            // Cargar el rol
+            const rol = usuario.rol?.nombreRol || 'Sin rol';
+
+            // Crear payload del JWT
             const payload = {
-                sub: usuario.id || usuarioCorreo.id,
-                nombreUsuario: usuario.nombreUsuario || usuarioCorreo.nombreUsuario,
-                rol: usuario.rol?.nombreRol || usuarioCorreo.rol?.nombreRol || 'Sin rol'
+                sub: usuario.id,
+                nombreUsuario: usuario.nombreUsuario,
+                rol: rol
             };
 
+            console.log('Payload para el token:', payload);
+
+            // Generar el token
             const token = await this.jwtService.signAsync(payload, {
                 secret: process.env.JWT_SECRET || 'SECRET-KEY',
                 expiresIn: '1h'
             });
 
+            console.log('Token generado correctamente');
+
             return { access_token: token };
         } catch (error) {
+            console.error('Error en login:', error.message);
             throw new UnauthorizedException('Credenciales inválidas', error.message);
         }
     }
+
 
     // Método para invalidar un token
     logout(token: string): void {

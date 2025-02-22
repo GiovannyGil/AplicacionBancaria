@@ -10,9 +10,10 @@ export class AuthController {
     constructor(private readonly authService: AuthService) { }
 
   @Post('login')
-  async login(@Body('nombreUsuario') nombreUsuario: string, @Body('correo') correo: string, @Body('clave') clave: string) {
-    return this.authService.login(nombreUsuario, correo,clave);
+  async login(@Body('nombreUsuario') nombreUsuario: string, @Body('clave') clave: string) {
+    return this.authService.login(nombreUsuario, clave);
   }
+
 
   @Post('logout')
   @UseGuards(JwtAuthGuard, RolesGuard)
