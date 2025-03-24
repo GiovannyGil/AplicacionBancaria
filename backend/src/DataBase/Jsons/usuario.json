@@ -12,3 +12,23 @@
     "genero": "masculino",
     "rolId": 1
 }
+
+{
+    "sql": "insert into Usuarios (primerNombre, segundoNombre, primerApellido, segundoApellido, nombreUsuario, correo, clave, direccion, celular, estado, genero, fechaCreacion, createdAt,rolId) 
+    values (
+    "arbey",
+    "giovanny",
+    "chica",
+    "gil",
+    "GioGil",
+    "arvey950@gmail.com",
+    "123456",
+    "cll 81 a",
+    "3043209834",
+    1,
+    "masculino",
+    "24/03/2025",
+    "24/03/2025",
+    1
+    )"
+}

@@ -3,3 +3,7 @@
     "descripcion": "",
     "estado": 1
 }
+
+{
+    "sql" : "insert into Roles (nombreRol, descripcion, estado, createdAt) values ("Usuario", "Usuario", 1, "24/03/2025")"
+}

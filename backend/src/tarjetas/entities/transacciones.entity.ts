@@ -16,6 +16,6 @@ export class Transaccion {
     @Column({ name: 'tipo', type: 'varchar', length: 10 }) // "compra" o "pago"
     tipo: string;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    @Column({ type: 'time', default: () => 'CURRENT_TIMESTAMP' })
     fecha: Date;
 }

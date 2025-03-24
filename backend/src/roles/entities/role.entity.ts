@@ -15,7 +15,7 @@ export class Role {
     @Column({ type: "int", nullable: false, default: 1, name: "estado" })
     estado: number
 
-    @Column({ type: "date", nullable: false })
+    @Column({ type: "date", nullable: true })
     createdAt: Date
 
     @Column({ type: "date", nullable: true })
@@ -31,7 +31,7 @@ export class Role {
     */
     @OneToMany(() => Usuario, (usuario) => usuario.rol)
     usuarios: Usuario[]
-    
+
     @BeforeInsert()
     setCreatedAt() {
         this.createdAt = new Date();

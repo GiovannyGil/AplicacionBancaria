@@ -20,8 +20,8 @@ export class Usuario {
     @Column({ name: 'primerApellido', type: 'varchar', length: 20, nullable: false })
     primerApellido: string
 
-    @Column({ name: 'seundoApellido', type: 'varchar', length: 20, nullable: false })
-    seundoApellido: string
+    @Column({ name: 'segundoApellido', type: 'varchar', length: 20, nullable: false })
+    segundoApellido: string
 
     @Column({ name: 'nombreUsuario', type: 'varchar', length: 20, nullable: false })
     nombreUsuario: string
@@ -32,8 +32,8 @@ export class Usuario {
     @Column({ name: 'clave', type: 'varchar', length: 100, nullable: false })
     clave: string
 
-    @Column({ name: 'dirrecion', type: 'varchar', length: 50, nullable: true })
-    dirrecion: string
+    @Column({ name: 'direccion', type: 'varchar', length: 50, nullable: true })
+    direccion: string
 
     @Column({ name: 'celular', type: 'varchar', length: 10, nullable: false, unique: true })
     celular: string
@@ -43,9 +43,6 @@ export class Usuario {
 
     @Column({ name: 'genero', type: 'varchar', length: 1, nullable: false })
     genero: string
-
-    @Column({ name: 'fechaCreacion', type: 'date', nullable: true, default: () => 'CURRENT_TIMESTAMP' })
-    fechaCreacion: Date
 
     /**
      * Relacion N:1 con Role
