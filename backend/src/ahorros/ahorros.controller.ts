@@ -23,19 +23,19 @@ export class AhorrosController {
     return this.ahorrosService.findAll();
   }
 
-  @Get(':id')
+  @Get('id/:id')
   @Roles('Administrador', 'Usuario')
   findOne(@Param('id') id: string) {
     return this.ahorrosService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('update/:id')
   @Roles('Administrador', 'Usuario')
   update(@Param('id') id: string, @Body() updateAhorroDto: UpdateAhorroDto) {
     return this.ahorrosService.update(+id, updateAhorroDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   @Roles('Administrador', 'Usuario')
   remove(@Param('id') id: string) {
     return this.ahorrosService.softDelete(+id);
@@ -47,7 +47,7 @@ export class AhorrosController {
     return this.ahorrosService.cleanDeletedRecords();
   }
 
-  @Delete(':id')
+  @Delete('removedefinitive/:id')
   @Roles('Administrador', 'Usuario')
   removedefinitive(@Param('id') id: string) {
     return this.ahorrosService.remove(+id);

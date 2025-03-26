@@ -20,19 +20,19 @@ export class GastosController {
     return this.gastosService.findAll();
   }
 
-  @Get(':id')
+  @Get('id/:id')
   @Roles('Administrador', 'Usuario')
   findOne(@Param('id') id: string) {
     return this.gastosService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('update/:id')
   @Roles('Administrador', 'Usuario')
   update(@Param('id') id: string, @Body() updateGastoDto: UpdateGastoDto) {
     return this.gastosService.update(+id, updateGastoDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   @Roles('Administrador', 'Usuario')
   remove(@Param('id') id: string) {
     return this.gastosService.softDelete(+id);
@@ -44,7 +44,7 @@ export class GastosController {
     return this.gastosService.cleanDeletedRecords();
   }
 
-  @Delete(':id')
+  @Delete('removedefinitive/:id')
   @Roles('Administrador', 'Usuario')
   removedefinitive(@Param('id') id: string) {
     return this.gastosService.remove(+id);

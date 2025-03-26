@@ -23,19 +23,19 @@ export class UsuariosController {
     return this.usuariosService.findAll();
   }
 
-  @Get(':id')
+  @Get('id/:id')
   @Roles('Administrador', 'Usuario')
   findOne(@Param('id') id: string) {
     return this.usuariosService.findOneByID(+id);
   }
 
-  @Get(':primerNombre')
+  @Get('nombre/:primerNombre')
   @Roles('Administrador', 'Usuario')
   findOneName(@Param('primerNombre') primerNombre: string) {
     return this.usuariosService.findOneByNombre(primerNombre);
   }
 
-  @Get(':correo')
+  @Get('correo/:correo')
   @Roles('Administrador', 'Usuario')
   findOneEmail(@Param('correo') correo: string) {
     return this.usuariosService.findOneByCorreo(correo);

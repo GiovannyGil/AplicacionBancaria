@@ -23,7 +23,7 @@ export class TarjetasController {
     return this.tarjetasService.findAll();
   }
 
-  @Get(':id')
+  @Get('id/:id')
   @Roles('Administrador')
   findOne(@Param('id') id: string) {
     return this.tarjetasService.findOne(+id);

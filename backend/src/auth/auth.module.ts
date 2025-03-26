@@ -12,10 +12,6 @@ import { RolesGuard } from './guards/roles.guard';
 
 @Module({
   imports: [
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || 'SECRET-KEY',
-      signOptions: { expiresIn: '60s' },
-    }),
     // TypeOrmModule.forFeature([Usuario]),
     UsuariosModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),

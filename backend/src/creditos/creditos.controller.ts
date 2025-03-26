@@ -23,19 +23,19 @@ export class CreditosController {
     return this.creditosService.findAll();
   }
 
-  @Get(':id')
+  @Get('id/:id')
   @Roles('Administrador', 'Usuario')
   findOne(@Param('id') id: string) {
     return this.creditosService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('update/:id')
   @Roles('Administrador', 'Usuario')
   update(@Param('id') id: string, @Body() updateCreditoDto: UpdateCreditoDto) {
     return this.creditosService.update(+id, updateCreditoDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   @Roles('Administrador', 'Usuario')
   remove(@Param('id') id: string) {
     return this.creditosService.softDelete(+id);
@@ -47,7 +47,7 @@ export class CreditosController {
     return this.creditosService.cleanDeletedRecords();
   }
 
-  @Delete(':id')
+  @Delete('removedefinitive/:id')
   @Roles('Administrador', 'Usuario')
   removedefinitive(@Param('id') id: string) {
     return this.creditosService.remove(+id);
