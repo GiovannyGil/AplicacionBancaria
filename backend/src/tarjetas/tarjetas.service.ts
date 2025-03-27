@@ -44,7 +44,7 @@ export class TarjetasService {
       if (tarjetas.length === 0) throw new NotFoundException('No se encontraron tarjetas registradas.');
       return tarjetas;
     } catch (error) {
-      throw new InternalServerErrorException(`Error al crear la tarjeta: ${error.message}`);
+      throw new InternalServerErrorException(`Error al encontrar las tarjetas: ${error.message}`);
     }
   }
 
@@ -86,7 +86,7 @@ export class TarjetasService {
 
       return tarjetaActualizada;
     } catch (error) {
-      throw new InternalServerErrorException(`Error al crear la tarjeta: ${error.message}`);
+      throw new InternalServerErrorException(`Error al actualizar la tarjeta: ${error.message}`);
     }
   }
 

@@ -2,41 +2,34 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { AhorrosService } from './ahorros.service';
 import { CreateAhorroDto } from './dto/create-ahorro.dto';
 import { UpdateAhorroDto } from './dto/update-ahorro.dto';
-import { Roles } from 'src/roles/decorators/roles.decorator';
-import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 
 @Controller('ahorros')
-@UseGuards(JwtAuthGuard, RolesGuard)
+@UseGuards(JwtAuthGuard)
 export class AhorrosController {
   constructor(private readonly ahorrosService: AhorrosService) {}
 
   @Post()
-  @Roles('Administrador', 'Usuario')
   create(@Body() createAhorroDto: CreateAhorroDto) {
     return this.ahorrosService.create(createAhorroDto);
   }
 
   @Get()
-  @Roles('Administrador', 'Usuario')
   findAll() {
     return this.ahorrosService.findAll();
   }
 
   @Get('id/:id')
-  @Roles('Administrador', 'Usuario')
   findOne(@Param('id') id: string) {
     return this.ahorrosService.findOne(+id);
   }
 
   @Patch('update/:id')
-  @Roles('Administrador', 'Usuario')
   update(@Param('id') id: string, @Body() updateAhorroDto: UpdateAhorroDto) {
     return this.ahorrosService.update(+id, updateAhorroDto);
   }
 
   @Delete('delete/:id')
-  @Roles('Administrador', 'Usuario')
   remove(@Param('id') id: string) {
     return this.ahorrosService.softDelete(+id);
   }
@@ -48,7 +41,6 @@ export class AhorrosController {
   }
 
   @Delete('removedefinitive/:id')
-  @Roles('Administrador', 'Usuario')
   removedefinitive(@Param('id') id: string) {
     return this.ahorrosService.remove(+id);
   }

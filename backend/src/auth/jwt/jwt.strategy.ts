@@ -1,47 +1,19 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { Strategy, ExtractJwt } from 'passport-jwt';
-import { UsuariosService } from 'src/usuarios/usuarios.service';
-import { AuthService } from '../auth.service';
-
-interface JwtPayload {
-  sub: number;
-  nombreUsuario: string;
-  rol?: string;
-}
+import { ExtractJwt, Strategy } from 'passport-jwt';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private readonly usuariosService: UsuariosService
-  ) {
-    super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: false,
-      secretOrKey: process.env.JWT_SECRET || 'SECRET_KEY',
-      passReqToCallback: true // Importante para obtener el token completo
-    });
-  }
-
-  async validate(payload: {
-    sub: number,
-    nombreUsuario: string,
-    rol?: string
-  }) {
-    try {
-      const usuario = await this.usuariosService.findOneByID(payload.sub);
-
-      if (!usuario) {
-        throw new UnauthorizedException('Usuario no encontrado')
-      }
-
-      return {
-        id: usuario.id,
-        nombreUsuario: usuario.nombreUsuario,
-        rol: usuario.rol?.nombreRol || 'Sin rol'
-      };
-    } catch (error) {
-      throw new UnauthorizedException('No autorizado')
+    constructor() {
+        super({
+            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            ignoreExpiration: false,
+            secretOrKey: process.env.JWT_SECRET || 'SECRET-KEY',
+        });
     }
-  }
+
+    async validate(payload: any) {
+        // Aquí puedes agregar lógica para validar si el usuario aún existe, etc.
+        return { userId: payload.sub, nombreUsuario: payload.nombreUsuario, rol: payload.rol };
+    }
 }

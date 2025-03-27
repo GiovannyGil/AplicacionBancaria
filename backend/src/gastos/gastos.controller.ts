@@ -1,39 +1,35 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { GastosService } from './gastos.service';
 import { CreateGastoDto } from './dto/create-gasto.dto';
 import { UpdateGastoDto } from './dto/update-gasto.dto';
-import { Roles } from 'src/roles/decorators/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 
 @Controller('gastos')
+@UseGuards(JwtAuthGuard)
 export class GastosController {
   constructor(private readonly gastosService: GastosService) {}
 
   @Post()
-  @Roles('Administrador', 'Usuario')
   create(@Body() createGastoDto: CreateGastoDto) {
     return this.gastosService.create(createGastoDto);
   }
 
   @Get()
-  @Roles('Administrador', 'Usuario')
   findAll() {
     return this.gastosService.findAll();
   }
 
   @Get('id/:id')
-  @Roles('Administrador', 'Usuario')
   findOne(@Param('id') id: string) {
     return this.gastosService.findOne(+id);
   }
 
   @Patch('update/:id')
-  @Roles('Administrador', 'Usuario')
   update(@Param('id') id: string, @Body() updateGastoDto: UpdateGastoDto) {
     return this.gastosService.update(+id, updateGastoDto);
   }
 
   @Delete('delete/:id')
-  @Roles('Administrador', 'Usuario')
   remove(@Param('id') id: string) {
     return this.gastosService.softDelete(+id);
   }
@@ -45,7 +41,6 @@ export class GastosController {
   }
 
   @Delete('removedefinitive/:id')
-  @Roles('Administrador', 'Usuario')
   removedefinitive(@Param('id') id: string) {
     return this.gastosService.remove(+id);
   }
