@@ -7,7 +7,7 @@ import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 @Controller('gastos')
 @UseGuards(JwtAuthGuard)
 export class GastosController {
-  constructor(private readonly gastosService: GastosService) {}
+  constructor(private readonly gastosService: GastosService) { }
 
   @Post()
   create(@Body() createGastoDto: CreateGastoDto) {

@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'tarjetas', loadChildren: () => import('./tarjetas/tarjetas.module').then(m => m.TarjetasModule) }, // Página de tarjetas
   { path: 'roles', loadChildren: () => import('./roles/roles.module').then(m => m.RolesModule) }, // Página de roles
   { path: 'gastos', loadChildren: () => import('./gastos/gastos.module').then(m => m.GastosModule) }, // Página de gastos
+  { path: 'ingresos', loadChildren: () => import('./ingresos/ingresos.module').then(m => m.IngresosModule) }, // Página de ingresos
   { path: 'creditos', loadChildren: () => import('./creditos/creditos.module').then(m => m.CreditosModule) }, // Página de créditos
   { path: 'ahorros', loadChildren: () => import('./ahorros/ahorros.module').then(m => m.AhorrosModule) }, // Página de ahorros
 ];

@@ -5,6 +5,7 @@ import { Gasto } from "src/gastos/entities/gasto.entity";
 import { Credito } from "src/creditos/entities/credito.entity";
 import { Tarjeta } from "src/tarjetas/entities/tarjeta.entity";
 import { Role } from "src/roles/entities/role.entity";
+import { Ingreso } from "src/ingresos/entities/ingreso.entity";
 
 @Entity({ name: 'Usuarios' })
 export class Usuario {
@@ -66,6 +67,13 @@ export class Usuario {
      */
     @OneToMany(() => Gasto, (gasto) => gasto.usuario)
     gastos: Gasto[]
+
+    /**
+     * un usuario tiene uno o mas gastos
+     * un gasto pertenece a un usuario
+     */
+    @OneToMany(() => Ingreso, (ingreso) => ingreso.usuario)
+    ingresos: Ingreso[]
 
     /**
     * un usuario tiene uno o mas gastos

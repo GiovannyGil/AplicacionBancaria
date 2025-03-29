@@ -17,23 +17,23 @@ export class UsuariosService {
   constructor(
     @InjectRepository(Usuario) private usuarioRepository: Repository<Usuario>,
     @InjectRepository(Role) private roleRepository: Repository<Role>,
-  ) {}
+  ) { }
 
   // metodo para crear un usuario
   async create(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
     try {
       // obtener los datos del usuario -> payload
-      const {rolId, clave, ...usuarioData} = createUsuarioDto
+      const { rolId, clave, ...usuarioData } = createUsuarioDto
 
       // Buscar el rol y verificar si existe
-      const rol = await this.roleRepository.findOne({ where: { id: rolId, deletedAt: null }});
-  
+      const rol = await this.roleRepository.findOne({ where: { id: rolId, deletedAt: null } });
+
       // Si no existe el rol, lanzar una excepción de tipo BadRequestException
       if (!rol) throw new NotFoundException(`El rol con ID ${rolId} no existe`)
-      
+
 
       // verificar que no esten vacios
-      if(usuarioData === null || !usuarioData){ throw new NotFoundException(`algo sucedio, no se encontraron los datos del usuario`) }
+      if (usuarioData === null || !usuarioData) { throw new NotFoundException(`algo sucedio, no se encontraron los datos del usuario`) }
 
       // encriptar la contraseña
       const saltos = await bcrypt.genSalt(10)
@@ -61,7 +61,7 @@ export class UsuariosService {
   async findAll(): Promise<Usuario[]> {
     try {
       // buscar los usuarios
-      const usuarios = await this.usuarioRepository.find({ where: {deletedAt: null}, relations: ['rol'] })
+      const usuarios = await this.usuarioRepository.find({ where: { deletedAt: null }, relations: ['rol'] })
       // si no encuentra nada, devolver un array vacio
       if (!usuarios) throw new NotFoundException('No se encontraron usuarios registrados.')
       return usuarios
@@ -74,7 +74,7 @@ export class UsuariosService {
   async findOneByID(id: number): Promise<Usuario> {
     try {
       // buscar el usuario por id
-      const usuario = await this.usuarioRepository.findOne({ where: { id, deletedAt: null }, relations: ['rol']})
+      const usuario = await this.usuarioRepository.findOne({ where: { id, deletedAt: null }, relations: ['rol'] })
       // controlar si no se encuentra el usuario
       if (!usuario) throw new NotFoundException(`El usuario con ID ${id} no existe o ya fue eliminado.`)
       // devolver el usuario
@@ -163,29 +163,29 @@ export class UsuariosService {
   async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
     try {
       const { rolId, ...usuarioData } = updateUsuarioDto;
-  
+
       // Buscar al usuario existente
       const usuario = await this.usuarioRepository.findOne({
         where: { id, deletedAt: null },
         relations: ['rol'], // Cargar el rol actual para la comparación
       });
-  
-      if (!usuario)  throw new NotFoundException(`El usuario con ID ${id} no existe o ya fue eliminado.`)
-  
+
+      if (!usuario) throw new NotFoundException(`El usuario con ID ${id} no existe o ya fue eliminado.`)
+
       // Manejar el cambio de rol, si es necesario
       if (rolId && usuario.rol?.id !== rolId) {
         // Buscar el nuevo rol
         const nuevoRol = await this.roleRepository.findOne({ where: { id: rolId } });
-  
+
         if (!nuevoRol) throw new NotFoundException(`El rol con ID ${rolId} no existe.`)
-  
+
         // Asignar el nuevo rol al usuario
         usuario.rol = nuevoRol;
       }
-  
+
       // Actualizar los datos del usuario
       Object.assign(usuario, usuarioData);
-  
+
       // Guardar los cambios en la base de datos
       return await this.usuarioRepository.save(usuario);
     } catch (error) {

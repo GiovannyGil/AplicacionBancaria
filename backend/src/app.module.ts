@@ -16,6 +16,7 @@ import { RolesModule } from './roles/roles.module';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtMiddleware } from './common/middleware/jwt.middleware';
 import { JwtCustomModule } from './auth/jwt/jwt.module';
+import { IngresosModule } from './ingresos/ingresos.module';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { JwtCustomModule } from './auth/jwt/jwt.module';
     // JwtCustomModule,
 
     TypeOrmModule.forRoot(ConnexionDDBB), // <- conexión a la base de datos
-    ScheduleModule.forRoot(), AuthModule, RolesModule, UsuariosModule, CreditosModule, AhorrosModule, GastosModule, DashModule, TarjetasModule, // <- para la programación de tareas automaticas
+    ScheduleModule.forRoot(), AuthModule, RolesModule, UsuariosModule, CreditosModule, AhorrosModule, GastosModule, DashModule, TarjetasModule, IngresosModule, // <- para la programación de tareas automaticas
 
   ],
   controllers: [AppController],
