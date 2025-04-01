@@ -5,6 +5,8 @@ import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { UsuariosCreateComponent } from './usuarios-create/usuarios-create.component';
 import { UsuariosListComponent } from './usuarios-list/usuarios-list.component';
 import { UsuariosEditComponent } from './usuarios-edit/usuarios-edit.component';
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { UsuariosEditComponent } from './usuarios-edit/usuarios-edit.component';
   ],
   imports: [
     CommonModule,
-    UsuariosRoutingModule
+    UsuariosRoutingModule,
+    FormsModule,
+    FontAwesomeModule,
   ]
 })
 export class UsuariosModule { }

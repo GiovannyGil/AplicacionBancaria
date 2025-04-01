@@ -31,6 +31,25 @@ export class AuthService {
     )
   }
 
+  // metodo registrarse
+  register(primerNombre: string, segundoNombre: string, primerApellido: string, segundoApellido: string, nombreUsuario: string, correo: string, clave: string, direccion: string, celular: string, estado: boolean, genero: string, fechaCreacion: Date, rolId: number): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, {
+      primerNombre,
+      segundoNombre,
+      primerApellido,
+      segundoApellido,
+      nombreUsuario,
+      correo,
+      clave,
+      direccion,
+      celular,
+      estado,
+      genero,
+      fechaCreacion,
+      rolId
+    })
+  }
+
   // metodo para cerrar session
   logout(): void {
     localStorage.removeItem(this.tokenKey)

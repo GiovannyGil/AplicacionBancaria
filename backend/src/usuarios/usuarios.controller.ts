@@ -34,12 +34,12 @@ export class UsuariosController {
     return this.usuariosService.findOneByCorreo(correo);
   }
 
-  @Patch(':id')
+  @Patch('update/:id')
   update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuariosService.update(+id, updateUsuarioDto);
   }
 
-  @Delete(':id')
+  @Delete('id/:id')
   remove(@Param('id') id: string) {
     return this.usuariosService.softDelete(+id);
   }
