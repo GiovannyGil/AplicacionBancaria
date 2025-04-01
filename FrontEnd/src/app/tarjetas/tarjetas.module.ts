@@ -5,6 +5,8 @@ import { TarjetasRoutingModule } from './tarjetas-routing.module';
 import { TarjetasCreateComponent } from './tarjetas-create/tarjetas-create.component';
 import { TarjetasListComponent } from './tarjetas-list/tarjetas-list.component';
 import { TarjetasEditComponent } from './tarjetas-edit/tarjetas-edit.component';
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { TarjetasEditComponent } from './tarjetas-edit/tarjetas-edit.component';
   ],
   imports: [
     CommonModule,
-    TarjetasRoutingModule
+    TarjetasRoutingModule,
+    FormsModule,
+    FontAwesomeModule,
   ]
 })
 export class TarjetasModule { }

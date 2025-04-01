@@ -5,6 +5,8 @@ import { IngresosRoutingModule } from './ingresos-routing.module';
 import { IngresosCreateComponent } from './ingresos-create/ingresos-create.component';
 import { IngresosListComponent } from './ingresos-list/ingresos-list.component';
 import { IngresosEditComponent } from './ingresos-edit/ingresos-edit.component';
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { IngresosEditComponent } from './ingresos-edit/ingresos-edit.component';
   ],
   imports: [
     CommonModule,
-    IngresosRoutingModule
+    IngresosRoutingModule,
+    FormsModule,
+    FontAwesomeModule,
   ]
 })
 export class IngresosModule { }

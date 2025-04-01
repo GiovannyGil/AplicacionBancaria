@@ -14,7 +14,7 @@ export class UsuariosService {
   constructor(private http: HttpClient) { }
 
   // Metodo para obtener todos los usuaiors
-  ObtenerUsuarios(): Observable<any> {
+  ObtenerUsuarios(id: any): Observable<any> {
     const authToken = localStorage.getItem('authToken') // obtener el token del localstorage
 
     // pasar el token al header
@@ -39,7 +39,7 @@ export class UsuariosService {
   }
 
   // metodo para obtener usuarios por nombre
-  ObtenerUsuarioNombre(id: number): Observable<any> {
+  ObtenerUsuarioNombre(primerNombre: number): Observable<any> {
     const authToken = localStorage.getItem('authToken') // obtener el token del localstorage
 
     // pasar el token al header
@@ -47,7 +47,19 @@ export class UsuariosService {
       'Authorization': `Bearer ${authToken}`
     })
 
-    return this.http.get<any>(`${this.apiURL}/nombre/${id}`, { headers })
+    return this.http.get<any>(`${this.apiURL}/nombre/${primerNombre}`, { headers })
+  }
+
+  // buscar usuarios por nombreUsuario
+  ObtenerUsuarioNombreUsuario(id: number): Observable<any> {
+    const authToken = localStorage.getItem('authToken') // obtener el token del localstorage
+
+    // pasar el token al header
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`
+    })
+
+    return this.http.get<any>(`${this.apiURL}/nombreUsuario/${id}`, { headers })
   }
 
   // metodo para obtener usuarios por correo

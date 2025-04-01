@@ -5,7 +5,8 @@ import { AhorrosRoutingModule } from './ahorros-routing.module';
 import { AhorrosCreateComponent } from './ahorros-create/ahorros-create.component';
 import { AhorrosListComponent } from './ahorros-list/ahorros-list.component';
 import { AhorrosEditComponent } from './ahorros-edit/ahorros-edit.component';
-
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { AhorrosEditComponent } from './ahorros-edit/ahorros-edit.component';
   ],
   imports: [
     CommonModule,
-    AhorrosRoutingModule
+    AhorrosRoutingModule,
+    FormsModule,
+    FontAwesomeModule,
   ]
 })
 export class AhorrosModule { }

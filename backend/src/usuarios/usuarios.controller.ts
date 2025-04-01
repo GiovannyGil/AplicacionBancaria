@@ -29,6 +29,11 @@ export class UsuariosController {
     return this.usuariosService.findOneByNombre(primerNombre);
   }
 
+  @Get('nombreUsuario/:nombreUsuario')
+  findOneNameUser(@Param('nombreUsuario') nombreUsuario: string) {
+    return this.usuariosService.findOneByNombre(nombreUsuario);
+  }
+
   @Get('correo/:correo')
   findOneEmail(@Param('correo') correo: string) {
     return this.usuariosService.findOneByCorreo(correo);
