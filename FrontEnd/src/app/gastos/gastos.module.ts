@@ -5,6 +5,8 @@ import { GastosRoutingModule } from './gastos-routing.module';
 import { GastosCreateComponent } from './gastos-create/gastos-create.component';
 import { GastosEditComponent } from './gastos-edit/gastos-edit.component';
 import { GastosListComponent } from './gastos-list/gastos-list.component';
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { GastosListComponent } from './gastos-list/gastos-list.component';
   ],
   imports: [
     CommonModule,
-    GastosRoutingModule
+    GastosRoutingModule,
+    FormsModule,
+    FontAwesomeModule,
   ]
 })
 export class GastosModule { }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { UsuariosService } from '../usuarios.service';
+
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsuariosService } from '../usuarios.service';
 
 @Component({
   selector: 'app-usuarios-edit',
@@ -8,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./usuarios-edit.component.css']
 })
 export class UsuariosEditComponent {
-  id!: number;
+  id!: number; // ID del usuario a editar
   primerNombre: string = '';
   segundoNombre: string = '';
   primerApellido: string = '';
@@ -21,8 +22,7 @@ export class UsuariosEditComponent {
   estado: number = 1; // Estado por defecto (activo)
   genero: string = '';
   fechaCreacion: Date = new Date(); // Fecha de creación por defecto (actual)
-  rolId: number = 2; // ID del rol por defecto (puede ser un valor fijo o dinámico según tu lógica)
-
+  rolId: number = 2; // ID del rol por defecto (rol usuario)
 
   constructor(
     private usuarioServide: UsuariosService,
@@ -41,11 +41,10 @@ export class UsuariosEditComponent {
     }
   }
 
-
   // metodo para cargar los datos existentes}
   cargarDatosUsuario(): void {
     this.usuarioServide.ObtenerUsuarios(this.id).subscribe(
-      (response) => {
+      (response: { usuario: any; }) => {
         console.log('Datos Obtenidos', response);
         const usuario = response.usuario // acceder a los datos
 
@@ -58,37 +57,42 @@ export class UsuariosEditComponent {
         this.correo = usuario.correo;
         this.clave = usuario.clave;
         this.direccion = usuario.direccion;
-        this.celular = usuario.celular; 
+
+        this.celular = usuario.celular;
         this.estado = usuario.estado;
         this.genero = usuario.genero;
-        this.fechaCreacion = usuario.fechaCreacion;
         this.rolId = usuario.rolId;
-      }, (error) => {
+      }, (error: { message: any; }) => {
         console.log(`Error al cargar los datos ${error.message}`);
       }
     )
   }
 
-
   // metodo para actulizar
   actualizarUsuario(): void {
     const usuarioActualizado = {
-      nombres: this.nombres,
-      apellidos: this.apellidos,
-      nombreusuario: this.nombreusuario,
-      edad: this.edad,
+      primerNombre: this.primerNombre,
+      segundoNombre: this.segundoNombre,
+      primerApellido: this.primerApellido,
+      segundoApellido: this.segundoApellido,
+      nombreUsuario: this.nombreUsuario,
       correo: this.correo,
-      estado: this.estado
+      clave: this.clave,
+      direccion: this.direccion,
+      celular: this.celular,
+      estado: this.estado,
+      rolId: this.rolId
     }
 
-    console.log('Datos a enviar ', usuarioActualizado);
+    console.log('Datos a enviar ',usuarioActualizado);
 
     this.usuarioServide.ActualizarUsuario(this.id, usuarioActualizado).subscribe(
       () => {
         alert('Usuario actualizado exitosamente')
         this.router.navigate(['/usuarios'])
-      },
-      (error) => {
+
+      }, 
+      (error: { message: any; }) => {
         console.log(`Error al actualizar el usuario ${error.message}`);
       }
     )

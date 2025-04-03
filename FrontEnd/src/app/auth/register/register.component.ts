@@ -20,7 +20,7 @@ export class RegisterComponent {
   estado: number = 1; // Estado por defecto (activo)
   genero: string = '';
   fechaCreacion: Date = new Date(); // Fecha de creación por defecto (actual)
-  rolId: number = 2; // ID del rol por defecto (puede ser un valor fijo o dinámico según tu lógica)
+  rolId: number = 2; // ID del rol por defecto (rol usuario)
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -58,8 +58,8 @@ export class RegisterComponent {
           alert('Registro exitoso');
           this.router.navigate(['/auth/login']);
         },
-        (error) => {
-          console.error('Error en el registro', error);
+        (error: { message: any; }) => {
+          console.error('Error en el registro', error.message);
           alert('Error al registrarse');
         }
       );

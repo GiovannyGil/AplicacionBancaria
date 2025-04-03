@@ -5,6 +5,8 @@ import { CreditosRoutingModule } from './creditos-routing.module';
 import { CreditosCreateComponent } from './creditos-create/creditos-create.component';
 import { CreditosListComponent } from './creditos-list/creditos-list.component';
 import { CreditosEditComponent } from './creditos-edit/creditos-edit.component';
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { CreditosEditComponent } from './creditos-edit/creditos-edit.component';
   ],
   imports: [
     CommonModule,
-    CreditosRoutingModule
+    CreditosRoutingModule,
+    FormsModule,
+    FontAwesomeModule,
   ]
 })
 export class CreditosModule { }

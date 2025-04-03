@@ -5,9 +5,9 @@ import { UsuariosCreateComponent } from './usuarios-create/usuarios-create.compo
 import { UsuariosEditComponent } from './usuarios-edit/usuarios-edit.component';
 
 const routes: Routes = [
-  { path: '', component: UsuariosListComponent },
-  { path: 'crear', component: UsuariosCreateComponent }, // Ruta para crear
-  { path: 'update/:id', component: UsuariosEditComponent } // Ruta para editar
+  { path: '', component: UsuariosListComponent }, // Redirige a la lista de usuarios por defecto
+  { path: 'crear', component: UsuariosCreateComponent }, // Ruta para crear un nuevo usuario
+  { path: 'update/:id', component: UsuariosEditComponent } // Ruta para editar un usuario existente
 ];
 
 @NgModule({

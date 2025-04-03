@@ -20,12 +20,12 @@ export class UsuariosCreateComponent {
   estado: number = 1; // Estado por defecto (activo)
   genero: string = '';
   fechaCreacion: Date = new Date(); // Fecha de creación por defecto (actual)
-  rolId: number = 2; // ID del rol por defecto (puede ser un valor fijo o dinámico según tu lógica)
 
-  // inyectar servicio
-  constructor(private usuarioService: UsuariosService, private router: Router) { }
+  rolId: number = 2; // ID del rol por defecto (rol usuario)
 
-  // metodo para crear un usuario
+  constructor (private usuarioService: UsuariosService, private router: Router) {}
+
+  // metodo para crear usuarios
   crearUsuario(): void {
     const nuevoUsuario = {
       primerNombre: this.primerNombre,
@@ -37,7 +37,7 @@ export class UsuariosCreateComponent {
       clave: this.clave,
       direccion: this.direccion,
       celular: this.celular,
-      estado: this.estado,
+      estado: Boolean(this.estado),
       genero: this.genero,
       fechaCreacion: this.fechaCreacion,
       rolId: this.rolId
@@ -47,7 +47,8 @@ export class UsuariosCreateComponent {
       () => {
         alert('Usuario creado exitosamente')
         this.router.navigate(['/usuarios'])
-      }, (error) => {
+
+      }, (error: { message: any; }) => {
         console.log(`Error al crear el usuario ${error.message}`);
       }
     )

@@ -15,16 +15,16 @@ export class UsuariosListComponent {
   faPlus = faPlus
 
   // instanciar array de usuarios vacio por defecto []
-  usuarios: any[] = []
-
+  usuarios : any[] = []
 
   // inyectar servicio
-  constructor(private usuarioService: UsuariosService, private router: Router) { }
+  constructor(private usuarioService: UsuariosService, private router: Router) {}
+
 
   ngOnInit(): void {
     this.obtenerUsuarios()
   }
-
+  
   // metodo para obtener ususarios
   obtenerUsuarios(): void {
     try {
@@ -49,6 +49,7 @@ export class UsuariosListComponent {
   eliminarUsuario(id: number): void {
     try {
       if (confirm('¿Está seguto que desea eliminar este usuario?')) {
+
         this.usuarioService.EliminarUsuairo(id).subscribe(
           () => {
             this.usuarios = this.usuarios.filter(usuario => usuario.id !== id)
@@ -61,7 +62,8 @@ export class UsuariosListComponent {
         )
       }
     } catch (error) {
-
+      console.error('Error al eliminar usuario:', error);
+      alert('Error al eliminar la usuario');
     }
   }
 
