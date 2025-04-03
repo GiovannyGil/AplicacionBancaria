@@ -14,7 +14,7 @@ export class UsuariosService {
   constructor(private http: HttpClient) { }
 
   // Metodo para obtener todos los usuaiors
-  ObtenerUsuarios(): Observable<any> {
+  ObtenerUsuarios(id: number): Observable<any> {
     const authToken = localStorage.getItem('authToken') // obtener el token del localstorage
 
     // pasar el token al header
