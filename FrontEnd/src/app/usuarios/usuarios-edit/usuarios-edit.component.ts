@@ -43,7 +43,7 @@ export class UsuariosEditComponent {
 
   // metodo para cargar los datos existentes}
   cargarDatosUsuario(): void {
-    this.usuarioServide.ObtenerUsuarios(this.id).subscribe(
+    this.usuarioServide.ObtenerUsuarioID(this.id).subscribe(
       (response: { usuario: any; }) => {
         console.log('Datos Obtenidos', response);
         const usuario = response.usuario // acceder a los datos
