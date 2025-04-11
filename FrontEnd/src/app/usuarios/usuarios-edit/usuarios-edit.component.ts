@@ -44,8 +44,9 @@ export class UsuariosEditComponent {
 
   // metodo para cargar los datos existentes}
   cargarDatosUsuario(): void {
-    this.usuarioServide.ObtenerUsuarios(this.id).subscribe(
-      (response) => {
+
+    this.usuarioServide.ObtenerUsuarioID(this.id).subscribe(
+      (response: { usuario: any; }) => {
         console.log('Datos Obtenidos', response);
         const usuario = response.usuario // acceder a los datos
 
@@ -73,12 +74,19 @@ export class UsuariosEditComponent {
   // metodo para actulizar
   actualizarUsuario(): void {
     const usuarioActualizado = {
-      nombres: this.nombres,
-      apellidos: this.apellidos,
-      nombreusuario: this.nombreusuario,
-      edad: this.edad,
+      primerNombre: this.primerNombre,
+      segundoNombre: this.segundoNombre,
+      primerApellido: this.primerApellido,
+      segundoApellido: this.segundoApellido,
+      nombreUsuario: this.nombreUsuario,
       correo: this.correo,
-      estado: this.estado
+      clave: this.clave,
+      direccion: this.direccion,
+      celular: this.celular,
+      estado: this.estado,
+      genero: this.genero,
+      fechaCreacion: this.fechaCreacion,
+      rolId: this.rolId,
     }
 
     console.log('Datos a enviar ', usuarioActualizado);

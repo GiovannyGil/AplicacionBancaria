@@ -1,1 +1,23 @@
-<p>roles-edit works!</p>
+<div class="register-container">
+    <div class="register-box">
+        <h2>Agregar Usuario</h2>
+        <form (ngSubmit)="actualizarRol()" class="ROL-form">
+        <div class="input-group">
+            <input [(ngModel)]="nombreRol" name="nombreRol" type="text" required />
+            <label>Nombre Rol</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="descripcion" name="descripcion" type="text" required />
+            <label>Descripción</label>
+        </div>
+        <div class="input-group">
+            <select [(ngModel)]="genero" name="genero" required>
+                <option value="1">Activo</option>
+                <option value="0">Inactivo</option>
+            </select>
+            <label>Estado</label>
+        </div>
+        <button type="submit" class="submit-button">Actualizar</button>
+        </form>
+    </div>
+</div>

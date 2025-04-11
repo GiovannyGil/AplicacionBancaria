@@ -1,1 +1,44 @@
-<p>roles-list works!</p>
+
+<!-- <app-navbar></app-navbar> Incluye el navbar -->
+<div class="usuarios-container">
+    <h2>Gestión de Usuarios</h2>
+    
+    <!-- Boton pra agregar un nuevo usuario -->
+    <button (click)="FomularioCrear()" class="add-button">
+      <fa-icon [icon]="faPlus"></fa-icon>Agregar Usuario
+    </button>
+    
+    <!-- Aquí iría el contenido específico para usuarios, como tablas, formularios, etc. -->
+    <table class="usuarios-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre Rol</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rol of roles">
+          <td>{{ rol.id }}</td>
+          <td>{{ rol.nombreRol }}</td>
+          <td>{{ rol.descripcion }}</td>
+          <td>{{ rol.estado }}</td>
+          <td>
+            <!-- boton para actualizar -->
+            <button (click)="FormularioEditar(rol.id)" class="action-button">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+  
+            <!-- Botón para eliminar -->
+            <button (click)="EliminarRol(rol.id)" class="action-button">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+  </div>
+  
