@@ -1,1 +1,44 @@
-<p>creditos-edit works!</p>
+<div class="register-container">
+    <div class="register-box">
+        <h2>Registro</h2>
+        <form (ngSubmit)="actualizarcredito()">
+        <div class="input-group">
+            <input [(ngModel)]="numero" name="numero" type="text" required />
+            <label>Número</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="nombre" name="nombre" type="text" required />
+            <label>Nombre</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="fechaExpira" name="fechaExpira" type="date" required />
+            <label>Fecha Expira</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="cantidadCuotas" name="cantidadCuotas" type="number" required />
+            <label>Cantidad Cuotas</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="montoFinal" name="montoFinal" type="number" required />
+            <label>Monto Final</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="interesMensual" name="interesMensual" type="number" required />
+            <label>Interes Mensual</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="interesTotal" name="interesTotal" type="number" required />
+            <label>Interes Total</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="debitoMensual" name="debitoMensual" type="number" required />
+            <label>Debito Mensual</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="tipo" name="tipo" type="text" required />
+            <label>tipo</label>
+        </div>
+        <button type="submit" class="register-button">Agregar</button>
+        </form>
+    </div>
+</div>

@@ -1,1 +1,43 @@
-<p>tarjetas-list works!</p>
+<!-- <app-navbar></app-navbar> Incluye el navbar -->
+<div class="tarjetas-container">
+  <h2>Gestión de tarjetas</h2>
+
+  <!-- Boton pra agregar un nuevo tarjeta -->
+  <button (click)="FomularioCrear()" class="add-button">
+    <fa-icon [icon]="faPlus"></fa-icon>Agregar tarjeta
+  </button>
+
+  <!-- Aquí iría el contenido específico para tarjetas, como tablas, formularios, etc. -->
+  <table class="tarjetas-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Número</th>
+        <th>Código</th>
+        <th>Fecha Expira</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tarjeta of tarjetas">
+        <td>{{ tarjeta.id }}</td>
+        <td>{{ tarjeta.numero }}</td>
+        <td>{{ tarjeta.codigo }}</td>
+        <td>{{ tarjeta.fechaExpira | date }}</td>
+        <td>{{ tarjeta.tipo }}</td>
+        <td>
+          <!-- boton para actualizar -->
+          <button (click)="FormularioEditar(tarjeta.id)" class="action-button">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+
+          <!-- Botón para eliminar -->
+          <button (click)="eliminartarjeta(tarjeta.id)" class="action-button">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,1 +1,47 @@
-<p>ahorros-list works!</p>
+<!-- <app-navbar></app-navbar> Incluye el navbar -->
+<div class="ahorros-container">
+  <h2>Gestión de ahorros</h2>
+
+  <!-- Boton pra agregar un nuevo ahorro -->
+  <button (click)="FomularioCrear()" class="add-button">
+    <fa-icon [icon]="faPlus"></fa-icon>Agregar ahorro
+  </button>
+
+  <!-- Aquí iría el contenido específico para ahorros, como tablas, formularios, etc. -->
+  <table class="ahorros-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Fecha Meta</th>
+        <th>Cantidad Cuotas</th>
+        <th>Monto Meta</th>
+        <th>Ahorro Mensual</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ahorro of ahorros">
+        <td>{{ ahorro.id }}</td>
+        <td>{{ ahorro.nombre }}</td>
+        <td>{{ ahorro.fechaMeta | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ ahorro.cantidadCuotas }}</td>
+        <td>{{ ahorro.montoMeta | currency: 'USD' }}</td>
+        <td>{{ ahorro.ahorroMensual | currency: 'USD' }}</td>
+        <td>{{ ahorro.tipo }}</td>
+        <td>
+          <!-- boton para actualizar -->
+          <button (click)="FormularioEditar(ahorro.id)" class="action-button">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+
+          <!-- Botón para eliminar -->
+          <button (click)="eliminarahorro(ahorro.id)" class="action-button">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,1 +1,57 @@
-<p>usuarios-create works!</p>
+<div class="register-container">
+    <div class="register-box">
+        <h2>Registro</h2>
+        <form (ngSubmit)="crearUsuario()">
+        <div class="input-group">
+            <input [(ngModel)]="primerNombre" name="primerNombre" type="text" required />
+            <label>primerNombre</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="segundoNombre" name="segundoNombre" type="text" required />
+            <label>segundoNombre</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="primerApellido" name="primerApellido" type="text" required />
+            <label>primerApellido</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="segundoApellido" name="segundoApellido" type="text" required />
+            <label>segundoApellido</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="nombreUsuario" name="nombreUsuario" type="text" required />
+            <label>Nombre de Usuario</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="correo" name="correo" type="email" required />
+            <label>Correo</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="clave" name="clave" type="password" required />
+            <label>Contraseña</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="clave" name="direccion" type="text" required />
+            <label>Direccion</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="clave" name="celular" type="text" required />
+            <label>Celular</label>
+        </div>
+        <div class="input-group">
+            <!-- <input [(ngModel)]="clave" name="genero" type="genero" required /> -->
+            <select [(ngModel)]="genero" name="genero" required>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Otro">Otro</option>
+            </select>
+            <label>Genero</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="clave" name="rolId" type="number" required />
+            <label>RolID</label>
+        </div>
+        <button type="submit" class="register-button">Registrarse</button>
+        </form>
+    </div>
+</div>

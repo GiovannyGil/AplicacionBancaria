@@ -1,1 +1,53 @@
-<p>creditos-list works!</p>
+<!-- <app-navbar></app-navbar> Incluye el navbar -->
+<div class="creditos-container">
+  <h2>Gestión de creditos</h2>
+
+  <!-- Boton pra agregar un nuevo credito -->
+  <button (click)="FomularioCrear()" class="add-button">
+    <fa-icon [icon]="faPlus"></fa-icon>Agregar credito
+  </button>
+
+  <!-- Aquí iría el contenido específico para creditos, como tablas, formularios, etc. -->
+  <table class="creditos-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Número</th>
+        <th>Nombre</th>
+        <th>Fecha Expira</th>
+        <th>Cantidad Cuotas</th>
+        <th>Monto Final</th>
+        <th>Interes Mensual</th>
+        <th>Interes Total</th>
+        <th>Debito Mensual</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let credito of creditos">
+        <td>{{ credito.id }}</td>
+        <td>{{ credito.numero }}</td>
+        <td>{{ credito.nombre }}</td>
+        <td>{{ credito.fechaExpira | date }}</td>
+        <td>{{ credito.cantidadCuotas }}</td>
+        <td>{{ credito.montoFinal | currency }}</td>
+        <td>{{ credito.interesMensual | percent }}</td>
+        <td>{{ credito.interesTotal | currency }}</td>
+        <td>{{ credito.debitoMensual | currency }}</td>
+        <td>{{ credito.tipo }}</td>
+        <td>
+          <!-- boton para actualizar -->
+          <button (click)="FormularioEditar(credito.id)" class="action-button">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+
+          <!-- Botón para eliminar -->
+          <button (click)="eliminarcredito(credito.id)" class="action-button">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

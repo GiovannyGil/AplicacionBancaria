@@ -1,1 +1,24 @@
-<p>tarjetas-create works!</p>
+<div class="register-container">
+    <div class="register-box">
+        <h2>Registro</h2>
+        <form (ngSubmit)="creartarjeta()">
+        <div class="input-group">
+            <input [(ngModel)]="numero" name="numero" type="text" required />
+            <label>Número</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="codigo" name="codigo" type="text" required />
+            <label>Código</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="fechaExpira" name="fechaExpira" type="date" required />
+            <label>Fecha Expira</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="tipo" name="tipo" type="text" required />
+            <label>tipo</label>
+        </div>
+        <button type="submit" class="register-button">Agregar</button>
+        </form>
+    </div>
+</div>

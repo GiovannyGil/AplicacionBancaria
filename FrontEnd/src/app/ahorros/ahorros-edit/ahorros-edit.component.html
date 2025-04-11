@@ -1,1 +1,32 @@
-<p>ahorros-edit works!</p>
+<div class="register-container">
+    <div class="register-box">
+        <h2>Registro</h2>
+        <form (ngSubmit)="actualizarahorro()">
+        <div class="input-group">
+            <input [(ngModel)]="nombre" name="nombre" type="text" required />
+            <label>Nombre</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="fechaMeta" name="fechaMeta" type="date" required />
+            <label>Fecha Meta</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="cantidadCuotas" name="cantidadCuotas" type="number" required />
+            <label>Cantidad Cuotas</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="montoMeta" name="montoMeta" type="number" required />
+            <label>Monto Meta</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="ahorroMensual" name="ahorroMensual" type="number" required />
+            <label>Ahorro Mensual</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="tipo" name="tipo" type="text" required />
+            <label>tipo</label>
+        </div>
+        <button type="submit" class="register-button">Actualizar</button>
+        </form>
+    </div>
+</div>

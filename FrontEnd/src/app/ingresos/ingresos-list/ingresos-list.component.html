@@ -1,1 +1,44 @@
-<p>ingresos-list works!</p>
+
+<!-- <app-navbar></app-navbar> Incluye el navbar -->
+<div class="ingresos-container">
+  <h2>Gestión de ingresos</h2>
+  
+  <!-- Boton pra agregar un nuevo ingreso -->
+  <button (click)="FomularioCrear()" class="add-button">
+    <fa-icon [icon]="faPlus"></fa-icon>Agregar ingreso
+  </button>
+  
+  <!-- Aquí iría el contenido específico para ingresos, como tablas, formularios, etc. -->
+  <table class="ingresos-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Número Ingreso</th>
+        <th>Valor Ingreso</th>
+        <th>Valor Final</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ingreso of ingresos">
+        <td>{{ ingreso.id }}</td>
+        <td>{{ ingreso.numeroIngreso }}</td>
+        <td>{{ ingreso.valorPago }}</td>
+        <td>{{ ingreso.valorFinal }}</td>
+        <td>{{ ingreso.estado }}</td>
+        <td>
+          <!-- boton para actualizar -->
+          <button (click)="FormularioEditar(ingreso.id)" class="action-button">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+
+          <!-- Botón para eliminar -->
+          <button (click)="eliminaringreso(ingreso.id)" class="action-button">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

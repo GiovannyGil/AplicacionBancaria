@@ -1,1 +1,20 @@
-<p>gastos-edit works!</p>
+<div class="register-container">
+    <div class="register-box">
+        <h2>Registro</h2>
+        <form (ngSubmit)="actualizargasto()">
+        <div class="input-group">
+            <input [(ngModel)]="numeroGasto" name="numeroGasto" type="text" required />
+            <label>Número Gasto</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="valorPago" name="valorPago" type="text" required />
+            <label>Valor Pago</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="valorFinal" name="valorFinal" type="text" required />
+            <label>Valor Final</label>
+        </div>
+        <button type="submit" class="register-button">Agregar</button>
+        </form>
+    </div>
+</div>
