@@ -12,15 +12,16 @@
         <label>Nombre de Usuario</label>
       </div>
       <div class="input-group">
-        <input
-          [(ngModel)]="clave"
-          name="clave"
-          type="password"
-          required
-        />
+        <input [(ngModel)]="clave" name="clave" type="password" required />
         <label>Contraseña</label>
       </div>
       <button type="submit" class="login-button">Entrar</button>
+
+      <div class="details">
+        <a href="#" class="noCuenta" (click)="irARegistro($event)">¿No tienes cuenta?</a>
+        <a href="#" class="recuperar">¿Olvidaste tu contraseña?</a>
+      </div>
+    
     </form>
   </div>
 </div>

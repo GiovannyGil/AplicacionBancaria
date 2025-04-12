@@ -28,4 +28,19 @@ export class LoginComponent {
       }
     )
   }
+
+
+  // metodo para ir de la pagina de login a la pagina de registro
+  irARegistro(event: Event): void {
+    event.preventDefault(); // Evita que el <a> recargue la página
+    this.router.navigate(['/auth/register']) // redirigir al registro
+  }
+
+  // metodo para recordar usuario
+
+  // metodo para recordar clave
+
+
+  // metodo para registrarse
+
 }

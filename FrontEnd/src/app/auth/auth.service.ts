@@ -53,7 +53,7 @@ export class AuthService {
   // metodo para cerrar session
   logout(): void {
     localStorage.removeItem(this.tokenKey)
-    this.router.navigate(['/'])
+    this.router.navigate(['/auth/login']) // redirigir al login
   }
 
   // metodo obtener token
