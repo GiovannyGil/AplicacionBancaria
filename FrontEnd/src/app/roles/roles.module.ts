@@ -5,7 +5,8 @@ import { RolesRoutingModule } from './roles-routing.module';
 import { RolesCreateComponent } from './roles-create/roles-create.component';
 import { RolesListComponent } from './roles-list/roles-list.component';
 import { RolesEditComponent } from './roles-edit/roles-edit.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { RolesEditComponent } from './roles-edit/roles-edit.component';
   ],
   imports: [
     CommonModule,
-    RolesRoutingModule
+    RolesRoutingModule,
+    FontAwesomeModule,
+    FormsModule
   ]
 })
 export class RolesModule { }

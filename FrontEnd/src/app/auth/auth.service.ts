@@ -14,7 +14,7 @@ interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = 'http://localhost:3000/auth';
   private tokenKey = 'authToken';
 
 
@@ -25,7 +25,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { nombreUsuario, clave }).pipe(
       tap((response) => {
         localStorage.setItem(this.tokenKey, response.token) // guardar el token en el localstorage
-        // console.log('token', response.token);
+        console.log('token', response.token);
         this.programarCierreSesion() // programar el cierre de sesion
       })
     )

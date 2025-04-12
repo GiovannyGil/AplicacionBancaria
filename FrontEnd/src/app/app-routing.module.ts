@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./main-page/main-page.module').then(m => m.MainPageModule) }, // Página principal
+  { path: '', loadChildren: () => import('./main-page/main-page.module').then(m => m.MainPageModule) }, // Página principal -> Dashboard (despues de logearse)
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) }, // Autenticación -> Login y Register
-  { path: 'dash', loadChildren: () => import('./dash/dash.module').then(m => m.DashModule) }, // Página de dashboard -> Página principal de la aplicación
   { path: 'usuarios', loadChildren: () => import('./usuarios/usuarios.module').then(m => m.UsuariosModule) }, // Página de usuarios
   { path: 'tarjetas', loadChildren: () => import('./tarjetas/tarjetas.module').then(m => m.TarjetasModule) }, // Página de tarjetas
   { path: 'roles', loadChildren: () => import('./roles/roles.module').then(m => m.RolesModule) }, // Página de roles

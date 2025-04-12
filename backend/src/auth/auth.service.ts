@@ -18,7 +18,7 @@ export class AuthService {
     ) { }
 
     // método para iniciar sesión
-    async login(nombreUsuario: string, clave: string): Promise<{ access_token: string }> {
+    async login(nombreUsuario: string, clave: string): Promise<{ token: string }> {
         try {
             console.log('Intentando iniciar sesión con:', nombreUsuario);
 
@@ -60,7 +60,7 @@ export class AuthService {
 
             console.log('Token generado correctamente');
 
-            return { access_token: token };
+            return { token: token };
         } catch (error) {
             console.error('Error en login:', error.message);
             throw new UnauthorizedException('Credenciales inválidas', error.message);
