@@ -126,6 +126,7 @@ export class AuthService {
   // metodo para verificar si está logeoado
   async isLoggedIn(): Promise<boolean> {
     try {
+      const token = this.getToken() // obtener el token
       // verifica si el token actual es valido usando la fecha de expiración
       const fechaExpiracion = this.obtenerFechaExpiracion()
       return fechaExpiracion ? Date.now() < fechaExpiracion : false

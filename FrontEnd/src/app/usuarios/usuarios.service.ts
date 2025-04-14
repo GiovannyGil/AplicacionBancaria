@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class UsuariosService {
 
   // URL de la api modulo usuarios
-  private apiURL = 'http://localhost:3000/api/usuarios'
+  private apiURL = 'http://localhost:3000/usuarios'
 
   // inyectar metodos http/recursos
   constructor(private http: HttpClient) { }

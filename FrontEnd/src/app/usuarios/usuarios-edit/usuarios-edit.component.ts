@@ -46,9 +46,9 @@ export class UsuariosEditComponent {
   cargarDatosUsuario(): void {
 
     this.usuarioServide.ObtenerUsuarioID(this.id).subscribe(
-      (response: { usuario: any; }) => {
+      (response) => {
         console.log('Datos Obtenidos', response);
-        const usuario = response.usuario // acceder a los datos
+        const usuario = response // acceder a los datos
 
         // asignar los valores
         this.primerNombre = usuario.primerNombre;

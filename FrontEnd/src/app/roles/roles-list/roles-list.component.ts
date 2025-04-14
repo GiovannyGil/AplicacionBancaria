@@ -20,7 +20,7 @@ export class RolesListComponent {
   // inyectar servicio
   constructor(private router: Router, private rolServices: RolesService) { }
 
-  ngOnit(): void {
+  ngOnInit(): void {
     this.obtenerRoles()
   }
 
@@ -30,11 +30,11 @@ export class RolesListComponent {
     try {
       this.rolServices.ObtenerRoles().subscribe(
         (data) => {
-          this.roles = data.roles // obtener un array de roles que trae el objeto
+          this.roles = data // obtener un array de roles que trae el 
         },
         (error) => {
           if (error.status === 401) {
-            console.error(`Token no encontrado, debe inicdiar sesión ${error.message}`)
+            console.error(`Token no encontrado, debe iniciar sesión ${error.message}`)
           } else {
             console.error(`Error al obtener los roles ${error.message}`)
           }

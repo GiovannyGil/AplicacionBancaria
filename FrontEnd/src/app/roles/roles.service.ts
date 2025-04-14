@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 })
 export class RolesService {
   // URL de la api modulo roles
-  private apiURL = 'http://localhost:3000/api/roles'
+  private apiURL = 'http://localhost:3000/roles'
 
   // inyectar metodos http/recursos
   constructor(private http: HttpClient) { }
@@ -72,7 +72,7 @@ export class RolesService {
         'Authorization': `Bearer ${authToken}`
       })
 
-      return this.http.put<any>(`${this.apiURL}/id/${id}`, rol, { headers })
+      return this.http.patch<any>(`${this.apiURL}/update/${id}`, rol, { headers })
     }
 
     // metodo para eliminar roles
@@ -84,6 +84,6 @@ export class RolesService {
         'Authorization': `Bearer ${authToken}`
       })
 
-      return this.http.delete<void>(`${this.apiURL}/id/${id}`, { headers })
+      return this.http.delete<any>(`${this.apiURL}/delete/${id}`, { headers })
     }
 }

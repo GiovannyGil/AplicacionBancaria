@@ -40,10 +40,10 @@
         <td>{{ usuario.correo }}</td>
         <td>{{ usuario.direccion }}</td>
         <td>{{ usuario.celular }}</td>
-        <td>{{ usuario.genero }}</td>
-        <td>{{ usuario.fechaCreacion }}</td>
-        <td>{{ usuario.rolId }}</td>
         <td>{{ usuario.estado }}</td>
+        <td>{{ usuario.genero }}</td>
+        <td>{{ usuario.createdAt }}</td>
+        <td>{{ usuario.rol.nombreRol }}</td>
         <td>
           <!-- boton para actualizar -->
           <button (click)="FormularioEditar(usuario.id)" class="action-button">

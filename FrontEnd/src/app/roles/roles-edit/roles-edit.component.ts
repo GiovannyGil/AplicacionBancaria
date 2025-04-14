@@ -35,9 +35,9 @@ export class RolesEditComponent {
   // metodo para obtener los datos existentes
   cargarDatosRol(): void {
     this.rolService.ObtenerRoleID(this.id).subscribe(
-      (response: { rol: any; }) => {
+      (response) => {
         console.log('Datos Obtenidos', response);
-        const rol = response.rol // acceder a los datos
+        const rol = response // acceder a los datos
 
         // asignar los valores
         this.nombreRol = rol.nombreRol;

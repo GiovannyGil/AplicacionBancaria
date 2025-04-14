@@ -20,7 +20,7 @@ export class LoginComponent {
       this.authService.login(this.nombreUsuario, this.clave).subscribe(
         () => {
           console.log('logeo existoso');
-          this.router.navigate(['']) // redirigir al inicio despues del logeo
+          this.router.navigate(['inicio']) // redirigir al inicio despues del logeo
         },
         (error) => {
           console.error('Error al iniciar sesión ', error)

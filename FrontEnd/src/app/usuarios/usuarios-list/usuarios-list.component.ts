@@ -24,17 +24,18 @@ export class UsuariosListComponent {
   ngOnInit(): void {
     this.obtenerUsuarios()
   }
-  
+
   // metodo para obtener ususarios
   obtenerUsuarios(): void {
     try {
       this.usuarioService.ObtenerUsuarios().subscribe(
         (data) => {
-          this.usuarios = data.usuarios // obtener un array de usuarios que trae el objeto
+          this.usuarios = data // obtener un array de usuarios que trae el objeto
+          // console.log('Usuarios: ',this.usuarios); // mostrar los usuarios en consola
         },
         (error) => {
-          if (error.status === 401) {
-            console.error(`Token no encontrado, debe inicdiar sesión ${error.message}`)
+          if(error.status === 401){
+            console.error(`Token no encontrado, debe iniciar sesión ${error.message}`)
           } else {
             console.error(`Error al obtener los usuarios ${error.message}`)
           }

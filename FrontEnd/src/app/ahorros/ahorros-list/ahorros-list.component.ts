@@ -35,7 +35,7 @@ export class AhorrosListComponent {
         },
         (error) => {
           if (error.status === 401) {
-            console.error(`Token no encontrado, debe inicdiar sesión ${error.message}`)
+            console.error(`Token no encontrado, debe iniciar sesión ${error.message}`)
           } else {
             console.error(`Error al obtener los ahorros ${error.message}`)
           }
