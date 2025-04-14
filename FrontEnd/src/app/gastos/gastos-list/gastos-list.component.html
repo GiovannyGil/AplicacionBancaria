@@ -1,1 +1,45 @@
-<p>gastos-list works!</p>
+<app-navbar-authenticate></app-navbar-authenticate>
+
+<div class="gastos-container">
+  <h2>Gestión de gastos</h2>
+
+  <!-- Boton pra agregar un nuevo gasto -->
+  <button (click)="FomularioCrear()" class="add-button">
+    <fa-icon [icon]="faPlus"></fa-icon>Agregar gasto
+  </button>
+
+  <!-- Aquí iría el contenido específico para gastos, como tablas, formularios, etc. -->
+  <table class="gastos-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre Gasto</th>
+        <th>Valor Pago</th>
+        <th>Valor Final</th>
+        <th>Usuario</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let gasto of gastos">
+        <td>{{ gasto.id }}</td>
+        <td>{{ gasto.nombreGasto }}</td>
+        <td>{{ gasto.valorPago | currency: 'COP' }}</td>
+        <td>{{ gasto.valorFinal | currency: 'COP' }}</td>
+        <td>{{ gasto.usuario }}</td>
+        <td>{{ gasto.tipo }}</td>
+        <td>
+          <!-- boton para actualizar -->
+          <button (click)="FormularioEditar(gasto.id)" class="action-button">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+
+          <!-- Botón para eliminar -->
+          <button (click)="eliminargasto(gasto.id)" class="action-button">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

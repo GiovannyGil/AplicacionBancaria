@@ -7,6 +7,7 @@ import { RolesListComponent } from './roles-list/roles-list.component';
 import { RolesEditComponent } from './roles-edit/roles-edit.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     RolesRoutingModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
   ]
 })
 export class RolesModule { }

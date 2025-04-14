@@ -1,4 +1,5 @@
-<!-- <app-navbar></app-navbar> Incluye el navbar -->
+<app-navbar-authenticate></app-navbar-authenticate>
+
 <div class="ahorros-container">
   <h2>Gestión de ahorros</h2>
 
@@ -27,8 +28,8 @@
         <td>{{ ahorro.nombre }}</td>
         <td>{{ ahorro.fechaMeta | date: 'dd/MM/yyyy' }}</td>
         <td>{{ ahorro.cantidadCuotas }}</td>
-        <td>{{ ahorro.montoMeta | currency: 'USD' }}</td>
-        <td>{{ ahorro.ahorroMensual | currency: 'USD' }}</td>
+        <td>{{ ahorro.montoMeta | currency: 'COP' }}</td>
+        <td>{{ ahorro.ahorroMensual | currency: 'COP' }}</td>
         <td>{{ ahorro.tipo }}</td>
         <td>
           <!-- boton para actualizar -->

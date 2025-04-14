@@ -26,45 +26,50 @@ export class RegisterComponent {
 
   // Método para registrar un nuevo usuario
   register(): void {
-    if (
-      this.primerNombre &&
-      this.segundoNombre &&
-      this.primerApellido &&
-      this.segundoApellido &&
-      this.nombreUsuario &&
-      this.correo &&
-      this.clave &&
-      this.direccion &&
-      this.celular &&
-      this.genero
-    ) {
-      // Llamar al servicio de autenticación para registrar el usuario
-      this.authService.register(
-        this.primerNombre,
-        this.segundoNombre,
-        this.primerApellido,
-        this.segundoApellido,
-        this.nombreUsuario,
-        this.correo,
-        this.clave,
-        this.direccion,
-        this.celular,
-        Boolean(this.estado),
-        this.genero,
-        this.fechaCreacion,
-        this.rolId
-    ).subscribe(
-        () => {
-          alert('Registro exitoso');
-          this.router.navigate(['/auth/login']);
-        },
-        (error: { message: any; }) => {
-          console.error('Error en el registro', error.message);
-          alert('Error al registrarse');
-        }
-      );
-    } else {
-      alert('Por favor, completa todos los campos');
+    try {
+      if (
+        this.primerNombre &&
+        this.segundoNombre &&
+        this.primerApellido &&
+        this.segundoApellido &&
+        this.nombreUsuario &&
+        this.correo &&
+        this.clave &&
+        this.direccion &&
+        this.celular &&
+        this.genero
+      ) {
+        // Llamar al servicio de autenticación para registrar el usuario
+        this.authService.register(
+          this.primerNombre,
+          this.segundoNombre,
+          this.primerApellido,
+          this.segundoApellido,
+          this.nombreUsuario,
+          this.correo,
+          this.clave,
+          this.direccion,
+          this.celular,
+          Boolean(this.estado),
+          this.genero,
+          this.fechaCreacion,
+          this.rolId
+      ).subscribe(
+          () => {
+            alert('Registro exitoso');
+            this.router.navigate(['/auth/login']);
+          },
+          (error: { message: any; }) => {
+            console.error('Error en el registro', error.message);
+            alert('Error al registrarse');
+          }
+        );
+      } else {
+        alert('Por favor, completa todos los campos');
+      }
+    } catch (error) {
+      console.error('Error al registrar', error);
+      alert('Error al registrar');  
     }
   }
 }

@@ -7,6 +7,7 @@ import { UsuariosListComponent } from './usuarios-list/usuarios-list.component';
 import { UsuariosEditComponent } from './usuarios-edit/usuarios-edit.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     UsuariosRoutingModule,
     FormsModule,
     FontAwesomeModule,
+    SharedModule,
   ]
 })
 export class UsuariosModule { }

@@ -7,6 +7,7 @@ import { AhorrosListComponent } from './ahorros-list/ahorros-list.component';
 import { AhorrosEditComponent } from './ahorros-edit/ahorros-edit.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AhorrosRoutingModule,
     FormsModule,
     FontAwesomeModule,
+    SharedModule,
   ]
 })
 export class AhorrosModule { }

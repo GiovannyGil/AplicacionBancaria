@@ -7,6 +7,7 @@ import { TarjetasListComponent } from './tarjetas-list/tarjetas-list.component';
 import { TarjetasEditComponent } from './tarjetas-edit/tarjetas-edit.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TarjetasRoutingModule,
     FormsModule,
     FontAwesomeModule,
+    SharedModule,
   ]
 })
 export class TarjetasModule { }

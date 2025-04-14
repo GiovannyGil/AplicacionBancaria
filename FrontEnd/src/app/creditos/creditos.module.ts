@@ -7,6 +7,7 @@ import { CreditosListComponent } from './creditos-list/creditos-list.component';
 import { CreditosEditComponent } from './creditos-edit/creditos-edit.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CreditosRoutingModule,
     FormsModule,
     FontAwesomeModule,
+    SharedModule,
   ]
 })
 export class CreditosModule { }

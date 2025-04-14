@@ -7,6 +7,7 @@ import { IngresosListComponent } from './ingresos-list/ingresos-list.component';
 import { IngresosEditComponent } from './ingresos-edit/ingresos-edit.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     IngresosRoutingModule,
     FormsModule,
     FontAwesomeModule,
+    SharedModule,
   ]
 })
 export class IngresosModule { }

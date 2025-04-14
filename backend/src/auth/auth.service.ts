@@ -2,6 +2,9 @@ import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/co
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
+import { Role } from 'src/roles/entities/role.entity';
+import { RolesService } from 'src/roles/roles.service';
+import { CreateUsuarioDto } from 'src/usuarios/dto/create-usuario.dto';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { UsuariosService } from 'src/usuarios/usuarios.service';
 import { Repository } from 'typeorm';
@@ -13,6 +16,7 @@ export class AuthService {
 
     constructor(
         private readonly usuariosService: UsuariosService,
+        private readonly roleService: RolesService,
         @InjectRepository(Usuario) private usuarioRepository: Repository<Usuario>,
         private readonly jwtService: JwtService,
     ) { }
@@ -68,80 +72,172 @@ export class AuthService {
     }
 
     // Método para registrarse como nuevo usuario
-    async register(primerNombre: string, segundoNombre: string, primerApellido: string, segundoApellido: string, nombreUsuario: string, correo: string, clave: string, direccion: string, celular: string, estado: boolean, genero: string, fechaCreacion: Date, rolId: number): Promise<any> {
+    async register(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
         try {
-            // Verificar si el usuario ya existe
-            const existingUser = await this.usuariosService.findOneByNombreUsuario(nombreUsuario);
-            if (existingUser) { throw new UnauthorizedException('El usuario ya existe'); }
+            // obtener los datos del usuario -> payload
+            const { rolId, clave, ...usuarioData } = createUsuarioDto
 
-            // verificar si los datos son válidos
-            const datos = [
-                { nombre: 'primerNombre', valor: primerNombre },
-                { nombre: 'segundoNombre', valor: segundoNombre },
-                { nombre: 'primerApellido', valor: primerApellido },
-                { nombre: 'segundoApellido', valor: segundoApellido },
-                { nombre: 'nombreUsuario', valor: nombreUsuario },
-                { nombre: 'correo', valor: correo },
-                { nombre: 'clave', valor: clave },
-                { nombre: 'direccion', valor: direccion },
-                { nombre: 'celular', valor: celular },
-                { nombre: 'estado', valor: estado },
-                { nombre: 'genero', valor: genero },
-                { nombre: 'fechaCreacion', valor: fechaCreacion },
-                { nombre: 'rolId', valor: rolId }
-            ]
+            // Buscar el rol y verificar si existe
+            const rol = await this.roleService.findOneByID(rolId);
 
-            for (const dato of datos) {
-                if (!dato.valor) {
-                    throw new UnauthorizedException(`El campo ${dato.nombre} es obligatorio`);
-                }
-            }
+            // Si no existe el rol, lanzar una excepción de tipo BadRequestException
+            if (!rol) throw new NotFoundException(`El rol con ID ${rolId} no existe`)
+
+            // verificar que no esten vacios
+            if (usuarioData === null || !usuarioData) { throw new NotFoundException(`algo sucedio, no se encontraron los datos del usuario`) }
+            
             // Verificar si el correo ya existe
-            const existingEmail = await this.usuariosService.findOneByCorreo(correo);
+            const existingEmail = await this.usuariosService.findOneByCorreo(usuarioData.correo);
             if (existingEmail) {
                 throw new UnauthorizedException('El correo ya está registrado');
             }
 
             // Verificar si el nombre de usuario ya existe
-            const existingUsername = await this.usuariosService.findOneByNombreUsuario(nombreUsuario);
+            const existingUsername = await this.usuariosService.findOneByNombreUsuario(usuarioData.nombreUsuario);
             if (existingUsername) {
                 throw new UnauthorizedException('El nombre de usuario ya está registrado');
             }
 
             // Verificar si el celular ya existe
-            const existingCellphone = await this.usuarioRepository.findOne({ where: { celular, deletedAt: null } });
+            const existingCellphone = await this.usuarioRepository.findOne({ where: { celular: usuarioData.celular, deletedAt: null } });
             if (existingCellphone) {
                 throw new UnauthorizedException('El celular ya está registrado');
             }
 
-            // Crear nuevo usuario
-            const newUser = await this.usuariosService.create({
-                primerNombre,
-                segundoNombre,
-                primerApellido,
-                segundoApellido,
-                nombreUsuario,
-                correo,
-                clave: await bcrypt.hash(clave, 10), // Hashear la contraseña
-                direccion,
-                celular,
-                estado,
-                genero,
-                fechaCreacion,
-                rolId: 0 // Asignar rol por defecto (puedes cambiar esto según tu lógica)
-            });
+            // encriptar la contraseña
+            const saltos = await bcrypt.genSalt(10)
+            const encriptadoClave = await bcrypt.hash(clave, saltos)
+
+            //crear el usuario
+            const usuario = this.usuarioRepository.create({
+                ...usuarioData,
+                clave: encriptadoClave,
+                rol
+            })
 
             // verificar si el usuario fue creado correctamente
-            if (!newUser) {
-                throw new UnauthorizedException('Error al crear el usuario');
-            }
+            if (!usuario) { throw new UnauthorizedException('Error al crear el usuario'); }
 
             // Enviar correo de bienvenida (opcional)
             // await this.sendWelcomeEmail(newUser.correo, newUser.nombreUsuario);
-            return newUser;
+            return usuario;
         } catch (error) {
             console.error('Error en registro:', error.message);
             throw new UnauthorizedException('Error al registrarse', error.message);
+        }
+    }
+
+    // metodo para recordar usuario
+    async recordarUsuario(correo: string): Promise<any> {
+        try {
+            // Verificar si el correo existe
+            const usuario = await this.usuariosService.findOneByCorreo(correo);
+            if (!usuario) {
+                throw new NotFoundException(`El correo "${correo}" no está registrado.`);
+            }
+
+            // mostrar el usuario encontrado
+            console.log('Usuario encontrado:', usuario);
+        
+
+            // Enviar correo con el token (implementa tu lógica de envío de correo aquí)
+            // await this.sendResetPasswordEmail(usuario.correo);
+
+            return { 
+                message: 'Se ha encontrado un usuario que coincide con su correo',
+                usuario: usuario.nombreUsuario
+            };
+        } catch (error) {
+            console.error('Error en recordar usuario:', error.message);
+            throw new UnauthorizedException('Error al recordar usuario', error.message);
+        }
+    }
+
+    // metodo para reestablecer contraseña
+    async buscarCoincidencias(nombreUsuario: string, correo: string): Promise<boolean> {
+        try {
+            // verificar si el usuario existe
+            const usuario = await this.usuariosService.findOneByNombreUsuario(nombreUsuario);
+
+            // verificar si el correo existe
+            const usuarioCorreo = await this.usuariosService.findOneByCorreo(correo);
+
+            // verificar si el usuario y correo son del mismo usuario
+            if (usuarioCorreo && usuarioCorreo.nombreUsuario !== nombreUsuario) {
+                throw new UnauthorizedException('El correo no coincide con el nombre de usuario');
+            }
+            if (!usuario) {
+                throw new NotFoundException(`El usuario "${nombreUsuario}" no existe.`);
+            }
+            if (!usuarioCorreo) {
+                throw new NotFoundException(`El correo "${correo}" no está registrado.`);
+            }
+
+            // retornar un true si el usuario y correo son del mismo usuario
+            const coincidencia = usuarioCorreo.nombreUsuario === nombreUsuario && usuarioCorreo.correo === correo;
+            console.log('Coincidencia encontrada:', coincidencia);
+            return coincidencia;
+
+        } catch (error) {
+            throw new UnauthorizedException(`Error al reestablecer la clave: ${error.message}`);
+        }
+    }
+    async reestablecerClave(nombreUsuario: string, correo: string, clave: string, confirmarClave: string): Promise<any> {
+        try {
+            // verificar si las coincidencias son correctas
+
+            const coincidencias = await this.buscarCoincidencias(nombreUsuario, correo);
+            if (!coincidencias) {
+                throw new UnauthorizedException('El usuario y correo no coinciden');
+            }
+
+            // verificar si la clave es válida
+            if (clave !== confirmarClave) {
+                throw new UnauthorizedException('Las claves no coinciden');
+            }
+
+            // verificar si la clave cumple con los requisitos
+            this.validarClave(clave);
+            
+            // actualizar la nueva clave el usuario
+            const usuario = await this.usuariosService.findOneByNombreUsuario(nombreUsuario);
+            if (!usuario) {
+                throw new NotFoundException(`El usuario "${nombreUsuario}" no existe.`);
+            }
+            const hashedClave = await bcrypt.hash(clave, 10); // Hashear la nueva contraseña
+            usuario.clave = hashedClave;
+            usuario.updatedAt = new Date(); // Actualizar la fecha de modificación
+            const updatedUser = await this.usuarioRepository.save(usuario); // Guardar el usuario actualizado
+            console.log('Clave reestablecida correctamente');
+            return { message: 'Clave reestablecida correctamente' };
+        } catch (error) {
+            throw new UnauthorizedException(`Error al reestablecer la clave: ${error.message}`);
+        }
+    }
+
+    // metodo para validar la clave
+    private async validarClave(clave: string): Promise<void> {
+        const minimoCaracteres = 6;
+        const maximoCaracteres = 20;
+        const tieneMayuscula = /[A-Z]/;
+        const tieneMinuscula = /[a-z]/;
+        const tieneNumero = /\d/;
+        const tieneCaracterEspecial = /[!@#$%^&*(),.?":{}|<>]/;
+
+        if (clave.length < minimoCaracteres || clave.length > maximoCaracteres) {
+            throw new UnauthorizedException(`La clave debe tener entre ${minimoCaracteres} y ${maximoCaracteres} caracteres`);
+        }
+        if (!tieneMayuscula.test(clave)) {
+            throw new UnauthorizedException('La clave debe tener al menos una letra mayúscula');
+        }
+        if (!tieneMinuscula.test(clave)) {
+            throw new UnauthorizedException('La clave debe tener al menos una letra minúscula');
+        }
+        if (!tieneNumero.test(clave)) {
+            throw new UnauthorizedException('La clave debe tener al menos un número');
+        }
+        if (!tieneCaracterEspecial.test(clave)) {
+            throw new UnauthorizedException('La clave debe tener al menos un carácter especial');
         }
     }
 
