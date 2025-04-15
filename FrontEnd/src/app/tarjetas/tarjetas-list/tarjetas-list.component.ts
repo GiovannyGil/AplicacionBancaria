@@ -29,7 +29,7 @@ export class TarjetasListComponent {
     try {
       this.tarjetasService.ObtenerTarjetas().subscribe(
         (data) => {
-          this.tarjetas = data.tarjetas // obtener un array de tarjetas que trae el objeto
+          this.tarjetas = data // obtener un array de tarjetas que trae el objeto
         },
         (error) => {
           if (error.status === 401) {

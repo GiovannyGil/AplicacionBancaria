@@ -210,7 +210,7 @@ export class UsuariosService {
       // guardar los cambios
       await this.usuarioRepository.save(usuario);
 
-      return "Usuario eliminado Correctamente";
+      return { mensaje: "Usuario eliminado Correctamente" };
     } catch (error) {
       throw new InternalServerErrorException(`Error al eliminar el usuario ${error.message}`);
     }

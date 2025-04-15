@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class TarjetasService {
   // URL de la api modulo tarjetas
-  private apiURL = 'http://localhost:3000/api/tarjetas'
+  private apiURL = 'http://localhost:3000/tarjetas'
 
   // inyectar metodos http/recursos
   constructor(private http: HttpClient) { }
@@ -59,7 +59,7 @@ export class TarjetasService {
       'Authorization': `Bearer ${authToken}`
     })
 
-    return this.http.put<any>(`${this.apiURL}/update/${id}`, tarjeta, { headers })
+    return this.http.patch<any>(`${this.apiURL}/update/${id}`, tarjeta, { headers })
   }
 
   // metodo para eliminar tarjeta
@@ -71,6 +71,6 @@ export class TarjetasService {
       'Authorization': `Bearer ${authToken}`
     })
 
-    return this.http.delete<void>(`${this.apiURL}/id/${id}`, { headers })
+    return this.http.delete<void>(`${this.apiURL}/delete/${id}`, { headers })
   }
 }

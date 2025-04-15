@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CreditosService {
   // URL de la api modulo Creditos
-  private apiURL = 'http://localhost:3000/api/creditos'
+  private apiURL = 'http://localhost:3000/creditos'
 
   // inyectar metodos http/recursos
   constructor(private http: HttpClient) { }
@@ -71,6 +71,6 @@ export class CreditosService {
         'Authorization': `Bearer ${authToken}`
       })
 
-      return this.http.delete<void>(`${this.apiURL}/id/${id}`, { headers })
+      return this.http.delete<void>(`${this.apiURL}/delete/${id}`, { headers })
     }
 }

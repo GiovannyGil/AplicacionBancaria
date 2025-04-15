@@ -7,7 +7,7 @@ import { AhorrosEditComponent } from './ahorros-edit/ahorros-edit.component';
 const routes: Routes = [
   { path: '', component: AhorrosListComponent }, // Redirige a la lista de ahorros por defecto
   { path: 'crear', component: AhorrosCreateComponent }, // Ruta para crear un nuevo ahorro
-  { path: 'update/id', component: AhorrosEditComponent } // Ruta para editar un ahorro existente
+  { path: 'update/:id', component: AhorrosEditComponent } // Ruta para editar un ahorro existente
 ];
 
 @NgModule({

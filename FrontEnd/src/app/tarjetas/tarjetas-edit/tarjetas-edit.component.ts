@@ -12,7 +12,14 @@ export class TarjetasEditComponent {
   numero: number = 0;
   codigo: number = 0;
   fechaExpira: Date = new Date(); // Cambiar por la fecha de expiración
+  cupoTotal: number = 0; // Cambiar por el cupo total
+  cupoDisponible: number = 0; // Cambiar por el cupo disponible
+  deuda: number = 0; // Cambiar por la deuda
+  saldoDebito: number = 0; // Cambiar por el saldo de débito
   tipo: number = 1; // Cambiar por el tipo de tarjeta
+  fechaPagos: Date = new Date(); // Cambiar por la fecha de pagos
+  fechaCompra: Date = new Date(); // Cambiar por la fecha de compra
+  estado: boolean = true; // Estado por defecto (activo)
   usuarioID: number = 1; // Cambiar por el ID del usuario logueado
 
 
@@ -37,15 +44,22 @@ export class TarjetasEditComponent {
   // metodo para cargar los datos existentes}
   cargarDatostarjeta(): void {
     this.tarjetaServide.ObtenerTarjetaID(this.id).subscribe(
-      (response: { tarjeta: any; }) => {
+      (response) => {
         console.log('Datos Obtenidos', response);
-        const tarjeta = response.tarjeta // acceder a los datos
+        const tarjeta = response // acceder a los datos
 
         // asignar los valores
         this.numero = tarjeta.numero;
         this.codigo = tarjeta.codigo;
         this.fechaExpira = tarjeta.fechaExpira;
+        this.cupoTotal = tarjeta.cupoTotal;
+        this.cupoDisponible = tarjeta.cupoDisponible;
+        this.deuda = tarjeta.deuda;
+        this.saldoDebito = tarjeta.saldoDebito;
         this.tipo = tarjeta.tipo;
+        this.fechaPagos = tarjeta.fechaPagos;
+        this.fechaCompra = tarjeta.fechaCompra;
+        this.estado = tarjeta.estado;
         this.usuarioID = tarjeta.usuarioID;
       }, (error: { message: any; }) => {
         console.log(`Error al cargar los datos ${error.message}`);
@@ -55,12 +69,19 @@ export class TarjetasEditComponent {
 
 
   // metodo para actulizar
-  actualizartarjeta(): void {
+  actualizarTarjeta(): void {
     const tarjetaActualizado = {
       numero: this.numero,
       codigo: this.codigo,
       fechaExpira: this.fechaExpira,
+      cupoTotal: this.cupoTotal,
+      cupoDisponible: this.cupoDisponible,
+      deuda: this.deuda,
+      saldoDebito: this.saldoDebito,
       tipo: this.tipo,
+      fechaPagos: this.fechaPagos,
+      fechaCompra: this.fechaCompra,
+      estado: this.estado,
       usuarioID: 1 // Cambiar por el ID del usuario logueado
     }
 

@@ -34,6 +34,7 @@ export class TarjetasService {
 
       return guardarTarjeta;
     } catch (error) {
+      console.log('error al crear la tarjeta', error);
       throw new InternalServerErrorException(`Error al crear la tarjeta: ${error.message}`);
     }
   }

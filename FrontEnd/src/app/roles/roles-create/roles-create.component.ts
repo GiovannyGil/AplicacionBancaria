@@ -29,8 +29,9 @@ export class RolesCreateComponent {
       () => {
         alert('Rol creado exitosamente')
         this.router.navigate(['/roles'])
-      }, (error: { message: any; }) => {
+      }, (error) => {
         console.log(`Error al crear el rol ${error.message}`);
+        alert(error.error.message + ',  verifique el ROL no se elimino no se eliminó recientemente');
       }
     )
   }

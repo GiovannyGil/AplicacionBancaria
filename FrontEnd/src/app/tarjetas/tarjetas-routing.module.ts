@@ -7,7 +7,7 @@ import { TarjetasEditComponent } from './tarjetas-edit/tarjetas-edit.component';
 const routes: Routes = [
   { path: '', component: TarjetasListComponent }, // Redirige a la lista de tarjeta por defecto
   { path: 'crear', component: TarjetasCreateComponent }, // Ruta para crear un nuevo tarjeta
-  { path: 'update/id', component: TarjetasEditComponent } // Ruta para editar un tarjeta existente
+  { path: 'update/:id', component: TarjetasEditComponent } // Ruta para editar un tarjeta existente
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

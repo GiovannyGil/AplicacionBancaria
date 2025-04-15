@@ -15,7 +15,7 @@ export class AhorrosEditComponent {
   montoMeta: number = 0;
   ahorroMensual: number = 0;
   tipo: number = 1; // Cambiar por el tipo de ahorro
-  usuarioID: number = 1; // Cambiar por el ID del usuario logueado
+  usuarioID: number = this.id; // Cambiar por el ID del usuario logueado
 
   constructor(
     private ahorroServide: AhorrosService,
@@ -38,9 +38,9 @@ export class AhorrosEditComponent {
   // metodo para cargar los datos existentes}
   cargarDatosahorro(): void {
     this.ahorroServide.ObtenerAhorrosID(this.id).subscribe(
-      (response: { ahorro: any; }) => {
+      (response) => {
         console.log('Datos Obtenidos', response);
-        const ahorro = response.ahorro // acceder a los datos
+        const ahorro = response // acceder a los datos
 
         // asignar los valores
         this.nombre = ahorro.nombre;
@@ -49,7 +49,7 @@ export class AhorrosEditComponent {
         this.montoMeta = ahorro.montoMeta;
         this.ahorroMensual = ahorro.ahorroMensual;
         this.tipo = ahorro.tipo;
-        this.usuarioID = ahorro.usuarioID;
+        this.usuarioID = ahorro.usuario;
       }, (error: { message: any; }) => {
         console.log(`Error al cargar los datos ${error.message}`);
       }

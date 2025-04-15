@@ -1,5 +1,5 @@
 import { Usuario } from "src/usuarios/entities/usuario.entity";
-import { BeforeInsert, BeforeUpdate, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, DeleteDateColumn, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'Roles' })
 export class Role {
@@ -21,8 +21,9 @@ export class Role {
     @Column({ type: "date", nullable: true })
     updatedAt: Date
 
-    @Column({ type: "date", nullable: true })
-    deletedAt: Date
+    @DeleteDateColumn({ type: 'datetime', name: 'deletedAt', nullable: true })
+    deletedAt: Date;
+
 
     // relaciones aqui
     /* relación con usuario (un rol por usuario) 

@@ -16,7 +16,14 @@
         <th>Número</th>
         <th>Código</th>
         <th>Fecha Expira</th>
+        <th>Cupo Total</th>
+        <th>Cupo Disponible</th>
+        <th>Deuda</th>
+        <th>Saldo Debito</th>
         <th>Tipo</th>
+        <th>Fecha Pagos</th>
+        <th>Fecha Compra</th>
+        <th>Estado</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -26,7 +33,14 @@
         <td>{{ tarjeta.numero }}</td>
         <td>{{ tarjeta.codigo }}</td>
         <td>{{ tarjeta.fechaExpira | date }}</td>
+        <td>{{ tarjeta.cupoTotal }}</td>
+        <td>{{ tarjeta.cupoDisponible }}</td>
+        <td>{{ tarjeta.deuda }}</td>
+        <td>{{ tarjeta.saldoDebito }}</td>
         <td>{{ tarjeta.tipo }}</td>
+        <td>{{ tarjeta.fechaPagos | date }}</td>
+        <td>{{ tarjeta.fechaCompra | date }}</td>
+        <td>{{ tarjeta.estado }}</td>
         <td>
           <!-- boton para actualizar -->
           <button (click)="FormularioEditar(tarjeta.id)" class="action-button">

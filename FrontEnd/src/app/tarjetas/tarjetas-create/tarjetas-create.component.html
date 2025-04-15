@@ -17,8 +17,39 @@
             <label>Fecha Expira</label>
         </div>
         <div class="input-group">
+            <input [(ngModel)]="cupoTotal" name="cupoTotal" type="number" required />
+            <label>Cupo Total</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="cupoDisponible" name="cupoDisponible" type="number" required />
+            <label>Cupo Disponible</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="deuda" name="deuda" type="number" required />
+            <label>Deuda</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="saldoDebito" name="saldoDebito" type="number" required />
+            <label>Saldo Debito</label>
+        </div>
+        <div class="input-group">
             <input [(ngModel)]="tipo" name="tipo" type="text" required />
             <label>tipo</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="fechaPagos" name="fechaPagos" type="date" required />
+            <label>Fecha Pagos</label>
+        </div>
+        <div class="input-group">
+            <input [(ngModel)]="fechaCompra" name="fechaCompra" type="date" required />
+            <label>Fecha Compra</label>
+        </div>
+        <div class="input-group">
+            <select [(ngModel)]="estado" name="esatado" required>
+                <option value="1">Activo</option>
+                <option value="0">Inactivo</option>
+            </select>
+            <label>Estado</label>
         </div>
         <button type="submit" class="register-button">Agregar</button>
         </form>

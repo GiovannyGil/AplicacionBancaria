@@ -44,7 +44,7 @@ export class UsuariosController {
     return this.usuariosService.update(+id, updateUsuarioDto);
   }
 
-  @Delete('id/:id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.usuariosService.softDelete(+id);
   }

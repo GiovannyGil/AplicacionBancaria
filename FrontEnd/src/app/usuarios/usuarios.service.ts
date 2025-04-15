@@ -83,7 +83,7 @@ export class UsuariosService {
       'Authorization': `Bearer ${authToken}`
     })
 
-    return this.http.delete<void>(`${this.apiURL}/id/${id}`, { headers })
+    return this.http.delete<void>(`${this.apiURL}/delete/${id}`, { headers })
   }
 
   // metodo para crear usuarios

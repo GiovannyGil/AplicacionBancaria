@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class IngresosService {
   // URL de la api modulo ingreso
-  private apiURL = 'http://localhost:3000/api/Ingresos'
+  private apiURL = 'http://localhost:3000/Ingresos'
 
   // inyectar metodos http/recursos
   constructor(private http: HttpClient) { }
@@ -72,6 +72,6 @@ export class IngresosService {
         'Authorization': `Bearer ${authToken}`
       })
 
-      return this.http.delete<void>(`${this.apiURL}/id/${id}`, { headers })
+      return this.http.delete<void>(`${this.apiURL}/delete/${id}`, { headers })
     }
 }

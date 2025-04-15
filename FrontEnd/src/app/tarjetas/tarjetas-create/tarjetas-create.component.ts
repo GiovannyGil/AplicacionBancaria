@@ -11,7 +11,14 @@ export class TarjetasCreateComponent {
   numero: number = 0;
   codigo: number = 0;
   fechaExpira: Date = new Date(); // Cambiar por la fecha de expiración
+  cupoTotal: number = 0; // Cambiar por el cupo total
+  cupoDisponible: number = 0; // Cambiar por el cupo disponible
+  deuda: number = 0; // Cambiar por la deuda
+  saldoDebito: number = 0; // Cambiar por el saldo de débito
   tipo: number = 1; // Cambiar por el tipo de tarjeta
+  fechaPagos: Date = new Date(); // Cambiar por la fecha de pagos
+  fechaCompra: Date = new Date(); // Cambiar por la fecha de compra
+  estado: boolean = true; // Estado por defecto (activo)
   usuarioID: number = 1; // Cambiar por el ID del usuario logueado
 
   // Constructor
@@ -23,7 +30,14 @@ export class TarjetasCreateComponent {
       numero: this.numero,
       codigo: this.codigo,
       fechaExpira: this.fechaExpira,
+      cupoTotal: this.cupoTotal,
+      cupoDisponible: this.cupoDisponible,
+      deuda: this.deuda,
+      saldoDebito: this.saldoDebito,
       tipo: this.tipo,
+      fechaPagos: this.fechaPagos,
+      fechaCompra: this.fechaCompra,
+      estado: this.estado,
       usuarioID: 1 // Cambiar por el ID del usuario logueado
     }
 

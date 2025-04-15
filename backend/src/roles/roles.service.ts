@@ -3,7 +3,7 @@ import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from './entities/role.entity';
-import { In, LessThan, Repository } from 'typeorm';
+import { In, IsNull, LessThan, Not, Repository } from 'typeorm';
 import { Cron, CronExpression } from '@nestjs/schedule';
 @Injectable()
 export class RolesService {
@@ -29,12 +29,18 @@ export class RolesService {
       const RolExiste = await this.verifyExistROL(createRoleDto.nombreRol)
       if(RolExiste) throw new BadRequestException('El rol ya existe')
 
-      // crear el rol
+      // verificar si el rol exite con el deleteAt not null
+      const rolEliminado = await this.findOneByNombre(nombreRol)
+      if (rolEliminado) throw new BadRequestException('El rol ya existe, pero fue eliminado. Por favor, restaurelo antes de crear uno nuevo.');
+  
+      // Crear el rol
       const nuevoRol = this.roleRepository.create({ nombreRol, estado, descripcion });
-      if(!nuevoRol) throw new BadRequestException('Error al crear el ROL')
+      if (!nuevoRol) throw new BadRequestException('Error al crear el ROL');
+  
       return await this.roleRepository.save(nuevoRol);
     } catch (error) {
-      throw new InternalServerErrorException('Error al crear el ROL', error.message)
+      console.log('Error al crear el rol', error);
+      throw new InternalServerErrorException('Error al crear el ROL', error.message);
     }
   }
 
@@ -100,12 +106,18 @@ export class RolesService {
   }
 
   // mepara marcar un rol como eliminado -> deletedAt -> Tiempo/Fecha
-  async softDelete(id: number): Promise<string> {
+  async softDelete(id: number) {
     try {
       const role = await this.findOneByID(id);
+
+      if (!role) throw new BadRequestException('El rol no existe o ya fue eliminado')
+
+      role.deletedAt = new Date(); // Asignar la fecha de eliminación
+
       await this.roleRepository.softRemove(role);
-      return `El rol con ID ${id} ha sido eliminado (soft delete)`;
+      return { mensaje: 'Rol eliminado correctamente' };
     } catch (error) {
+      console.log('error al eliminar el rol', error);
       throw new InternalServerErrorException('Error al eliminar el ROL', error.message)
     }
   }

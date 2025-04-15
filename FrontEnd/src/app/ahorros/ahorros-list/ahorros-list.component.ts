@@ -31,7 +31,7 @@ export class AhorrosListComponent {
     try {
       this.ahorrosService.ObtenerAhorros().subscribe(
         (data) => {
-          this.ahorros = data.ahorros // obtener un array de ahorros que trae el objeto
+          this.ahorros = data // obtener un array de ahorros que trae el objeto
         },
         (error) => {
           if (error.status === 401) {

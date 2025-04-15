@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AhorrosService {
   // URL de la api modulo usuarios
-  private apiURL = 'http://localhost:3000/api/ahorros'
+  private apiURL = 'http://localhost:3000/ahorros'
 
   // inyectar metodos http/recursos
   constructor(private http: HttpClient) { }

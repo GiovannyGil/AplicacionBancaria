@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class GastosService {
   // URL de la api modulo Gastos
-  private apiURL = 'http://localhost:3000/api/gastos'
+  private apiURL = 'http://localhost:3000/gastos'
 
   // inyectar metodos http/recursos
   constructor(private http: HttpClient) { }
@@ -72,6 +72,6 @@ export class GastosService {
         'Authorization': `Bearer ${authToken}`
       })
 
-      return this.http.delete<void>(`${this.apiURL}/id/${id}`, { headers })
+      return this.http.delete<void>(`${this.apiURL}/delete/${id}`, { headers })
     }
 }

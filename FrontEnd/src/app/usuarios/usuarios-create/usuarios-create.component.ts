@@ -17,7 +17,7 @@ export class UsuariosCreateComponent {
   clave: string = '';
   direccion: string = '';
   celular: string = '';
-  estado: number = 1; // Estado por defecto (activo)
+  estado: boolean = true; // Estado por defecto (activo)
   genero: string = '';
   fechaCreacion: Date = new Date(); // Fecha de creación por defecto (actual)
   rolId: number = 2; // ID del rol por defecto (puede ser un valor fijo o dinámico según tu lógica)
@@ -42,6 +42,7 @@ export class UsuariosCreateComponent {
       fechaCreacion: this.fechaCreacion,
       rolId: this.rolId
     }
+    console.log('datos usuario nuevo ', nuevoUsuario);
 
     this.usuarioService.CrearUsuarios(nuevoUsuario).subscribe(
       () => {
