@@ -73,7 +73,7 @@ export class AuthService {
     try {
       localStorage.removeItem(this.tokenKey)
       localStorage.removeItem('rolId') // eliminar el rol del localstorage
-      this.router.navigate(['/auth/login']) // redirigir al login
+      this.router.navigate(['']) // redirigir al login
     } catch (error) {
       console.error('Error al cerrar sesión', error)
       alert('Error al cerrar sesión')
@@ -148,7 +148,7 @@ export class AuthService {
   }
 
   // metodo para reestablever la clave
-  async reestablecerClave(nombreUsuario: string, correo: string, clave: string, confirmarClave: string) {
+  reestablecerClave(nombreUsuario: string, correo: string, clave: string, confirmarClave: string): Observable<any> {
     try {
       return this.http.post(`${this.apiUrl}/reestablecerClave`, { nombreUsuario, correo, clave, confirmarClave }).pipe(
         tap((response) => {

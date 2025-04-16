@@ -13,7 +13,7 @@ export class RecordarUsuarioComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  recordarUsuario(): void {
+  recordarUsuario(correo:string): void {
     if (!this.correo) {
       alert('Por favor, ingrese un correo electrónico válido.');
       return;
@@ -22,13 +22,10 @@ export class RecordarUsuarioComponent {
     this.authService.recordarUsuario(this.correo).subscribe({
       next: (response) => {
         // Mostrar los datos que devuelve el backend
-        alert(`Usuario: ${response.usuario}\nMensaje: ${response.message}`);
-
-        // O puedes guardar el usuario en una variable y mostrarlo en el HTML
-        this.usuarioEncontrado = response.usuario;
-
-        // Opcional: redirigir luego de mostrar
-        // this.router.navigate(['/auth/login']);
+        alert(`
+          ${response.message}\n
+          Usuario: ${response.usuario}
+        `)
       },
       error: (error) => {
         console.error('Error al recordar usuario', error);

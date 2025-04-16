@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { AhorrosService } from './ahorros.service';
 import { CreateAhorroDto } from './dto/create-ahorro.dto';
 import { UpdateAhorroDto } from './dto/update-ahorro.dto';
@@ -15,8 +15,9 @@ export class AhorrosController {
   }
 
   @Get()
-  findAll() {
-    return this.ahorrosService.findAll();
+  findAll(@Req() req: Request & { user: any }) {
+    const userId = req.user.id;
+    return this.ahorrosService.findAll(userId);
   }
 
   @Get('id/:id')

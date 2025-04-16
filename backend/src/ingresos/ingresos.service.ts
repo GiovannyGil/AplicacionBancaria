@@ -3,7 +3,7 @@ import { CreateIngresoDto } from './dto/create-ingreso.dto';
 import { UpdateIngresoDto } from './dto/update-ingreso.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Ingreso } from './entities/ingreso.entity';
-import { In, LessThan, Repository } from 'typeorm';
+import { In, IsNull, LessThan, Repository } from 'typeorm';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
@@ -17,41 +17,47 @@ export class IngresosService {
 
   async create(createIngresoDto: CreateIngresoDto): Promise<Ingreso> {
     const { usuarioID } = createIngresoDto;
+    
     try {
-      // verificar que el usuario existe
-      const usuario = await this.usuariosRepository.findOne({ where: { id: usuarioID, deletedAt: null } })
-      if (!usuario) throw new NotFoundException('Usuario no encontrado')
-
-      // crear Ingreso
-      const ingreso = this.ingresoRepository.create(createIngresoDto);
-      if (!ingreso) throw new InternalServerErrorException('No se pudo crear el ingreso.');
-
-      // guardar Ingreso
-      const guardarIngreso = await this.ingresoRepository.save(ingreso);
-      if (!guardarIngreso) throw new InternalServerErrorException('No se pudo guardar el ingreso.');
-
-      return guardarIngreso
+      // Verificar que el usuario existe
+      const usuario = await this.usuariosRepository.findOne({
+        where: { id: usuarioID, deletedAt: IsNull() }
+      });
+      if (!usuario) throw new NotFoundException('Usuario no encontrado');
+  
+      // Crear y asignar los valores del ingreso
+      const ingreso = this.ingresoRepository.create({
+        ...createIngresoDto,
+        usuario: usuario, // Relación con el usuario
+      });
+  
+      return await this.ingresoRepository.save(ingreso);
+  
     } catch (error) {
+      console.log('error al crear el ingreso', error);
       throw new InternalServerErrorException(`Error al crear el ingreso: ${error.message}`);
     }
   }
+  
 
-  async findAll() {
+  async findAll(userId: number): Promise<Ingreso[]> {
     try {
-      const ingresos = await this.ingresoRepository.find({ where: { deletedAt: null }, relations: ['usuario'] });
+      const ingresos = await this.ingresoRepository.find({ where: { deletedAt: IsNull(), usuario: { id: userId } }, relations: ['usuario'] });
       if (!ingresos) throw new InternalServerErrorException('No se encontraron ingresos.');
       return ingresos;
     } catch (error) {
+      console.log('error al buscar los ingresos', error);
       throw new InternalServerErrorException(`Error al buscar los ingresos: ${error.message}`);
     }
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<Ingreso> {
     try {
-      const ingreso = await this.ingresoRepository.findOne({ where: { id, deletedAt: null }, relations: ['usuario'] });
+      const ingreso = await this.ingresoRepository.findOne({ where: { id, deletedAt: IsNull() }, relations: ['usuario'] });
       if (!ingreso) throw new InternalServerErrorException('No se encontró el ingreso.');
       return ingreso;
     } catch (error) {
+      console.log('error al buscar el ingreso', error);
       throw new InternalServerErrorException(`Error al buscar el ingreso: ${error.message}`);
     }
   }
@@ -77,6 +83,7 @@ export class IngresosService {
 
       return ingresoActualizado;
     } catch (error) {
+      console.log('error al actualizar el ingreso', error);
       throw new InternalServerErrorException(`Error al actualizar el ingreso: ${error.message}`);
     }
   }
@@ -84,7 +91,7 @@ export class IngresosService {
   async softDelete(id: number): Promise<{ message: string }> {
     try {
       // buscar la ingreso por id
-      const ingreso = await this.ingresoRepository.findOne({ where: { id, deletedAt: null } })
+      const ingreso = await this.ingresoRepository.findOne({ where: { id, deletedAt: IsNull() } })
 
       // si no encuentra nada
       if (!ingreso) throw new NotFoundException('No se encontro la compra')
@@ -98,6 +105,7 @@ export class IngresosService {
       // devolver mensaje de exito
       return { message: "compra eliminada correctamente" }
     } catch (error) {
+      console.log('error al eliminar la compra', error);
       throw new BadRequestException('Error al eliminar la compra', error.message)
     }
   }
@@ -134,6 +142,7 @@ export class IngresosService {
       if (!ingresoEliminado) throw new InternalServerErrorException('No se pudo eliminar el ingreso.');
       return ingresoEliminado;
     } catch (error) {
+      console.log('error al eliminar el ingreso', error);
       throw new InternalServerErrorException(`Error al eliminar el ingreso: ${error.message}`);
     }
   }

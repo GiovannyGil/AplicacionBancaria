@@ -41,9 +41,9 @@ export class CreditosEditComponent {
   // metodo para cargar los datos existentes}
   cargarDatoscredito(): void {
     this.creditoServide.ObtenerCreditoID(this.id).subscribe(
-      (response: { credito: any; }) => {
+      (response) => {
         console.log('Datos Obtenidos', response);
-        const credito = response.credito // acceder a los datos
+        const credito = response // acceder a los datos
 
         // asignar los valores
         this.numero = credito.numero;
@@ -75,7 +75,6 @@ export class CreditosEditComponent {
       interesTotal: this.interesTotal,
       debitoMensual: this.debitoMensual,
       tipo: this.tipo,
-      usuarioID: 1 // Cambiar por el ID del usuario logueado
     }
 
     console.log('Datos a enviar ', creditoActualizado);

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { CreditosService } from './creditos.service';
 import { CreateCreditoDto } from './dto/create-credito.dto';
 import { UpdateCreditoDto } from './dto/update-credito.dto';
@@ -15,8 +15,9 @@ export class CreditosController {
   }
 
   @Get()
-  findAll() {
-    return this.creditosService.findAll();
+  findAll(@Req() req: Request & { user: any }) {
+    const userId = req.user.id;
+    return this.creditosService.findAll(userId);
   }
 
   @Get('id/:id')

@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./ingresos-create.component.css']
 })
 export class IngresosCreateComponent {
-  numeroIngreso: string = '';
-  valorPago: number = 0;
+  nombreIngreso: string = '';
+  valorIngreso: number = 0;
   valorFinal: number = 0;
   usuarioID: number = 1; // Cambiar por el ID del usuario logueado
 
@@ -19,8 +19,8 @@ export class IngresosCreateComponent {
   // metodo para crear un ingreso
   crearingreso(): void {
     const nuevoingreso = {
-      numeroIngreso: this.numeroIngreso,
-      valorPago: this.valorPago,
+      nombreIngreso: this.nombreIngreso,
+      valorIngreso: this.valorIngreso,
       valorFinal: this.valorFinal,
       usuarioID: 1 // Cambiar por el ID del usuario logueado
     }

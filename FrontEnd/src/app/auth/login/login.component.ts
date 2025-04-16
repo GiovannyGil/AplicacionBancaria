@@ -48,8 +48,26 @@ export class LoginComponent {
   }
 
   // metodo para recordar clave
+  irAReestablecerClave(event: Event): void {
+    try {
+      event.preventDefault(); // Evita que el <a> recargue la página
+      this.router.navigate(['/auth/reestablecerClave']) // redirigir a la reestablecer clave
+    } catch (error) {
+      console.error('Error al navegar a la página de recordar clave', error)
+      alert('Error al navegar a la página de recordar clave')
+      throw new Error('Error al navegar a la página de recordar clave')
+    }
+  }
 
-
-  // metodo para registrarse
-
+  // metodo para recuperar usuario
+  irARecuperarUsuario(event: Event): void {
+    try {
+      event.preventDefault(); // Evita que el <a> recargue la página
+      this.router.navigate(['/auth/recuperarUsuario']) // redirigir a la recuperar usuario
+    } catch (error) {
+      console.error('Error al navegar a la página de recuperar usuario', error)
+      alert('Error al navegar a la página de recuperar usuario')
+      throw new Error('Error al navegar a la página de recuperar usuario')
+    }
+  }
 }

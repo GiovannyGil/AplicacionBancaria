@@ -60,7 +60,7 @@ export class IngresosService {
         'Authorization': `Bearer ${authToken}`
       })
 
-      return this.http.put<any>(`${this.apiURL}/update/${id}`, Ingreso, { headers })
+      return this.http.patch<any>(`${this.apiURL}/update/${id}`, Ingreso, { headers })
     }
 
     // metodo para eliminar Ingreso

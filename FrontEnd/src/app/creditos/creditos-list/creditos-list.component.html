@@ -33,10 +33,10 @@
         <td>{{ credito.nombre }}</td>
         <td>{{ credito.fechaExpira | date }}</td>
         <td>{{ credito.cantidadCuotas }}</td>
-        <td>{{ credito.montoFinal | currency }}</td>
-        <td>{{ credito.interesMensual | percent }}</td>
-        <td>{{ credito.interesTotal | currency }}</td>
-        <td>{{ credito.debitoMensual | currency }}</td>
+        <td>{{ credito.montoFinal | currency: 'COP' }}</td>
+        <td>{{ credito.interesMensual | currency: 'COP' }}</td>
+        <td>{{ credito.interesTotal | currency: 'COP' }}</td>
+        <td>{{ credito.debitoMensual | currency: 'COP' }}</td>
         <td>{{ credito.tipo }}</td>
         <td>
           <!-- boton para actualizar -->

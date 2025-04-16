@@ -14,8 +14,9 @@ export class RolesService {
   async verifyExistROL(nombreRol: string): Promise<Boolean> {
     try {
       // buscar el rol
-      return !!(await this.roleRepository.findOne({ where: { nombreRol, deletedAt: null } }));
+      return !!(await this.roleRepository.findOne({ where: { nombreRol, deletedAt: IsNull() } }));
     } catch (error) {
+      console.log('Error al verificar la existencia del rol', error);
       throw new InternalServerErrorException('Error al verificar la existencia del ROL', error.message)
     }
   }
@@ -48,13 +49,14 @@ export class RolesService {
   async findAll(): Promise<Role[]> {
     try {
       // buscar los roles
-      const roles = await this.roleRepository.find({ where: { deletedAt: null } })
+      const roles = await this.roleRepository.find({ where: { deletedAt: IsNull() } })
 
       // si no encuentra nada, devolver un array vacio
       if(!roles || roles.length === 0) throw new BadRequestException('No hay roles registrados')
 
       return roles
     } catch (error) {
+      console.log('Error al buscar los roles', error);
       throw new InternalServerErrorException('Error al buscar los roles', error.message)
     }
   }
@@ -63,12 +65,13 @@ export class RolesService {
   async findOneByID(id: number): Promise<Role> {
     try {
       // buscar el rol
-      const rol = await this.roleRepository.findOne({ where: { id, deletedAt: null }})
+      const rol = await this.roleRepository.findOne({ where: { id, deletedAt: IsNull() }})
       // si no encuentra el rol devolver un null
       if(!rol) throw new BadRequestException('El rol no existe')
       // retornar el rol
       return rol
     } catch (error) {
+      console.log('Error al buscar el rol', error);
       throw new InternalServerErrorException('Error al buscar el rol', error.message)
     }
   }
@@ -77,12 +80,13 @@ export class RolesService {
   async findOneByNombre(nombreRol: string): Promise<Role> {
     try {
       // buscar el rol
-      const rol = await this.roleRepository.findOne({ where: { nombreRol, deletedAt: null } })
+      const rol = await this.roleRepository.findOne({ where: { nombreRol, deletedAt: IsNull() } })
       // si no encuentra el rol devolver un null
       if (!rol) throw new BadRequestException('El rol no existe')
       // retornar el rol
       return rol
     } catch (error) {
+      console.log('Error al buscar el rol', error);
       throw new InternalServerErrorException('Error al buscar el rol', error.message)
     }
   }
@@ -101,6 +105,7 @@ export class RolesService {
     Object.assign(role, { nombreRol, estado, descripcion });
     return await this.roleRepository.save(role);
     } catch (error) {
+      console.log('Error al actualizar el rol', error);
       throw new InternalServerErrorException('Error al actualizar el rol', error.message)
     }
   }

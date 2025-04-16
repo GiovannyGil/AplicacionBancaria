@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./gastos-create.component.css']
 })
 export class GastosCreateComponent {
-  numeroGasto: string = '';
+  nombreGasto: string = '';
   valorPago: number = 0;
   valorFinal: number = 0;
   usuarioID: number = 1; // Cambiar por el ID del usuario logueado
@@ -19,7 +19,7 @@ export class GastosCreateComponent {
   // metodo para crear un gasto
   creargasto(): void {
     const nuevogasto = {
-      numerogasto: this.numeroGasto,
+      nombreGasto: this.nombreGasto,
       valorPago: this.valorPago,
       valorFinal: this.valorFinal,
       usuarioID: 1 // Cambiar por el ID del usuario logueado

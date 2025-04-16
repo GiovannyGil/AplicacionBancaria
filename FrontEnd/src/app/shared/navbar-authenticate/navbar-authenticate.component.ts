@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-navbar-authenticate',
@@ -10,6 +12,12 @@ export class NavbarAuthenticateComponent {
 
   ngOnInit() {
     this.userRol = localStorage.getItem('rolId') || '';
+  }
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  cerrarSesion(): void {
+    this.authService.logout();
   }
 
   esAdmin(): boolean {

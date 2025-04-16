@@ -33,10 +33,10 @@
         <td>{{ tarjeta.numero }}</td>
         <td>{{ tarjeta.codigo }}</td>
         <td>{{ tarjeta.fechaExpira | date }}</td>
-        <td>{{ tarjeta.cupoTotal }}</td>
-        <td>{{ tarjeta.cupoDisponible }}</td>
-        <td>{{ tarjeta.deuda }}</td>
-        <td>{{ tarjeta.saldoDebito }}</td>
+        <td>{{ tarjeta.cupoTotal | currency: 'COP'  }}</td>
+        <td>{{ tarjeta.cupoDisponible | currency: 'COP'  }}</td>
+        <td>{{ tarjeta.deuda | currency: 'COP'  }}</td>
+        <td>{{ tarjeta.saldoDebito | currency: 'COP'  }}</td>
         <td>{{ tarjeta.tipo }}</td>
         <td>{{ tarjeta.fechaPagos | date }}</td>
         <td>{{ tarjeta.fechaCompra | date }}</td>

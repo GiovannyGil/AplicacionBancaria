@@ -3,7 +3,7 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from './entities/usuario.entity';
-import { In, LessThan, Repository } from 'typeorm';
+import { In, IsNull, LessThan, Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { BadRequestException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
@@ -26,7 +26,7 @@ export class UsuariosService {
       const { rolId, clave, ...usuarioData } = createUsuarioDto
 
       // Buscar el rol y verificar si existe
-      const rol = await this.roleRepository.findOne({ where: { id: rolId, deletedAt: null } });
+      const rol = await this.roleRepository.findOne({ where: { id: rolId, deletedAt: IsNull() } });
 
       // Si no existe el rol, lanzar una excepción de tipo BadRequestException
       if (!rol) throw new NotFoundException(`El rol con ID ${rolId} no existe`)
@@ -61,7 +61,8 @@ export class UsuariosService {
   async findAll(): Promise<Usuario[]> {
     try {
       // buscar los usuarios
-      const usuarios = await this.usuarioRepository.find({ where: { deletedAt: null }, relations: ['rol'] })
+      const usuarios = await this.usuarioRepository.find({ where: { deletedAt: IsNull() }, 
+      relations: ['rol'] })
       // si no encuentra nada, devolver un array vacio
       if (!usuarios) throw new NotFoundException('No se encontraron usuarios registrados.')
       return usuarios
@@ -74,7 +75,7 @@ export class UsuariosService {
   async findOneByID(id: number): Promise<Usuario> {
     try {
       // buscar el usuario por id
-      const usuario = await this.usuarioRepository.findOne({ where: { id, deletedAt: null }, relations: ['rol'] })
+      const usuario = await this.usuarioRepository.findOne({ where: { id, deletedAt: IsNull() }, relations: ['rol'] })
       // controlar si no se encuentra el usuario
       if (!usuario) throw new NotFoundException(`El usuario con ID ${id} no existe o ya fue eliminado.`)
       // devolver el usuario
@@ -88,7 +89,7 @@ export class UsuariosService {
   async findOneByNombre(primerNombre: string): Promise<Usuario> {
     try {
       // buscr el usuario por nombreUsuario
-      const usuario = await this.usuarioRepository.findOne({ where: { primerNombre: primerNombre, deletedAt: null }, relations: ['rol'] })
+      const usuario = await this.usuarioRepository.findOne({ where: { primerNombre: primerNombre, deletedAt: IsNull() }, relations: ['rol'] })
 
       // si no encuentra nada, devolver un array vacio
       if (!usuario) throw new NotFoundException(`El usuario con NombreUsuario ${primerNombre} no existe o ya fue eliminado.`)
@@ -103,7 +104,7 @@ export class UsuariosService {
   async findOneByNombreUsuario(nombreUsuario: string): Promise<Usuario> {
     try {
       // buscr el usuario por nombreUsuario
-      const usuario = await this.usuarioRepository.findOne({ where: { nombreUsuario: nombreUsuario, deletedAt: null }, relations: ['rol'] })
+      const usuario = await this.usuarioRepository.findOne({ where: { nombreUsuario: nombreUsuario, deletedAt: IsNull() }, relations: ['rol'] })
 
       // si no encuentra nada, devolver un array vacio
       if (!usuario) throw new NotFoundException(`El usuario con NombreUsuario ${nombreUsuario} no existe o ya fue eliminado.`)
@@ -118,7 +119,7 @@ export class UsuariosService {
   async findOneByCorreo(correo: string): Promise<Usuario> {
     try {
       // buscr el usuario por correo
-      const usuario = await this.usuarioRepository.findOne({ where: { correo: correo, deletedAt: null }, relations: ['rol'] })
+      const usuario = await this.usuarioRepository.findOne({ where: { correo: correo, deletedAt: IsNull() }, relations: ['rol'] })
 
       // si no encuentra nada, devolver un array vacio
       if (!usuario) throw new NotFoundException(`El usuario con correo ${correo} no existe o ya fue eliminado.`)
@@ -136,7 +137,7 @@ export class UsuariosService {
 
       // buscar el usuario por id
       const usuario = await this.usuarioRepository.findOne({
-        where: { id, deletedAt: null },
+        where: { id, deletedAt: IsNull() },
       });
 
       // verificar si el usuario existe
@@ -166,7 +167,7 @@ export class UsuariosService {
 
       // Buscar al usuario existente
       const usuario = await this.usuarioRepository.findOne({
-        where: { id, deletedAt: null },
+        where: { id, deletedAt: IsNull() },
         relations: ['rol'], // Cargar el rol actual para la comparación
       });
 
@@ -198,7 +199,7 @@ export class UsuariosService {
     try {
       // buscar el usuario por id
       const usuario = await this.usuarioRepository.findOne({
-        where: { id, deletedAt: null },
+        where: { id, deletedAt: IsNull() },
       });
 
       // verificar si el usuario existe

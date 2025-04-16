@@ -5,52 +5,48 @@
         <h2>Registro</h2>
         <form (ngSubmit)="register()">
         <div class="input-group">
-            <input [(ngModel)]="primerNombre" name="primerNombre" type="text" required />
+            <input [(ngModel)]="primerNombre" name="primerNombre" type="text" required placeholder="Primer Nombre"/>
             <label>primerNombre</label>
         </div>
         <div class="input-group">
-            <input [(ngModel)]="segundoNombre" name="segundoNombre" type="text" required />
+            <input [(ngModel)]="segundoNombre" name="segundoNombre" type="text" required placeholder="Segundo Nombre"/>
             <label>segundoNombre</label>
         </div>
         <div class="input-group">
-            <input [(ngModel)]="primerApellido" name="primerApellido" type="text" required />
+            <input [(ngModel)]="primerApellido" name="primerApellido" type="text" required placeholder="Primer Apellido"/>
             <label>primerApellido</label>
         </div>
         <div class="input-group">
-            <input [(ngModel)]="segundoApellido" name="segundoApellido" type="text" required />
+            <input [(ngModel)]="segundoApellido" name="segundoApellido" type="text" required placeholder="Segundo Apellido"/>
             <label>segundoApellido</label>
         </div>
         <div class="input-group">
-            <input [(ngModel)]="nombreUsuario" name="nombreUsuario" type="text" required />
+            <input [(ngModel)]="nombreUsuario" name="nombreUsuario" type="text" required placeholder="Nombre Usuario"/>
             <label>Nombre de Usuario</label>
         </div>
         <div class="input-group">
-            <input [(ngModel)]="correo" name="correo" type="email" required />
+            <input [(ngModel)]="correo" name="correo" type="email" required placeholder="Correo"/>
             <label>Correo</label>
         </div>
         <div class="input-group">
-            <input [(ngModel)]="clave" name="clave" type="password" required />
+            <input [(ngModel)]="clave" name="clave" type="password" required placeholder="Clave"/>
             <label>Contraseña</label>
         </div>
         <div class="input-group">
-            <input [(ngModel)]="clave" name="direccion" type="text" required />
+            <input [(ngModel)]="direccion" name="direccion" type="text" required placeholder="direccion"/>
             <label>Direccion</label>
         </div>
         <div class="input-group">
-            <input [(ngModel)]="clave" name="celular" type="text" required />
+            <input [(ngModel)]="celular" name="celular" type="text" required placeholder="Celular"/>
             <label>Celular</label>
         </div>
         <div class="input-group">
             <select [(ngModel)]="genero" name="genero" required>
-                <option value="Masculino">Masculino</option>
+                <option value="Masculino" selected>Masculino</option>
                 <option value="Femenino">Femenino</option>
                 <option value="Otro">Otro</option>
             </select>
             <label>Genero</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="clave" name="rolId" type="number" required />
-            <label>RolID</label>
         </div>
         <button type="submit" class="register-button">Registrarse</button>
         </form>

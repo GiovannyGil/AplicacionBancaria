@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { IngresosService } from './ingresos.service';
 import { CreateIngresoDto } from './dto/create-ingreso.dto';
 import { UpdateIngresoDto } from './dto/update-ingreso.dto';
@@ -15,8 +15,9 @@ export class IngresosController {
   }
 
   @Get()
-  findAll() {
-    return this.ingresosService.findAll();
+  findAll(@Req() req: Request & { user: any }) {
+    const userId = req.user.id;
+    return this.ingresosService.findAll(userId);
   }
 
   @Get('id/:id')

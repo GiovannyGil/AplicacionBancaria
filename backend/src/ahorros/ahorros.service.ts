@@ -2,7 +2,7 @@ import { BadGatewayException, BadRequestException, Injectable, InternalServerErr
 import { CreateAhorroDto } from './dto/create-ahorro.dto';
 import { UpdateAhorroDto } from './dto/update-ahorro.dto';
 import { Ahorro } from './entities/ahorro.entity';
-import { In, LessThan, Repository } from 'typeorm';
+import { In, IsNull, LessThan, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { Cron, CronExpression } from '@nestjs/schedule';
@@ -14,41 +14,45 @@ export class AhorrosService {
         @InjectRepository(Usuario) private usuariosRepository: Repository<Usuario>,
       ) {}
 
-  async create(createAhorroDto: CreateAhorroDto):Promise<Ahorro> {
-    const { usuarioID } = createAhorroDto;
-    try {
-      // verificar que el usuario existe
-      const usuario = await this.usuariosRepository.findOne({ where: {id: usuarioID, deletedAt: null} })
-      if(!usuario) throw new NotFoundException('Usuario no encontrado')
+      async create(createAhorroDto: CreateAhorroDto): Promise<Ahorro> {
+        const { usuarioID } = createAhorroDto;
+      
+        try {
+          // verificar que el usuario existe
+          const usuario = await this.usuariosRepository.findOne({ where: { id: usuarioID, deletedAt: IsNull() } });
+          if (!usuario) throw new NotFoundException('Usuario no encontrado');
+      
+          // crear Ahorro y asignar el usuario manualmente
+          const ahorro = this.ahorroRepository.create({
+            ...createAhorroDto,
+            usuario: usuario, // aquí se relaciona correctamente el usuario
+          });
+      
+          const guardarAhorro = await this.ahorroRepository.save(ahorro);
+          if (!guardarAhorro) throw new InternalServerErrorException('No se pudo guardar el ahorro.');
+      
+          return guardarAhorro;
+        } catch (error) {
+          throw new InternalServerErrorException(`Error al crear el ahorro: ${error.message}`);
+        }
+      }
 
-      // crear Ahorro
-      const ahorro = this.ahorroRepository.create(createAhorroDto);
-      if (!ahorro) throw new InternalServerErrorException('No se pudo crear el ahorro.');
-
-      const guardarAhorro = await this.ahorroRepository.save(ahorro);
-      if (!guardarAhorro) throw new InternalServerErrorException('No se pudo guardar el ahorro.');
-
-      return guardarAhorro;
-    } catch (error) {
-      throw new InternalServerErrorException(`Error al crear el ahorro: ${error.message}`);
-    }
-  }
-
-  async findAll(): Promise<Ahorro[]> {
-    try {
-      const ahorros = await this.ahorroRepository.find({ where: {deletedAt: null}, relations: ['usuario'] });
-
-      if (!ahorros) throw new InternalServerErrorException('No se encontraron ahorros.');
-
-      return ahorros;
-    } catch (error) {
-      throw new InternalServerErrorException(`Error al buscar los ahorros: ${error.message}`);
-    }
-  }
+      async findAll(userId: number): Promise<Ahorro[]> {
+        try {
+          const ahorros = await this.ahorroRepository.find({ where: {deletedAt: IsNull(), usuario: { id: userId }}, relations: ['usuario'] });
+    
+          if (!ahorros) throw new InternalServerErrorException('No se encontraron ahorros.');
+    
+          return ahorros;
+        } catch (error) {
+          throw new InternalServerErrorException(`Error al buscar los ahorros: ${error.message}`);
+        }
+      }
+      
 
   async findOne(id: number): Promise<Ahorro> {
     try {
-      const ahorro = await this.ahorroRepository.findOne({ where: {id, deletedAt: null}, relations: [ 'usuario'] });
+      const ahorro = await this.ahorroRepository.findOne({ where: {id, deletedAt: IsNull()}, relations: [ 'usuario'] });
 
       if (!ahorro) throw new InternalServerErrorException('No se encontró el ahorro.');
 
@@ -61,7 +65,7 @@ export class AhorrosService {
   async update(id: number, updateAhorroDto: UpdateAhorroDto): Promise<Ahorro> {
     try {
       // Verificar que el ahorro existe
-      const ahorro = await this.ahorroRepository.findOne({ where: { id, deletedAt: null } });
+      const ahorro = await this.ahorroRepository.findOne({ where: { id, deletedAt: IsNull() } });
 
       if (!ahorro) {
         throw new NotFoundException('Ahorro no encontrado');
@@ -96,7 +100,7 @@ export class AhorrosService {
   async softDelete(id: number): Promise<{message: string}> {
     try {
       // buscar la ahorro por id
-      const ahorro = await this.ahorroRepository.findOne({ where: { id, deletedAt: null } })
+      const ahorro = await this.ahorroRepository.findOne({ where: { id, deletedAt: IsNull() } })
 
       // si no encuentra nada
       if (!ahorro) throw new NotFoundException('No se encontro la compra')

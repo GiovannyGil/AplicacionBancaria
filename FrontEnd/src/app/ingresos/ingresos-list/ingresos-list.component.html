@@ -13,7 +13,7 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Número Ingreso</th>
+        <th>Nombre Ingreso</th>
         <th>Valor Ingreso</th>
         <th>Valor Final</th>
         <th>Acciones</th>
@@ -22,10 +22,9 @@
     <tbody>
       <tr *ngFor="let ingreso of ingresos">
         <td>{{ ingreso.id }}</td>
-        <td>{{ ingreso.numeroIngreso }}</td>
-        <td>{{ ingreso.valorPago }}</td>
-        <td>{{ ingreso.valorFinal }}</td>
-        <td>{{ ingreso.estado }}</td>
+        <td>{{ ingreso.nombreIngreso }}</td>
+        <td>{{ ingreso.valorIngreso | currency: 'COP'  }}</td>
+        <td>{{ ingreso.valorFinal | currency: 'COP'  }}</td>
         <td>
           <!-- boton para actualizar -->
           <button (click)="FormularioEditar(ingreso.id)" class="action-button">

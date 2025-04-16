@@ -29,7 +29,7 @@ export class IngresosListComponent {
     try {
       this.ingresosService.ObtenerIngresoes().subscribe(
         (data) => {
-          this.ingresos = data.ingresos // obtener un array de ingresos que trae el objeto
+          this.ingresos = data // obtener un array de ingresos que trae el objeto
         },
         (error) => {
           if (error.status === 401) {

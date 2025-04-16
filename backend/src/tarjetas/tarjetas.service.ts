@@ -3,7 +3,7 @@ import { CreateTarjetaDto } from './dto/create-tarjeta.dto';
 import { UpdateTarjetaDto } from './dto/update-tarjeta.dto';
 import { Tarjeta } from './entities/tarjeta.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, LessThan, Repository } from 'typeorm';
+import { In, IsNull, LessThan, Repository } from 'typeorm';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { Transaccion } from './entities/transacciones.entity';
@@ -21,11 +21,14 @@ export class TarjetasService {
     const { usuarioID } = createTarjetaDto;
     try {
       // verificar que el usuario existe
-      const usuario = await this.usuariosRepository.findOne({ where: { id: usuarioID, deletedAt: null } })
+      const usuario = await this.usuariosRepository.findOne({ where: { id: usuarioID, deletedAt: IsNull() } })
       if (!usuario) throw new NotFoundException('Usuario no encontrado')
 
       // crear Tarjeta
-      const tarjeta = this.tarjetaRepository.create(createTarjetaDto);
+      const tarjeta = this.tarjetaRepository.create({
+        ...createTarjetaDto,
+        usuario: usuario,
+      });
       if (!tarjeta) throw new NotFoundException('No se pudo crear la tarjeta.');
 
       // guardar Tarjeta
@@ -39,12 +42,15 @@ export class TarjetasService {
     }
   }
 
-  async findAll(): Promise<Tarjeta[]> {
+  async findAll(userId: number): Promise<Tarjeta[]> {
     try {
-      const tarjetas = await this.tarjetaRepository.find({ where: { deletedAt: null }, relations: ['usuario'] });
-      if (tarjetas.length === 0) throw new NotFoundException('No se encontraron tarjetas registradas.');
+      const tarjetas = await this.tarjetaRepository.find({ where: { deletedAt: IsNull(), usuario: {id: userId} }, relations: ['usuario'] });
+      
+      if (!tarjetas) throw new NotFoundException('No se encontraron tarjetas registradas.');
+      
       return tarjetas;
     } catch (error) {
+      console.log('error al buscar las tarjetas', error);
       throw new InternalServerErrorException(`Error al encontrar las tarjetas: ${error.message}`);
     }
   }
@@ -52,10 +58,11 @@ export class TarjetasService {
   async findOne(id: number): Promise<Tarjeta> {
     try {
       return await this.tarjetaRepository.findOneOrFail({
-        where: { id, deletedAt: null },
+        where: { id, deletedAt: IsNull() },
         relations: ['usuario']
       });
     } catch (error) {
+      console.log('error al buscar la tarjeta', error);
       if (error.name === 'EntityNotFoundError') {
         throw new NotFoundException('No se encontró la tarjeta registrada.');
       }
@@ -87,13 +94,14 @@ export class TarjetasService {
 
       return tarjetaActualizada;
     } catch (error) {
+      console.log('error al actualizar la tarjeta', error);
       throw new InternalServerErrorException(`Error al actualizar la tarjeta: ${error.message}`);
     }
   }
 
   async remove(id: number) {
     try {
-      const tarjeta = await this.tarjetaRepository.findOne({ where: { id, deletedAt: null } });
+      const tarjeta = await this.tarjetaRepository.findOne({ where: { id, deletedAt: IsNull() } });
       if (!tarjeta) throw new NotFoundException('No se encontró la tarjeta registrada.');
 
       tarjeta.deletedAt = new Date();
@@ -101,19 +109,21 @@ export class TarjetasService {
 
       return { message: 'Tarjeta eliminada correctamente' };
     } catch (error) {
+      console.log('error al eliminar la tarjeta', error);
       throw new InternalServerErrorException(`Error al eliminar la tarjeta: ${error.message}`);
     }
   }
 
   async softDelete(id: number): Promise<{ message: string }> {
     try {
-      const tarjeta = await this.tarjetaRepository.findOneOrFail({ where: { id, deletedAt: null } });
+      const tarjeta = await this.tarjetaRepository.findOneOrFail({ where: { id, deletedAt: IsNull() } });
 
       tarjeta.deletedAt = new Date();
       await this.tarjetaRepository.save(tarjeta);
 
       return { message: "Tarjeta eliminada correctamente" };
     } catch (error) {
+      console.log('error al eliminar la tarjeta', error);
       if (error.name === 'EntityNotFoundError') {
         throw new NotFoundException('No se encontró la tarjeta');
       }
@@ -170,6 +180,7 @@ export class TarjetasService {
       // Retornar mensaje de éxito con información relevante
       return { mensaje: 'Tarjeta asignada correctamente', tarjetaId: tarjeta.id, usuarioId: usuario.id };
     } catch (error) {
+      console.log('error al asignar la tarjeta', error);
       throw new InternalServerErrorException(`Error al asignar la tarjeta al usuario: ${error.message}`);
     }
   }

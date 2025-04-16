@@ -60,7 +60,7 @@ export class GastosService {
         'Authorization': `Bearer ${authToken}`
       })
 
-      return this.http.put<any>(`${this.apiURL}/update/${id}`, gasto, { headers })
+      return this.http.patch<any>(`${this.apiURL}/update/${id}`, gasto, { headers })
     }
 
     // metodo para eliminar Gasto

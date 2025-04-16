@@ -16,7 +16,6 @@
         <th>Nombre Gasto</th>
         <th>Valor Pago</th>
         <th>Valor Final</th>
-        <th>Usuario</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -26,8 +25,6 @@
         <td>{{ gasto.nombreGasto }}</td>
         <td>{{ gasto.valorPago | currency: 'COP' }}</td>
         <td>{{ gasto.valorFinal | currency: 'COP' }}</td>
-        <td>{{ gasto.usuario }}</td>
-        <td>{{ gasto.tipo }}</td>
         <td>
           <!-- boton para actualizar -->
           <button (click)="FormularioEditar(gasto.id)" class="action-button">

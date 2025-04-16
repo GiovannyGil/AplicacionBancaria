@@ -30,7 +30,7 @@ export class CreditosListComponent {
     try {
       this.creditosService.ObtenerCreditos().subscribe(
         (data) => {
-          this.creditos = data.creditos // obtener un array de creditos que trae el objeto
+          this.creditos = data // obtener un array de creditos que trae el objeto
         },
         (error) => {
           if (error.status === 401) {

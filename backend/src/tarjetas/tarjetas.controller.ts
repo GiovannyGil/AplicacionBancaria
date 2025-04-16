@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { TarjetasService } from './tarjetas.service';
 import { CreateTarjetaDto } from './dto/create-tarjeta.dto';
 import { UpdateTarjetaDto } from './dto/update-tarjeta.dto';
@@ -15,8 +15,9 @@ export class TarjetasController {
   }
 
   @Get()
-  findAll() {
-    return this.tarjetasService.findAll();
+  findAll(@Req() req: Request & { user: any }) {
+    const userId = req.user.id;
+    return this.tarjetasService.findAll(userId);
   }
 
   @Get('id/:id')

@@ -28,7 +28,7 @@ export class GastosListComponent {
     try {
       this.gastosService.ObtenerGastos().subscribe(
         (data) => {
-          this.gastos = data.gastos // obtener un array de gastos que trae el objeto
+          this.gastos = data // obtener un array de gastos que trae el objeto
         },
         (error) => {
           if (error.status === 401) {

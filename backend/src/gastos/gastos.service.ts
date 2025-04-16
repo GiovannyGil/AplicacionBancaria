@@ -3,7 +3,7 @@ import { CreateGastoDto } from './dto/create-gasto.dto';
 import { UpdateGastoDto } from './dto/update-gasto.dto';
 import { Gasto } from './entities/gasto.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, LessThan, Repository } from 'typeorm';
+import { In, IsNull, LessThan, Repository } from 'typeorm';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
@@ -17,11 +17,11 @@ export class GastosService {
     const { usuarioID } = createGastoDto;
     try {
       // verificar que el usuario existe
-        const usuario = await this.usuariosRepository.findOne({ where: {id: usuarioID, deletedAt: null} })
+        const usuario = await this.usuariosRepository.findOne({ where: {id: usuarioID, deletedAt: IsNull()} })
         if(!usuario) throw new NotFoundException('Usuario no encontrado')
         
         // crear Gasto
-        const gasto = this.gastoRepository.create(createGastoDto);
+        const gasto = this.gastoRepository.create({...createGastoDto, usuario: usuario});
         if (!gasto) throw new InternalServerErrorException('No se pudo crear el gasto.');
 
         // guardar Gasto
@@ -30,26 +30,29 @@ export class GastosService {
 
         return guardarGasto
     } catch (error) {
+      console.log('error al crear el gasto', error);
       throw new InternalServerErrorException(`Error al crear el gasto: ${error.message}`);
     }
   }
 
-  async findAll(): Promise<Gasto[]> {
+  async findAll(userId: number): Promise<Gasto[]> {
     try {
-      const gastos = await this.gastoRepository.find({ where: {deletedAt: null}, relations: ['usuario'] });
+      const gastos = await this.gastoRepository.find({ where: {deletedAt: IsNull(), usuario: { id: userId }}, relations: ['usuario'] });
       if (!gastos) throw new InternalServerErrorException('No se encontraron gastos.');
       return gastos;
     } catch (error) {
+      console.log('error al buscar los gastos', error);
       throw new InternalServerErrorException(`Error al buscar los gastos: ${error.message}`);
     }
   }
 
   async findOne(id: number): Promise<Gasto> {
     try {
-      const gasto = await this.gastoRepository.findOne({ where: {id, deletedAt: null}, relations: [ 'usuario'] });
+      const gasto = await this.gastoRepository.findOne({ where: {id, deletedAt: IsNull()}, relations: [ 'usuario'] });
       if (!gasto) throw new InternalServerErrorException('No se encontró el gasto.');
       return gasto;
     } catch (error) {
+      console.log('error al buscar el gasto', error);
       throw new InternalServerErrorException(`Error al buscar el gasto: ${error.message}`);     
     }
   }
@@ -75,6 +78,7 @@ export class GastosService {
 
       return gastoActualizado;
     } catch (error) {
+      console.log('error al actualizar el gasto', error);
       throw new InternalServerErrorException(`Error al actualizar el gasto: ${error.message}`);
     }
   }
@@ -82,7 +86,7 @@ export class GastosService {
     async softDelete(id: number): Promise<{message: string}> {
       try {
         // buscar la gasto por id
-        const gasto = await this.gastoRepository.findOne({ where: { id, deletedAt: null } })
+        const gasto = await this.gastoRepository.findOne({ where: { id, deletedAt: IsNull() } })
   
         // si no encuentra nada
         if (!gasto) throw new NotFoundException('No se encontro la compra')
@@ -96,6 +100,7 @@ export class GastosService {
         // devolver mensaje de exito
         return {message: "compra eliminada correctamente"}
       } catch (error) {
+        console.log('error al eliminar la compra', error);
         throw new BadRequestException('Error al eliminar la compra', error.message)
       }
     }
@@ -132,6 +137,7 @@ export class GastosService {
       if (!gastoEliminado) throw new InternalServerErrorException('No se pudo eliminar el gasto.');
       return gastoEliminado;
    } catch (error) {
+      console.log('error al eliminar el gasto', error);
      throw new InternalServerErrorException(`Error al eliminar el gasto: ${error.message}`);    
    }
   }

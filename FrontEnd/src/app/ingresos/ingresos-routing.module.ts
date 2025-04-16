@@ -7,7 +7,7 @@ import { IngresosEditComponent } from './ingresos-edit/ingresos-edit.component';
 const routes: Routes = [
   { path: '', component: IngresosListComponent }, // Redirige a la lista de ingreso por defecto
   { path: 'crear', component: IngresosCreateComponent }, // Ruta para crear un nuevo ingreso
-  { path: 'update/id', component: IngresosEditComponent } // Ruta para editar un ingreso existente
+  { path: 'update/:id', component: IngresosEditComponent } // Ruta para editar un ingreso existente
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

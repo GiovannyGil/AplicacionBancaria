@@ -2,4 +2,25 @@
 
 <div class="container">
     <h2>Restablecer Contraseña</h2>
+
+    <form action="">
+        <div class="item">
+            <input type="text" placeholder="Nombre Usuario" name="nombreUsuario" [(ngModel)]="nombreUsuario" required />
+            <label for="">Nombre Usuario</label>
+        </div>
+        <div class="item">
+            <input type="email" placeholder="Correo Electronico" required name="correo" [(ngModel)]="correo" />
+            <label for="">Correo Electronico</label>
+        </div>
+        <div class="item">
+            <input type="password" placeholder="Clave" required name="clave" [(ngModel)]="clave"/>
+            <label for="">Clave</label>
+        </div>
+        <div class="item">
+            <input type="password" placeholder="Confirmar Clave" required name="confirmarClave" [(ngModel)]="confirmarClave"/>
+            <label for="">Correo Electronico</label>
+        </div>
+
+        <button (click)="reestablecerClave(nombreUsuario,correo,clave,confirmarClave)">Recordar</button>
+    </form>
 </div>

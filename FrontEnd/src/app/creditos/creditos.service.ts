@@ -59,7 +59,7 @@ export class CreditosService {
         'Authorization': `Bearer ${authToken}`
       })
 
-      return this.http.put<any>(`${this.apiURL}/update/${id}`, credito, { headers })
+      return this.http.patch<any>(`${this.apiURL}/update/${id}`, credito, { headers })
     }
 
     // metodo para eliminar Credito

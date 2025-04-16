@@ -2,21 +2,21 @@
 
 <div class="register-container">
     <div class="register-box">
-        <h2>Registro</h2>
+        <h2>Actualizar</h2>
         <form (ngSubmit)="actualizaringreso()">
         <div class="input-group">
-            <input [(ngModel)]="numeroIngreso" name="numeroIngreso" type="text" required />
-            <label>Número Ingreso</label>
+            <input [(ngModel)]="nombreIngreso" name="nombreIngreso" type="text" required />
+            <label>Nombre Ingreso</label>
         </div>
         <div class="input-group">
-            <input [(ngModel)]="valorPago" name="valorPago" type="text" required />
-            <label>Valor Pago</label>
+            <input [(ngModel)]="valorIngreso" name="valorIngreso" type="text" required />
+            <label>Valor Ingreso</label>
         </div>
         <div class="input-group">
             <input [(ngModel)]="valorFinal" name="valorFinal" type="text" required />
             <label>Valor Final</label>
         </div>
-        <button type="submit" class="register-button">Agregar</button>
+        <button type="submit" class="register-button">Actualziar</button>
         </form>
     </div>
 </div>

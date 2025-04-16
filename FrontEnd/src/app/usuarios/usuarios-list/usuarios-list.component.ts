@@ -53,8 +53,8 @@ export class UsuariosListComponent {
 
         this.usuarioService.EliminarUsuairo(id).subscribe(
           () => {
-            this.usuarios = this.usuarios.filter(usuario => usuario.id !== id)
-            alert('Usuarios Eliminado Exitosamente')
+            alert('Usuario Eliminado Exitosamente');
+            this.obtenerUsuarios();
           },
           (error) => {
             console.error('Error al eliminar usuario:', error.message);

@@ -4,7 +4,7 @@ import { UpdateCreditoDto } from './dto/update-credito.dto';
 import { Credito } from './entities/credito.entity';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, LessThan, Repository } from 'typeorm';
+import { In, IsNull, LessThan, Repository } from 'typeorm';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
@@ -18,11 +18,11 @@ export class CreditosService {
     const { usuarioID } = createCreditoDto;
     try {
       // verificar que el usuario existe
-      const usuario = await this.usuariosRepository.findOne({ where: {id: usuarioID, deletedAt: null} })
+      const usuario = await this.usuariosRepository.findOne({ where: {id: usuarioID, deletedAt: IsNull()} })
       if(!usuario) throw new NotFoundException('Usuario no encontrado')
 
       // crear credito
-      const credito = this.creditoRepository.create(createCreditoDto);
+      const credito = this.creditoRepository.create({...createCreditoDto, usuario: usuario });
       if (!credito) throw new InternalServerErrorException('No se pudo crear el credito.');
 
       const guardarcredito = await this.creditoRepository.save(credito);
@@ -30,31 +30,34 @@ export class CreditosService {
 
       return guardarcredito;
     } catch (error) {
+      console.log('error al crear el credito', error);
       throw new InternalServerErrorException(`Error al crear el credito: ${error.message}`);
     }
   }
 
-  async findAll(): Promise<Credito[]> {
+  async findAll(userId: number): Promise<Credito[]> {
     try {
-      const creditos = await this.creditoRepository.find({ where: { deletedAt: null }, relations: ['usuario'] });
+      const creditos = await this.creditoRepository.find({ where: { deletedAt: IsNull(), usuario: { id: userId } }, relations: ['usuario'] });
 
       if (!creditos) throw new InternalServerErrorException('No se encontraron creditos.');
       return creditos;
 
     } catch (error) {
+      console.log('error al buscar los creditos', error);
       throw new InternalServerErrorException(`Error al buscar los creditos: ${error.message}`);
     }
   }
 
   async findOne(id: number): Promise<Credito> {
     try {
-      const creditos = await this.creditoRepository.findOne({ where: { id, deletedAt: null }, relations: ['usuario'] });
+      const creditos = await this.creditoRepository.findOne({ where: { id, deletedAt: IsNull() }, relations: ['usuario'] });
 
       if (!creditos) throw new InternalServerErrorException('No se encontró el credito.');
 
       return creditos;
 
     } catch (error) {
+      console.log('error al buscar el credito', error);
       throw new InternalServerErrorException(`Error al buscar el credito: ${error.message}`);
     }
   }
@@ -62,7 +65,7 @@ export class CreditosService {
   async update(id: number, updateCreditoDto: UpdateCreditoDto): Promise<Credito> {
     try {
       // verificar que el credito existe
-      const credito = await this.creditoRepository.findOne({ where: { id, deletedAt: null } });
+      const credito = await this.creditoRepository.findOne({ where: { id, deletedAt: IsNull() } });
       if (!credito) throw new NotFoundException('Credito no encontrado');
 
       // verificar si hay datos a modificar
@@ -83,6 +86,7 @@ export class CreditosService {
       // devolver el credito actualizado
       return creditoActualizado;
     } catch (error) {
+      console.log('error al actualizar el credito', error);
       throw new InternalServerErrorException(`Error al actualizar el credito: ${error.message}`);      
     }
   }
@@ -90,7 +94,7 @@ export class CreditosService {
   async softDelete(id: number): Promise<{ message: string }> {
     try {
       // buscar la credito por id
-      const credito = await this.creditoRepository.findOne({ where: { id, deletedAt: null } })
+      const credito = await this.creditoRepository.findOne({ where: { id, deletedAt: IsNull() } })
 
       // si no encuentra nada
       if (!credito) throw new NotFoundException('No se encontro la compra')
@@ -104,6 +108,7 @@ export class CreditosService {
       // devolver mensaje de exito
       return { message: "compra eliminada correctamente" }
     } catch (error) {
+      console.log('error al eliminar la compra', error);
       throw new BadRequestException('Error al eliminar la compra', error.message)
     }
   }
@@ -140,6 +145,7 @@ export class CreditosService {
       if (!creditoEliminado) throw new InternalServerErrorException('No se pudo eliminar el credito.');
       return creditoEliminado;
     } catch (error) {
+      console.log('error al eliminar el credito', error);
       throw new InternalServerErrorException(`Error al eliminar el credito: ${error.message}`);
     }
   }

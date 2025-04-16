@@ -9,10 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class IngresosEditComponent {
   id!: number;
-  numeroIngreso: string = '';
-  valorPago: number = 0;
+  nombreIngreso: string = '';
+  valorIngreso: number = 0;
   valorFinal: number = 0;
-  ingresoID: number = 1; // Cambiar por el ID del ingreso logueado
+  usuarioID: number = 1; // Cambiar por el ID del ingreso logueado
 
   constructor(
     private ingresoServide: IngresosService,
@@ -35,15 +35,15 @@ export class IngresosEditComponent {
   // metodo para cargar los datos existentes}
   cargarDatosingreso(): void {
     this.ingresoServide.ObtenerIngresoeID(this.id).subscribe(
-      (response: { ingreso: any; }) => {
+      (response) => {
         console.log('Datos Obtenidos', response);
-        const ingreso = response.ingreso // acceder a los datos
+        const ingreso = response // acceder a los datos
 
         // asignar los valores
-        this.numeroIngreso = ingreso.numeroIngreso;
-        this.valorPago = ingreso.valorPago;
+        this.nombreIngreso = ingreso.nombreIngreso;
+        this.valorIngreso = ingreso.valorIngreso;
         this.valorFinal = ingreso.valorFinal;
-        this.ingresoID = ingreso.usuarioID;
+        this.usuarioID = ingreso.usuarioID;
       }, (error: { message: any; }) => {
         console.log(`Error al cargar los datos ${error.message}`);
       }
@@ -54,10 +54,10 @@ export class IngresosEditComponent {
   // metodo para actulizar
   actualizaringreso(): void {
     const ingresoActualizado = {
-      numeroIngreso: this.numeroIngreso,
-      valorPago: this.valorPago,
+      nombreIngreso: this.nombreIngreso,
+      valorIngreso: this.valorIngreso,
       valorFinal: this.valorFinal,
-      usuarioID: this.ingresoID
+      usuarioID: this.usuarioID
     }
 
     console.log('Datos a enviar ', ingresoActualizado);

@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GastosEditComponent {
   id!: number;
-  numeroGasto: string = '';
+  nombreGasto: string = '';
   valorPago: number = 0;
   valorFinal: number = 0;
   gastoID: number = 1; // Cambiar por el ID del gasto logueado
@@ -35,12 +35,12 @@ export class GastosEditComponent {
   // metodo para cargar los datos existentes}
   cargarDatosgasto(): void {
     this.gastoServide.ObtenerGastoID(this.id).subscribe(
-      (response: { gasto: any; }) => {
+      (response) => {
         console.log('Datos Obtenidos', response);
-        const gasto = response.gasto // acceder a los datos
+        const gasto = response // acceder a los datos
 
         // asignar los valores
-        this.numeroGasto = gasto.numerogasto;
+        this.nombreGasto = gasto.nombreGasto;
         this.valorPago = gasto.valorPago;
         this.valorFinal = gasto.valorFinal;
         this.gastoID = gasto.usuarioID;
@@ -54,10 +54,9 @@ export class GastosEditComponent {
   // metodo para actulizar
   actualizargasto(): void {
     const gastoActualizado = {
-      numerogasto: this.numeroGasto,
+      nombreGasto: this.nombreGasto,
       valorPago: this.valorPago,
       valorFinal: this.valorFinal,
-      usuarioID: this.gastoID
     }
 
     console.log('Datos a enviar ', gastoActualizado);

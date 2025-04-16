@@ -10,18 +10,20 @@
           name="nombreUsuario"
           type="text"
           required
+          placeholder="Nombre de Usuario"
         />
         <label>Nombre de Usuario</label>
       </div>
       <div class="input-group">
-        <input [(ngModel)]="clave" name="clave" type="password" required />
+        <input [(ngModel)]="clave" name="clave" type="password" required placeholder="Contraseña" />
         <label>Contraseña</label>
       </div>
       <button type="submit" class="login-button">Entrar</button>
 
       <div class="details">
         <a href="#" class="noCuenta" (click)="irARegistro($event)">¿No tienes cuenta?</a>
-        <a href="#" class="recuperar">¿Olvidaste tu contraseña?</a>
+        <a href="#" class="recuperar" (click)="irARecuperarUsuario($event)">¿Olvidaste tu Usuario?</a>
+        <a href="#" class="recuperar" (click)="irAReestablecerClave($event)">¿Olvidaste tu Contraseña?</a>
       </div>
     
     </form>
