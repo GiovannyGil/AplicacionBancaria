@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'gastos', loadChildren: () => import('./gastos/gastos.module').then(m => m.GastosModule), canActivate: [AuthGuard]  }, // Página de gastos
   { path: 'ingresos', loadChildren: () => import('./ingresos/ingresos.module').then(m => m.IngresosModule), canActivate: [AuthGuard]  }, // Página de ingresos
   { path: 'creditos', loadChildren: () => import('./creditos/creditos.module').then(m => m.CreditosModule), canActivate: [AuthGuard]  }, // Página de créditos
-  { path: 'ahorros', loadChildren: () => import('./ahorros/ahorros.module').then(m => m.AhorrosModule), canActivate: [AuthGuard]  }, // Página de ahorros
+  { path: 'ahorros', loadChildren: () => import('./ahorros/ahorros.module').then(m => m.AhorrosModule), canActivate: [AuthGuard] }, // Página de ahorros
+  { path: 'perfil', loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilModule), canActivate: [AuthGuard] }, // Página de ahorros
 ];
 
 @NgModule({

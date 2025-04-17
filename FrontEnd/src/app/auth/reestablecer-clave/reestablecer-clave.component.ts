@@ -16,13 +16,13 @@ export class ReestablecerClaveComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   // metodo para reestablecer la clave
-  reestablecerClave(nombreUsuario: string, correo: string, clave: string, confirmarClave: string): void {
-    if (clave !== confirmarClave) {
+  reestablecerClave(): void {
+    if (this.clave !== this.confirmarClave) {
       alert('Las contraseñas no coinciden. Por favor, intente nuevamente.');
       return;
     }
 
-    this.authService.reestablecerClave(nombreUsuario, correo, clave, confirmarClave).subscribe({
+    this.authService.reestablecerClave(this.nombreUsuario, this.correo, this.clave, this.confirmarClave).subscribe({
       next: (response) => {
         alert(response.message);
       },

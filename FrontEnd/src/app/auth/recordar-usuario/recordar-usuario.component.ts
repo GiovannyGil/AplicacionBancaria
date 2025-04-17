@@ -13,7 +13,7 @@ export class RecordarUsuarioComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  recordarUsuario(correo:string): void {
+  recordarUsuario(): void {
     if (!this.correo) {
       alert('Por favor, ingrese un correo electrónico válido.');
       return;
