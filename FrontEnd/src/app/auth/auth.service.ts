@@ -26,12 +26,13 @@ export class AuthService {
       return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { nombreUsuario, clave }).pipe(
         tap((response) => {
           localStorage.setItem(this.tokenKey, response.token) // guardar el token en el localstorage
-          console.log('token', response.token);
 
           // Decodificar el token para extraer el rol (si no usas una petición extra)
           const payload = JSON.parse(atob(response.token.split('.')[1]));
-          console.log('payload', payload);
+
+          // Guardar datos útiles en el localStorage
           localStorage.setItem('rolId', payload.rol); // 👈 Guardar el rol en el localstorage
+          localStorage.setItem('usuarioId', payload.id || payload.sub);
 
           this.programarCierreSesion() // programar el cierre de sesion
         })
