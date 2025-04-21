@@ -27,18 +27,18 @@ export class TarjetasListComponent {
   // metodo para obtener ususarios
   obtenertarjetas(): void {
     try {
-      this.tarjetasService.ObtenerTarjetas().subscribe(
-        (data) => {
+      this.tarjetasService.ObtenerTarjetas().subscribe({
+        next: (data) => {
           this.tarjetas = data // obtener un array de tarjetas que trae el objeto
         },
-        (error) => {
+        error: (error) => {
           if (error.status === 401) {
             console.error(`Token no encontrado, debe iniciar sesión ${error.message}`)
           } else {
             console.error(`Error al obtener los tarjetas ${error.message}`)
           }
         }
-      )
+      })
     } catch (error) {
       console.log(`Error al Obtener los tarjetas ${error}`);
     }
@@ -50,16 +50,16 @@ export class TarjetasListComponent {
     try {
       if (confirm('¿Está seguto que desea eliminar este tarjeta?')) {
 
-        this.tarjetasService.EliminarTarjeta(id).subscribe(
-          () => {
+        this.tarjetasService.EliminarTarjeta(id).subscribe({
+          next: () => {
             this.tarjetas = this.tarjetas.filter(tarjeta => tarjeta.id !== id)
             alert('tarjetas Eliminado Exitosamente')
           },
-          (error) => {
+          error: (error) => {
             console.error('Error al eliminar tarjeta:', error.message);
             alert('Error al eliminar la tarjeta');
           }
-        )
+        })
       }
     } catch (error) {
       console.error('Error al eliminar tarjeta:', error);

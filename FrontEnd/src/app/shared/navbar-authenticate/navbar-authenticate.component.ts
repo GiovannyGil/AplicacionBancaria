@@ -23,4 +23,10 @@ export class NavbarAuthenticateComponent {
   esAdmin(): boolean {
     return this.userRol === 'Administrador';
   }
+
+  isCollapsed = false;
+
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed;
+  }
 }

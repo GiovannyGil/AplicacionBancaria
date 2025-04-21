@@ -23,7 +23,6 @@ export class GastosEditComponent {
   ngOnInit(): void {
     // obtener el ID desde la ruta
     this.id = +this.route.snapshot.paramMap.get('id')!;
-    console.log('ID obtenido: ', this.id);
     if (this.id) {
       this.cargarDatosgasto(); // Solo carga los datos si el ID es válido
     } else {
@@ -34,9 +33,8 @@ export class GastosEditComponent {
 
   // metodo para cargar los datos existentes}
   cargarDatosgasto(): void {
-    this.gastoServide.ObtenerGastoID(this.id).subscribe(
-      (response) => {
-        console.log('Datos Obtenidos', response);
+    this.gastoServide.ObtenerGastoID(this.id).subscribe({
+      next: (response) => {
         const gasto = response // acceder a los datos
 
         // asignar los valores
@@ -44,10 +42,11 @@ export class GastosEditComponent {
         this.valorPago = gasto.valorPago;
         this.valorFinal = gasto.valorFinal;
         this.gastoID = gasto.usuarioID;
-      }, (error: { message: any; }) => {
+      }, 
+      error: (error: { message: any; }) => {
         console.log(`Error al cargar los datos ${error.message}`);
       }
-    )
+    })
   }
 
 
@@ -58,17 +57,14 @@ export class GastosEditComponent {
       valorPago: this.valorPago,
       valorFinal: this.valorFinal,
     }
-
-    console.log('Datos a enviar ', gastoActualizado);
-
-    this.gastoServide.EditarGasto(this.id, gastoActualizado).subscribe(
-      () => {
+    this.gastoServide.EditarGasto(this.id, gastoActualizado).subscribe({
+      next: () => {
         alert('gasto actualizado exitosamente')
         this.router.navigate(['/gastos'])
       },
-      (error: { message: any; }) => {
+      error: (error: { message: any; }) => {
         console.log(`Error al actualizar el gasto ${error.message}`);
       }
-    )
+    })
   }
 }

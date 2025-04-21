@@ -32,7 +32,6 @@ export class TarjetasEditComponent {
   ngOnInit(): void {
     // obtener el ID desde la ruta
     this.id = +this.route.snapshot.paramMap.get('id')!;
-    console.log('ID obtenido: ', this.id);
     if (this.id) {
       this.cargarDatostarjeta(); // Solo carga los datos si el ID es válido
     } else {
@@ -43,9 +42,8 @@ export class TarjetasEditComponent {
 
   // metodo para cargar los datos existentes}
   cargarDatostarjeta(): void {
-    this.tarjetaServide.ObtenerTarjetaID(this.id).subscribe(
-      (response) => {
-        console.log('Datos Obtenidos', response);
+    this.tarjetaServide.ObtenerTarjetaID(this.id).subscribe({
+      next: (response) => {
         const tarjeta = response // acceder a los datos
 
         // asignar los valores
@@ -61,10 +59,11 @@ export class TarjetasEditComponent {
         this.fechaCompra = tarjeta.fechaCompra;
         this.estado = tarjeta.estado;
         this.usuarioID = tarjeta.usuarioID;
-      }, (error: { message: any; }) => {
+      }, 
+      error: (error: { message: any; }) => {
         console.log(`Error al cargar los datos ${error.message}`);
       }
-    )
+    })
   }
 
 
@@ -84,17 +83,14 @@ export class TarjetasEditComponent {
       estado: this.estado,
       usuarioID: 1 // Cambiar por el ID del usuario logueado
     }
-
-    console.log('Datos a enviar ', tarjetaActualizado);
-
-    this.tarjetaServide.EditarTarjeta(this.id, tarjetaActualizado).subscribe(
-      () => {
+    this.tarjetaServide.EditarTarjeta(this.id, tarjetaActualizado).subscribe({
+      next: () => {
         alert('tarjeta actualizado exitosamente')
         this.router.navigate(['/tarjetas'])
       },
-      (error: { message: any; }) => {
+      error: (error: { message: any; }) => {
         console.log(`Error al actualizar el tarjeta ${error.message}`);
       }
-    )
+    })
   }
 }

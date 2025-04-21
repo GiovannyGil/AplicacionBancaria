@@ -28,18 +28,18 @@ export class CreditosListComponent {
   // metodo para obtener ususarios
   obtenercreditos(): void {
     try {
-      this.creditosService.ObtenerCreditos().subscribe(
-        (data) => {
+      this.creditosService.ObtenerCreditos().subscribe({
+        next: (data) => {
           this.creditos = data // obtener un array de creditos que trae el objeto
         },
-        (error) => {
+        error: (error) => {
           if (error.status === 401) {
             console.error(`Token no encontrado, debe iniciar sesión ${error.message}`)
           } else {
             console.error(`Error al obtener los creditos ${error.message}`)
           }
         }
-      )
+      })
     } catch (error) {
       console.log(`Error al Obtener los creditos ${error}`);
     }

@@ -25,13 +25,14 @@ export class IngresosCreateComponent {
       usuarioID: 1 // Cambiar por el ID del usuario logueado
     }
 
-    this.ingresoService.CrearIngreso(nuevoingreso).subscribe(
-      () => {
+    this.ingresoService.CrearIngreso(nuevoingreso).subscribe({
+      next: () => {
         alert('ingreso creado exitosamente')
         this.router.navigate(['/ingresos'])
-      }, (error) => {
+      }, 
+      error: (error) => {
         console.log(`Error al crear el ingreso ${error.message}`);
       }
-    )
+    })
   }
 }

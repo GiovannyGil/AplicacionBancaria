@@ -37,13 +37,14 @@ export class CreditosCreateComponent {
       usuarioID: 1 // Cambiar por el ID del usuario logueado
     }
 
-    this.creditoService.CrearCredito(nuevocredito).subscribe(
-      () => {
+    this.creditoService.CrearCredito(nuevocredito).subscribe({
+      next: () => {
         alert('credito creado exitosamente')
         this.router.navigate(['/creditos'])
-      }, (error: { message: any; }) => {
+      }, 
+      error: (error: { message: any; }) => {
         console.log(`Error al crear el credito ${error.message}`);
       }
-    )
+    })
   }
 }

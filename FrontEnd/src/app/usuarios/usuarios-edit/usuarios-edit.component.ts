@@ -33,7 +33,6 @@ export class UsuariosEditComponent {
   ngOnInit(): void {
     // obtener el ID desde la ruta
     this.id = +this.route.snapshot.paramMap.get('id')!;
-    console.log('ID obtenido: ', this.id);
     if (this.id) {
       this.cargarDatosUsuario(); // Solo carga los datos si el ID es válido
     } else {
@@ -45,9 +44,8 @@ export class UsuariosEditComponent {
   // metodo para cargar los datos existentes}
   cargarDatosUsuario(): void {
 
-    this.usuarioServide.ObtenerUsuarioID(this.id).subscribe(
-      (response) => {
-        console.log('Datos Obtenidos', response);
+    this.usuarioServide.ObtenerUsuarioID(this.id).subscribe({
+      next: (response) => {
         const usuario = response // acceder a los datos
 
         // asignar los valores
@@ -64,10 +62,11 @@ export class UsuariosEditComponent {
         this.genero = usuario.genero;
         this.fechaCreacion = usuario.fechaCreacion;
         this.rolId = usuario.rolId;
-      }, (error) => {
+      }, 
+      error: (error) => {
         console.log(`Error al cargar los datos ${error.message}`);
       }
-    )
+    })
   }
 
 
@@ -88,18 +87,15 @@ export class UsuariosEditComponent {
       fechaCreacion: this.fechaCreacion,
       rolId: this.rolId,
     }
-
-    console.log('Datos a enviar ', usuarioActualizado);
-
-    this.usuarioServide.ActualizarUsuario(this.id, usuarioActualizado).subscribe(
-      () => {
+    this.usuarioServide.ActualizarUsuario(this.id, usuarioActualizado).subscribe({
+      next: () => {
         alert('Usuario actualizado exitosamente')
         this.router.navigate(['/usuarios'])
       },
-      (error) => {
+      error: (error) => {
         console.log(`Error al actualizar el usuario ${error.message}`);
       }
-    )
+    })
   }
 
 }

@@ -9,54 +9,63 @@
     <fa-icon [icon]="faPlus"></fa-icon>Agregar Usuario
   </button>
   
-  <!-- Aquí iría el contenido específico para usuarios, como tablas, formularios, etc. -->
-  <table class="usuarios-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Primer Nombre</th>
-        <th>Segundo Nombre</th>
-        <th>Primer Apellido</th>
-        <th>Segundo Apellido</th>
-        <th>Nombre Usuario</th>
-        <th>Correo</th>
-        <th>Dirección</th>
-        <th>Celular</th>
-        <th>Estado</th>
-        <th>Genero</th>
-        <th>Fecha Registro</th>
-        <th>Rol</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let usuario of usuarios">
-        <td>{{ usuario.id }}</td>
-        <td>{{ usuario.primerNombre }}</td>
-        <td>{{ usuario.segundoNombre }}</td>
-        <td>{{ usuario.primerApellido }}</td>
-        <td>{{ usuario.segundoApellido }}</td>
-        <td>{{ usuario.nombreUsuario }}</td>
-        <td>{{ usuario.correo }}</td>
-        <td>{{ usuario.direccion }}</td>
-        <td>{{ usuario.celular }}</td>
-        <td>{{ usuario.estado }}</td>
-        <td>{{ usuario.genero }}</td>
-        <td>{{ usuario.createdAt }}</td>
-        <td>{{ usuario.rol.nombreRol }}</td>
-        <td>
-          <!-- boton para actualizar -->
-          <button (click)="FormularioEditar(usuario.id)" class="action-button">
-            <fa-icon [icon]="faEdit"></fa-icon>
-          </button>
+  <div class="tabla">
+    <!-- Aquí iría el contenido específico para usuarios, como tablas, formularios, etc. -->
+    <table class="usuarios-table">
+      <thead class="usuarios-table-header">
+        <tr>
+          <th class="coloumnas primero">ID</th>
+          <th class="coloumnas">Primer Nombre</th>
+          <th class="coloumnas">Segundo Nombre</th>
+          <th class="coloumnas">Primer Apellido</th>
+          <th class="coloumnas">Segundo Apellido</th>
+          <th class="coloumnas">Nombre Usuario</th>
+          <th class="coloumnas">Correo</th>
+          <th class="coloumnas">Dirección</th>
+          <th class="coloumnas">Celular</th>
+          <th class="coloumnas">Estado</th>
+          <th class="coloumnas">Genero</th>
+          <th class="coloumnas">Fecha Registro</th>
+          <th class="coloumnas">Rol</th>
+          <th class="coloumnas ultimo">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="usuarios-table-body">
+        <tr *ngFor="let usuario of usuarios">
+          <td class="valores primerov">{{ usuario.id }}</td>
+          <td class="valores">{{ usuario.primerNombre }}</td>
+          <td class="valores">{{ usuario.segundoNombre }}</td>
+          <td class="valores">{{ usuario.primerApellido }}</td>
+          <td class="valores">{{ usuario.segundoApellido }}</td>
+          <td class="valores">{{ usuario.nombreUsuario }}</td>
+          <td class="valores">{{ usuario.correo }}</td>
+          <td class="valores">{{ usuario.direccion }}</td>
+          <td class="valores">{{ usuario.celular }}</td>
+          
+          <td class="valores estado" [ngClass]="usuario.estado ? 'estado-activo' : 'estado-inactivo'">
+            {{ usuario.estado }}
+          </td>
+          
+          <td class="valores genero" [ngClass]="usuario.genero.toLowerCase() === 'masculino' ? 'genero-masculino' : 'genero-femenino'">
+            {{ usuario.genero }}
+          </td>
+          
+          <td class="valores">{{ usuario.createdAt }}</td>
+          <td class="valores">{{ usuario.rol.nombreRol }}</td>
+          <td class="valores botones-acciones ultimov">
+            <!-- boton para actualizar -->
+            <button (click)="FormularioEditar(usuario.id)" class="action-button edit-button">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
 
-          <!-- Botón para eliminar -->
-          <button (click)="eliminarUsuario(usuario.id)" class="action-button">
-            <fa-icon [icon]="faTrash"></fa-icon>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+            <!-- Botón para eliminar -->
+            <button (click)="eliminarUsuario(usuario.id)" class="action-button remove-button">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </div>

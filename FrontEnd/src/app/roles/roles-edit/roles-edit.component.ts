@@ -23,7 +23,6 @@ export class RolesEditComponent {
   ngOnInit(): void {
     // obtener el ID desde la ruta
     this.id = +this.route.snapshot.paramMap.get('id')!;
-    console.log('ID obtenido: ', this.id);
     if (this.id) {
       this.cargarDatosRol(); // Solo carga los datos si el ID es válido
     } else {
@@ -34,9 +33,8 @@ export class RolesEditComponent {
 
   // metodo para obtener los datos existentes
   cargarDatosRol(): void {
-    this.rolService.ObtenerRoleID(this.id).subscribe(
-      (response) => {
-        console.log('Datos Obtenidos', response);
+    this.rolService.ObtenerRoleID(this.id).subscribe({
+      next: (response) => {
         const rol = response // acceder a los datos
 
         // asignar los valores
@@ -44,10 +42,10 @@ export class RolesEditComponent {
         this.descripcion = rol.descripcion;
         this.estado = rol.estado ? 1 : 0; // Convertir a número (1 o 0)
       },
-      (error) => {
+      error: (error) => {
         console.error('Error al obtener el rol:', error.message);
       }
-    );
+    });
   }
 
   // metodo para editar el rol
@@ -58,14 +56,15 @@ export class RolesEditComponent {
       estado: this.estado // Convertir a booleano (true o false)
     }
 
-    this.rolService.EditarRol(this.id, rolActualizado).subscribe(
-      () => {
+    this.rolService.EditarRol(this.id, rolActualizado).subscribe({
+      next: () => {
         alert('Rol actualizado exitosamente')
         this.router.navigate(['/roles'])
-      }, (error: { message: any; }) => {
+      }, 
+      error: (error: { message: any; }) => {
         console.log(`Error al actualizar el rol ${error.message}`);
       }
-    )
+    })
   }
 
 }

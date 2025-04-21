@@ -23,7 +23,6 @@ export class IngresosEditComponent {
   ngOnInit(): void {
     // obtener el ID desde la ruta
     this.id = +this.route.snapshot.paramMap.get('id')!;
-    console.log('ID obtenido: ', this.id);
     if (this.id) {
       this.cargarDatosingreso(); // Solo carga los datos si el ID es válido
     } else {
@@ -34,9 +33,8 @@ export class IngresosEditComponent {
 
   // metodo para cargar los datos existentes}
   cargarDatosingreso(): void {
-    this.ingresoServide.ObtenerIngresoeID(this.id).subscribe(
-      (response) => {
-        console.log('Datos Obtenidos', response);
+    this.ingresoServide.ObtenerIngresoeID(this.id).subscribe({
+      next: (response) => {
         const ingreso = response // acceder a los datos
 
         // asignar los valores
@@ -44,10 +42,11 @@ export class IngresosEditComponent {
         this.valorIngreso = ingreso.valorIngreso;
         this.valorFinal = ingreso.valorFinal;
         this.usuarioID = ingreso.usuarioID;
-      }, (error: { message: any; }) => {
+      }, 
+      error: (error: { message: any; }) => {
         console.log(`Error al cargar los datos ${error.message}`);
       }
-    )
+    })
   }
 
 
@@ -59,17 +58,14 @@ export class IngresosEditComponent {
       valorFinal: this.valorFinal,
       usuarioID: this.usuarioID
     }
-
-    console.log('Datos a enviar ', ingresoActualizado);
-
-    this.ingresoServide.EditarIngreso(this.id, ingresoActualizado).subscribe(
-      () => {
+    this.ingresoServide.EditarIngreso(this.id, ingresoActualizado).subscribe({
+      next: () => {
         alert('ingreso actualizado exitosamente')
         this.router.navigate(['/ingresos'])
       },
-      (error: { message: any; }) => {
+      error: (error: { message: any; }) => {
         console.log(`Error al actualizar el ingreso ${error.message}`);
       }
-    )
+    })
   }
 }

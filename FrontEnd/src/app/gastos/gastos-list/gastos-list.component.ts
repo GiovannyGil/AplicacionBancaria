@@ -26,18 +26,18 @@ export class GastosListComponent {
   // metodo para obtener ususarios
   obtenergastos(): void {
     try {
-      this.gastosService.ObtenerGastos().subscribe(
-        (data) => {
+      this.gastosService.ObtenerGastos().subscribe({
+        next: (data) => {
           this.gastos = data // obtener un array de gastos que trae el objeto
         },
-        (error) => {
+        error: (error) => {
           if (error.status === 401) {
             console.error(`Token no encontrado, debe iniciar sesión ${error.message}`)
           } else {
             console.error(`Error al obtener los gastos ${error.message}`)
           }
         }
-      )
+      })
     } catch (error) {
       console.log(`Error al Obtener los gastos ${error}`);
     }
@@ -49,16 +49,16 @@ export class GastosListComponent {
     try {
       if (confirm('¿Está seguto que desea eliminar este gasto?')) {
 
-        this.gastosService.EliminarGasto(id).subscribe(
-          () => {
+        this.gastosService.EliminarGasto(id).subscribe({
+          next: () => {
             this.gastos = this.gastos.filter(gasto => gasto.id !== id)
             alert('gastos Eliminado Exitosamente')
           },
-          (error) => {
+          error: (error) => {
             console.error('Error al eliminar gasto:', error.message);
             alert('Error al eliminar la gasto');
           }
-        )
+        })
       }
     } catch (error) {
       console.error('Error al eliminar gasto:', error);

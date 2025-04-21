@@ -42,16 +42,15 @@ export class UsuariosCreateComponent {
       fechaCreacion: this.fechaCreacion,
       rolId: this.rolId
     }
-    console.log('datos usuario nuevo ', nuevoUsuario);
-
-    this.usuarioService.CrearUsuarios(nuevoUsuario).subscribe(
-      () => {
+    this.usuarioService.CrearUsuarios(nuevoUsuario).subscribe({
+      next: () => {
         alert('Usuario creado exitosamente')
         this.router.navigate(['/usuarios'])
-      }, (error) => {
+      }, 
+      error: (error) => {
         console.log(`Error al crear el usuario ${error.message}`);
       }
-    )
+    })
   }
 
 }

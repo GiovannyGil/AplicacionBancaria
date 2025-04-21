@@ -54,16 +54,16 @@ export class RegisterComponent {
           this.genero,
           this.fechaCreacion,
           this.rolId
-      ).subscribe(
-          () => {
+      ).subscribe({
+          next: () => {
             alert('Registro exitoso');
             this.router.navigate(['/auth/login']);
           },
-          (error: { message: any; }) => {
+          error: (error: { message: any; }) => {
             console.error('Error en el registro', error.message);
             alert('Error al registrarse');
           }
-        );
+        });
       } else {
         alert('Por favor, completa todos los campos');
       }

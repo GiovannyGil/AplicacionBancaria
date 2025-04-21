@@ -124,7 +124,7 @@ export class AuthService {
     }
   }
 
-  // metodo para verificar si está logeoado
+  // metodo para verificar si está logueado
   async isLoggedIn(): Promise<boolean> {
     try {
       const token = this.getToken() // obtener el token
@@ -154,7 +154,6 @@ export class AuthService {
       return this.http.post(`${this.apiUrl}/reestablecerClave`, { nombreUsuario, correo, clave, confirmarClave }).pipe(
         tap((response) => {
           alert(response)
-          console.log('Respuesta del servidor:', response)
           this.router.navigate(['/auth/login']) // redirigir al login
         })
       )

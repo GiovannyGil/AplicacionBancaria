@@ -28,18 +28,18 @@ export class RolesListComponent {
   // metodo para obtener roles
   obtenerRoles(): void {
     try {
-      this.rolServices.ObtenerRoles().subscribe(
-        (data) => {
+      this.rolServices.ObtenerRoles().subscribe({
+        next: (data) => {
           this.roles = data // obtener un array de roles que trae el 
         },
-        (error) => {
+        error: (error) => {
           if (error.status === 401) {
             console.error(`Token no encontrado, debe iniciar sesión ${error.message}`)
           } else {
             console.error(`Error al obtener los roles ${error.message}`)
           }
         }
-      )
+      })
     } catch (error) {
       console.log(`Error al Obtener los Roles ${error}`);
     }
@@ -50,16 +50,16 @@ export class RolesListComponent {
     try {
       if (confirm('¿Está seguto que desea eliminar este rol?')) {
 
-        this.rolServices.EliminarRol(id).subscribe(
-          () => {
+        this.rolServices.EliminarRol(id).subscribe({
+          next: () => {
             this.roles = this.roles.filter(rol => rol.id !== id)
             alert('Rol Eliminado Exitosamente')
           },
-          (error) => {
+          error: (error) => {
             console.error('Error al eliminar rol:', error.message);
             alert('Error al eliminar el rol');
           }
-        )
+        })
       }
     } catch (error) {
       console.error(`Error al eliminar el rol ${error}`)

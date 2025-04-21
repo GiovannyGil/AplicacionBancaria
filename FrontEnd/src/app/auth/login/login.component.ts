@@ -17,16 +17,16 @@ export class LoginComponent {
   // metodo para logearse
   async login(): Promise<void> {
     try {
-      this.authService.login(this.nombreUsuario, this.clave).subscribe(
-        () => {
-          console.log('logeo existoso');
-          this.router.navigate(['inicio']) // redirigir al inicio despues del logeo
+      this.authService.login(this.nombreUsuario, this.clave).subscribe({
+        next: () => {
+          alert('logueo existoso');
+          this.router.navigate(['inicio']) // redirigir al inicio despues del logue
         },
-        (error) => {
+        error: (error) => {
           console.error('Error al iniciar sesión ', error)
           alert('Error en las Credenciales')
         }
-      )
+      })
     } catch (error) {
       console.error('Error al iniciar sesión', error)
       alert('Error al iniciar sesión')

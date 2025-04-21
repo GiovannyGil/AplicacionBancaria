@@ -1,0 +1,162 @@
+/* Estilo general del contenedor */
+.usuarios-container {
+    max-width: 95%;
+    margin: 0px auto 40px;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* Título */
+  .usuarios-container h2 {
+    font-size: 28px;
+    margin-bottom: 24px;
+    color: #1f2937;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  /* Botón de agregar usuario */
+  .add-button {
+    background-color: #0681e6;
+    color: white;
+    padding: 10px 16px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(6, 129, 230, 0.3);
+    transition: all 0.25s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .add-button:hover {
+    background-color: #046bbd;
+    transform: scale(1.05);
+  }
+  
+  /* Tabla */
+  .usuarios-table {
+     width: 100%;
+     border-collapse: separate;
+     border-spacing: 0 6px;
+     border-radius: 12px;
+    }
+
+    .primero {
+        border-radius: 16px 0 0 0;
+    }
+
+    .ultimo {
+        border-radius: 0 16px 0 0;
+    }
+
+    .primerov {
+        border-radius: 16px 0 0 16px;
+    }
+
+    .ultimov {
+        border-radius: 0 16px 16px 0;
+    }
+
+
+/* Estado */
+.estado-activo {
+    background-color: #d1fae5; /* verde suave */
+    color: #065f46;
+    font-weight: 600;
+    /* border-radius: 8px; */
+    text-align: center;
+  }
+  
+  .estado-inactivo {
+    background-color: #e5e7eb; /* gris claro */
+    color: #4b5563;
+    font-weight: 600;
+    /* border-radius: 8px; */
+    text-align: center;
+  }
+  
+  /* Género */
+  .genero-masculino {
+    background-color: #dbeafe; /* azul claro */
+    color: #1e40af;
+    font-weight: 600;
+    /* border-radius: 8px; */
+    text-align: center;
+  }
+  
+  .genero-femenino {
+    background-color: #fce7f3; /* rosado claro */
+    color: #9d174d;
+    font-weight: 600;
+    /* border-radius: 8px; */
+    text-align: center;
+  }
+  
+  /* Encabezado de la tabla */
+  .usuarios-table-header th {
+    background:  #0a99ff;
+    color: white;
+    font-weight: 600;
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 2px solid #e5e7eb;
+  }
+  
+  /* Celdas de contenido */
+  .usuarios-table-body .valores {
+    background-color: white;
+    padding: 12px 10px;
+    font-size: 14px;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+    transition: background 0.3s;
+  }
+  
+  .usuarios-table-body tr:hover .valores {
+    background-color: #f0f9ff;
+  }
+  
+  /* Acciones */
+  .botones-acciones {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-size: 16px;
+  }
+  
+  .edit-button {
+    color: #0681e6;
+  }
+  
+  .edit-button:hover {
+    background-color: rgba(6, 129, 230, 0.1);
+    transform: scale(1.1);
+  }
+  
+  .remove-button {
+    color: #e63946;
+  }
+  
+  .remove-button:hover {
+    background-color: rgba(230, 57, 70, 0.1);
+    transform: scale(1.1);
+  }
+  

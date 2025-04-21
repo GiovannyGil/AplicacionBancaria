@@ -29,7 +29,6 @@ export class CreditosEditComponent {
   ngOnInit(): void {
     // obtener el ID desde la ruta
     this.id = +this.route.snapshot.paramMap.get('id')!;
-    console.log('ID obtenido: ', this.id);
     if (this.id) {
       this.cargarDatoscredito(); // Solo carga los datos si el ID es válido
     } else {
@@ -40,9 +39,8 @@ export class CreditosEditComponent {
 
   // metodo para cargar los datos existentes}
   cargarDatoscredito(): void {
-    this.creditoServide.ObtenerCreditoID(this.id).subscribe(
-      (response) => {
-        console.log('Datos Obtenidos', response);
+    this.creditoServide.ObtenerCreditoID(this.id).subscribe({
+      next: (response) => {
         const credito = response // acceder a los datos
 
         // asignar los valores
@@ -56,10 +54,11 @@ export class CreditosEditComponent {
         this.debitoMensual = credito.debitoMensual;
         this.tipo = credito.tipo;
         this.usuarioID = credito.usuarioID;
-      }, (error: { message: any; }) => {
+      }, 
+      error: (error: { message: any; }) => {
         console.log(`Error al cargar los datos ${error.message}`);
       }
-    )
+    })
   }
 
 
@@ -76,17 +75,14 @@ export class CreditosEditComponent {
       debitoMensual: this.debitoMensual,
       tipo: this.tipo,
     }
-
-    console.log('Datos a enviar ', creditoActualizado);
-
-    this.creditoServide.EditarCredito(this.id, creditoActualizado).subscribe(
-      () => {
+    this.creditoServide.EditarCredito(this.id, creditoActualizado).subscribe({
+      next: () => {
         alert('credito actualizado exitosamente')
         this.router.navigate(['/creditos'])
       },
-      (error: { message: any; }) => {
+      error: (error: { message: any; }) => {
         console.log(`Error al actualizar el credito ${error.message}`);
       }
-    )
+    })
   }
 }

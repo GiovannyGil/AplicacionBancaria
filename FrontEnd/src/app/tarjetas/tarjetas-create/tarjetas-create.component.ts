@@ -41,13 +41,14 @@ export class TarjetasCreateComponent {
       usuarioID: 1 // Cambiar por el ID del usuario logueado
     }
 
-    this.tarjetaService.CrearTarjeta(nuevotarjeta).subscribe(
-      () => {
+    this.tarjetaService.CrearTarjeta(nuevotarjeta).subscribe({
+      next: () => {
         alert('tarjeta creado exitosamente')
         this.router.navigate(['/tarjetas'])
-      }, (error: { message: any; }) => {
+      }, 
+      error: (error: { message: any; }) => {
         console.log(`Error al crear el tarjeta ${error.message}`);
       }
-    )
+    })
   }
 }

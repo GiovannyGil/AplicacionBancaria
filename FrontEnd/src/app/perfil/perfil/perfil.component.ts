@@ -21,7 +21,7 @@ export class PerfilComponent {
   estado: number = 1;
   genero: string = '';
   fechaCreacion: Date = new Date();
-  rolId: number = 2;
+  rol: number = 2;
 
   constructor(
     private usuarioServide: PerfilServicesService,
@@ -41,31 +41,74 @@ export class PerfilComponent {
   }
 
   cargarDatosUsuario(): void {
-    this.usuarioServide.ObtenerUsuarioID(this.id).subscribe(
-      (usuario) => {
-        console.log('Datos Obtenidos PERFIL', usuario);
-
+    this.usuarioServide.ObtenerUsuarioID(this.id).subscribe({
+      next: (usuario) => {
         this.primerNombre = usuario.primerNombre;
         this.segundoNombre = usuario.segundoNombre;
         this.primerApellido = usuario.primerApellido;
         this.segundoApellido = usuario.segundoApellido;
         this.nombreUsuario = usuario.nombreUsuario;
         this.correo = usuario.correo;
-        this.clave = usuario.clave;
         this.direccion = usuario.direccion;
         this.celular = usuario.celular;
         this.estado = usuario.estado;
         this.genero = usuario.genero;
         this.fechaCreacion = usuario.fechaCreacion;
-        this.rolId = usuario.rolId;
+        this.rol= usuario.rol.nombreRol;
       },
-      (error) => {
-        console.log(`Error al cargar los datos ${error.message}`);
+      error: (error) => {
+        console.log(`Error al cargar los datos del usuario logueado ${error.message}`);
+      },
+      complete: () => {
+        // Aquí puedes manejar la lógica después de cargar los datos del usuario
+        console.log('Datos del usuario cargados correctamente');
       }
-    );
+    });
   }
 
-  /** 
+
+  // metodo para pasar los inputs de disabled a enabled
+  editar(){
+    const inputs = document.querySelectorAll('input, select, textarea, button');
+    inputs.forEach((input) => {
+      input.removeAttribute('disabled');
+    });
+
+    // boton con id = editar a hidden
+    const botonEditar = document.getElementById('editar') as HTMLButtonElement;
+    if (botonEditar) {
+      botonEditar.style.display = 'none'; // Ocultar el botón de editar
+    }
+
+    // boton con id = hidden a visible
+    const botonCancel = document.getElementById('cancel') as HTMLButtonElement;
+    if (botonCancel) {
+      botonCancel.style.display = 'block'; // Mostrar el botón de editar
+    }
+  }
+
+  // metodo para cancelar editar
+  cancelarEdit(){
+    const inputs = document.querySelectorAll('input, select, textarea, button#actualizar');
+    inputs.forEach((input) => {
+      input.setAttribute('disabled', 'true');
+    });
+
+    // boton con id = editar a visible
+    const botonEditar = document.getElementById('editar') as HTMLButtonElement;
+    if (botonEditar) {
+      botonEditar.style.display = 'block'; // Mostrar el botón de editar
+      botonEditar.setAttribute('enabled', 'true'); // habilitar el boton
+    }
+
+    // boton con id = cancel a hidden
+    const botonCancel = document.getElementById('cancel') as HTMLButtonElement;
+    if (botonCancel) {
+      botonCancel.style.display = 'none'; // Ocultar el botón de editar
+    }
+  }
+
+  
   actualizarUsuario(): void {
     const usuarioActualizado = {
       primerNombre: this.primerNombre,
@@ -74,26 +117,25 @@ export class PerfilComponent {
       segundoApellido: this.segundoApellido,
       nombreUsuario: this.nombreUsuario,
       correo: this.correo,
-      clave: this.clave,
       direccion: this.direccion,
       celular: this.celular,
       estado: this.estado,
       genero: this.genero,
       fechaCreacion: this.fechaCreacion,
-      rolId: this.rolId,
     };
-
-    console.log('Datos a enviar ', usuarioActualizado);
-
-    this.usuarioServide.ActualizarUsuario(this.id, usuarioActualizado).subscribe(
-      () => {
+    this.usuarioServide.ActualizarUsuario(this.id, usuarioActualizado).subscribe({
+      next: () => {
         alert('Usuario actualizado exitosamente');
-        this.router.navigate(['/usuarios']);
+        this.router.navigate(['/perfil']); // Redirigir a la página de perfil después de actualizar
+        this.cancelarEdit(); // Cancelar la edición y volver a deshabilitar los campos
       },
-      (error) => {
+      error: (error) => {
         console.log(`Error al actualizar el usuario ${error.message}`);
+      },
+      complete: () => {
+        console.log('Usuario actualizado correctamente');
       }
-    );
+  });
   }
-  */
+  
 }

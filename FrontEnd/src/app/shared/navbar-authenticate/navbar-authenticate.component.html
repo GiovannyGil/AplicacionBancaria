@@ -1,42 +1,52 @@
 <nav class="navbar">
-  <div class="navbar-brand">
-    <a routerLink="/">Bancaría</a>
+  <div class="navbar-container">
+    <a routerLink="/" class="navbar-brand">💸 Bancaría</a>
+
+    <ul class="navbar-links">
+      <li *ngIf="esAdmin()">
+        <a routerLink="/usuarios"> 
+          <i class='bx bxs-user' ></i> Usuarios 
+        </a>
+      </li>
+      <li *ngIf="esAdmin()">
+        <a routerLink="/roles"> 
+          <i class='bx bxs-lock-alt' ></i> Roles 
+        </a>
+      </li>
+      <li>
+        <a routerLink="/ahorros">
+          <i class='bx bxs-wallet'></i> Ahorros 
+        </a>
+      </li>
+      <li>
+        <a routerLink="/ingresos">
+          <i class='bx bx-dollar'></i> Ingresos 
+        </a>
+      </li>
+      <li>
+        <a routerLink="/gastos">
+          <i class='bx bxs-credit-card-alt' ></i> Gastos 
+        </a>
+      </li>
+      <li>
+        <a routerLink="/creditos">
+          <i class='bx bx-money'></i> Créditos 
+        </a>
+      </li>
+      <li>
+        <a routerLink="/tarjetas">
+          <i class='bx bxs-credit-card'></i> Tarjetas 
+        </a>
+      </li>
+    </ul>
+
+    <div class="navbar-actions">
+      <a routerLink="/perfil" class="btn perfil">
+        <i class='bx bxs-user-circle'></i> Mi cuenta 
+      </a>
+      <button class="btn logout" (click)="cerrarSesion()">
+        <i class='bx bx-log-out'></i> Cerrar sesión 
+      </button>
+    </div>
   </div>
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a routerLink="/" class="nav-link">Inicio</a>
-    </li>
-    <li class="nav-item" *ngIf="esAdmin()">
-      <a routerLink="/usuarios" class="nav-link">Usuarios</a>
-    </li>
-    <li class="nav-item" *ngIf="esAdmin()">
-      <a routerLink="/roles" class="nav-link">Roles</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="/ahorros" class="nav-link">Ahorros</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="/ingresos" class="nav-link">Ingresos</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="/gastos" class="nav-link">Gastos</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="/creditos" class="nav-link">Créditos</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="/tarjetas" class="nav-link">Tarjetas</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="/perfil" class="nav-link">MiCuenta</a>
-    </li>
-    <li class="nav-item">
-      <a
-        href="#"
-        class="nav-link"
-        (click)="cerrarSesion(); $event.preventDefault()"
-        >Cerrar Sesión</a
-      >
-    </li>
-  </ul>
 </nav>

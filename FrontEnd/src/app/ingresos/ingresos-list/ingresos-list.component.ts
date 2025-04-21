@@ -27,18 +27,18 @@ export class IngresosListComponent {
   // metodo para obtener ususarios
   obtenerIngresos(): void {
     try {
-      this.ingresosService.ObtenerIngresoes().subscribe(
-        (data) => {
+      this.ingresosService.ObtenerIngresoes().subscribe({
+        next: (data) => {
           this.ingresos = data // obtener un array de ingresos que trae el objeto
         },
-        (error) => {
+        error: (error) => {
           if (error.status === 401) {
             console.error(`Token no encontrado, debe iniciar sesión ${error.message}`)
           } else {
             console.error(`Error al obtener los ingresos ${error.message}`)
           }
         }
-      )
+      })
     } catch (error) {
       console.log(`Error al Obtener los ingresos ${error}`);
     }

@@ -26,7 +26,6 @@ export class AhorrosEditComponent {
   ngOnInit(): void {
     // obtener el ID desde la ruta
     this.id = +this.route.snapshot.paramMap.get('id')!;
-    console.log('ID obtenido: ', this.id);
     if (this.id) {
       this.cargarDatosahorro(); // Solo carga los datos si el ID es válido
     } else {
@@ -39,7 +38,6 @@ export class AhorrosEditComponent {
   cargarDatosahorro(): void {
     this.ahorroServide.ObtenerAhorrosID(this.id).subscribe(
       (response) => {
-        console.log('Datos Obtenidos', response);
         const ahorro = response // acceder a los datos
 
         // asignar los valores
@@ -68,9 +66,6 @@ export class AhorrosEditComponent {
       tipo: this.tipo,
       usuarioID: 1 // Cambiar por el ID del usuario logueado
     }
-
-    console.log('Datos a enviar ', ahorroActualizado);
-
     this.ahorroServide.ActualizarAhorro(this.id, ahorroActualizado).subscribe(
       () => {
         alert('ahorro actualizado exitosamente')

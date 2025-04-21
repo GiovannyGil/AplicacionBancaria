@@ -25,14 +25,15 @@ export class RolesCreateComponent {
       estado: Boolean(this.estado)
     }
 
-    this.rolService.CrearRol(nuevoRol).subscribe(
-      () => {
+    this.rolService.CrearRol(nuevoRol).subscribe({
+      next: () => {
         alert('Rol creado exitosamente')
         this.router.navigate(['/roles'])
-      }, (error) => {
+      }, 
+      error: (error) => {
         console.log(`Error al crear el rol ${error.message}`);
         alert(error.error.message + ',  verifique el ROL no se elimino no se eliminó recientemente');
       }
-    )
+    })
   }
 }

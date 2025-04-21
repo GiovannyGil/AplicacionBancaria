@@ -25,13 +25,14 @@ export class GastosCreateComponent {
       usuarioID: 1 // Cambiar por el ID del usuario logueado
     }
 
-    this.gastoService.CrearGasto(nuevogasto).subscribe(
-      () => {
+    this.gastoService.CrearGasto(nuevogasto).subscribe({
+      next: () => {
         alert('gasto creado exitosamente')
         this.router.navigate(['/gastos'])
-      }, (error) => {
+      }, 
+      error: (error) => {
         console.log(`Error al crear el gasto ${error.message}`);
       }
-    )
+    })
   }
 }

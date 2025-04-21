@@ -28,19 +28,18 @@ export class UsuariosListComponent {
   // metodo para obtener ususarios
   obtenerUsuarios(): void {
     try {
-      this.usuarioService.ObtenerUsuarios().subscribe(
-        (data) => {
+      this.usuarioService.ObtenerUsuarios().subscribe({
+        next: (data) => {
           this.usuarios = data // obtener un array de usuarios que trae el objeto
-          // console.log('Usuarios: ',this.usuarios); // mostrar los usuarios en consola
         },
-        (error) => {
+        error: (error) => {
           if(error.status === 401){
             console.error(`Token no encontrado, debe iniciar sesión ${error.message}`)
           } else {
             console.error(`Error al obtener los usuarios ${error.message}`)
           }
         }
-      )
+      })
     } catch (error) {
       console.log(`Error al Obtener los Usuarios ${error}`);
     }
@@ -51,16 +50,16 @@ export class UsuariosListComponent {
     try {
       if (confirm('¿Está seguto que desea eliminar este usuario?')) {
 
-        this.usuarioService.EliminarUsuairo(id).subscribe(
-          () => {
+        this.usuarioService.EliminarUsuairo(id).subscribe({
+          next: () => {
             alert('Usuario Eliminado Exitosamente');
             this.obtenerUsuarios();
           },
-          (error) => {
+          error: (error) => {
             console.error('Error al eliminar usuario:', error.message);
             alert('Error al eliminar la usuario');
           }
-        )
+        })
       }
     } catch (error) {
       console.error('Error al eliminar usuario:', error);
