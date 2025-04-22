@@ -1,60 +1,120 @@
 <app-navbar-authenticate></app-navbar-authenticate>
 
-<div class="register-container">
-    <div class="register-box">
-
-        <h2>Agregar Usuario</h2>
-        <form (ngSubmit)="crearUsuario()" class="usuario-form">
-        <div class="input-group">
-            <input [(ngModel)]="primerNombre" name="primerNombre" type="text" required />
-            <label>Primer Nombre</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="segundoNombre" name="segundoNombre" type="text" required />
-            <label>Segundo Nombre</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="primerApellido" name="primerApellido" type="text" required />
-            <label>Primer Apellido</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="segundoApellido" name="segundoApellido" type="text" required />
-            <label>Segundo Apellido</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="nombreUsuario" name="nombreUsuario" type="text" required />
-            <label>Nombre de Usuario</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="correo" name="correo" type="email" required />
-            <label>Correo</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="clave" name="clave" type="password" required />
-            <label>Contraseña</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="direccion" name="direccion" type="text" required />
-            <label>Dirección</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="celular" name="celular" type="text" required />
-            <label>Celular</label>
-        </div>
-        <div class="input-group">
-            <!-- <input [(ngModel)]="clave" name="genero" type="genero" required /> -->
-            <select [(ngModel)]="genero" name="genero" required>
-                <option value="Masculino">Masculino</option>
-                <option value="Femenino">Femenino</option>
-                <option value="Otro">Otro</option>
-            </select>
-            <label>Genero</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="rolId" name="rolId" type="number" required />
-            <label>RolID</label>
-        </div>
-        <button type="submit" class="submit-button">Agregar</button>
-        </form>
+<div class="usuario-contenedor">
+  <div class="usuario-contenido">
+    <h1>Agregar Usuario</h1>
+    <form (ngSubmit)="crearUsuario()" class="usuario-form">
+      <div class="input-group">
+        <label class="lbl">Primer Nombre</label>
+        <input
+          class="caja"
+          [(ngModel)]="primerNombre"
+          name="primerNombre"
+          type="text"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Segundo Nombre</label>
+        <input
+          class="caja"
+          [(ngModel)]="segundoNombre"
+          name="segundoNombre"
+          type="text"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Primer Apellido</label>
+        <input
+          class="caja"
+          [(ngModel)]="primerApellido"
+          name="primerApellido"
+          type="text"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Segundo Apellido</label>
+        <input
+          class="caja"
+          [(ngModel)]="segundoApellido"
+          name="segundoApellido"
+          type="text"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Nombre de Usuario</label>
+        <input
+          class="caja"
+          [(ngModel)]="nombreUsuario"
+          name="nombreUsuario"
+          type="text"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Correo</label>
+        <input
+          class="caja"
+          [(ngModel)]="correo"
+          name="correo"
+          type="email"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Contraseña</label>
+        <input
+          class="caja"
+          [(ngModel)]="clave"
+          name="clave"
+          type="password"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Dirección</label>
+        <input
+          class="caja"
+          [(ngModel)]="direccion"
+          name="direccion"
+          type="text"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Celular</label>
+        <input
+          class="caja"
+          [(ngModel)]="celular"
+          name="celular"
+          type="text"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Genero</label>
+        <select class="caja" [(ngModel)]="genero" name="genero" required>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label class="lbl">RolID</label>
+        <input
+          class="caja"
+          [(ngModel)]="rolId"
+          name="rolId"
+          type="number"
+          required
+        />
+      </div>
+    </form>
+    <div class="button-group">
+        <button type="submit" id="agregar" class="submit-button" (click)="crearUsuario()">Agregar</button>
     </div>
+  </div>
 </div>

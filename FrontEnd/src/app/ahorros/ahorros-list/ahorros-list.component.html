@@ -8,41 +8,42 @@
     <fa-icon [icon]="faPlus"></fa-icon>Agregar ahorro
   </button>
 
-  <!-- Aquí iría el contenido específico para ahorros, como tablas, formularios, etc. -->
+<div class="tabla">
   <table class="ahorros-table">
-    <thead>
+    <thead class="ahorros-table-header">
       <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Fecha Meta</th>
-        <th>Cantidad Cuotas</th>
-        <th>Monto Meta</th>
-        <th>Ahorro Mensual</th>
-        <th>Tipo</th>
-        <th>Acciones</th>
+        <th class="columnas primero">ID</th>
+        <th class="columnas">Nombre</th>
+        <th class="columnas">Fecha Meta</th>
+        <th class="columnas">Cantidad Cuotas</th>
+        <th class="columnas">Monto Meta</th>
+        <th class="columnas">Ahorro Mensual</th>
+        <th class="columnas">Tipo</th>
+        <th class="columnas ultimo">Acciones</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody  class="ahorros-table-body">
       <tr *ngFor="let ahorro of ahorros">
-        <td>{{ ahorro.id }}</td>
-        <td>{{ ahorro.nombre }}</td>
-        <td>{{ ahorro.fechaMeta | date: 'dd/MM/yyyy' }}</td>
-        <td>{{ ahorro.cantidadCuotas }}</td>
-        <td>{{ ahorro.montoMeta | currency: 'COP' }}</td>
-        <td>{{ ahorro.ahorroMensual | currency: 'COP' }}</td>
-        <td>{{ ahorro.tipo }}</td>
-        <td>
+        <td class="valores primerov">{{ ahorro.id }}</td>
+        <td class="valores">{{ ahorro.nombre }}</td>
+        <td class="valores">{{ ahorro.fechaMeta | date: 'dd/MM/yyyy' }}</td>
+        <td class="valores">{{ ahorro.cantidadCuotas }}</td>
+        <td class="valores">{{ ahorro.montoMeta | currency: 'COP' }}</td>
+        <td class="valores">{{ ahorro.ahorroMensual | currency: 'COP' }}</td>
+        <td class="valores">{{ ahorro.tipo }}</td>
+        <td class="valores botones-acciones ultimov">
           <!-- boton para actualizar -->
-          <button (click)="FormularioEditar(ahorro.id)" class="action-button">
+          <button (click)="FormularioEditar(ahorro.id)" class="action-button edit-button">
             <fa-icon [icon]="faEdit"></fa-icon>
           </button>
 
           <!-- Botón para eliminar -->
-          <button (click)="eliminarahorro(ahorro.id)" class="action-button">
+          <button (click)="eliminarahorro(ahorro.id)" class="action-button remove-button">
             <fa-icon [icon]="faTrash"></fa-icon>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+  </div>
 </div>

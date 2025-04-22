@@ -1,46 +1,48 @@
 <app-navbar-authenticate></app-navbar-authenticate>
 
-<div class="register-container">
-    <div class="register-box">
-        <h2>Registro</h2>
+<div class="credito-contenedor">
+  <div class="credito-contenido">
+        <h1>Agregar Crédito</h1>
         <form (ngSubmit)="crearcredito()">
         <div class="input-group">
-            <input [(ngModel)]="numero" name="numero" type="text" required />
-            <label>Número</label>
+            <label class="lbl">Número</label>
+            <input class="caja" [(ngModel)]="numero" name="numero" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="nombre" name="nombre" type="text" required />
-            <label>Nombre</label>
+            <label class="lbl">Nombre</label>
+            <input class="caja" [(ngModel)]="nombre" name="nombre" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="fechaExpira" name="fechaExpira" type="date" required />
-            <label>Fecha Expira</label>
+            <label class="lbl">Fecha Expira</label>
+            <input class="caja" [(ngModel)]="fechaExpira" name="fechaExpira" type="date" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="cantidadCuotas" name="cantidadCuotas" type="number" required />
-            <label>Cantidad Cuotas</label>
+            <label class="lbl">Cantidad Cuotas</label>
+            <input class="caja" [(ngModel)]="cantidadCuotas" name="cantidadCuotas" type="number" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="montoFinal" name="montoFinal" type="number" required />
-            <label>Monto Final</label>
+            <label class="lbl">Monto Final</label>
+            <input class="caja" [(ngModel)]="montoFinal" name="montoFinal" type="number" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="interesMensual" name="interesMensual" type="number" required />
-            <label>Interes Mensual</label>
+            <label class="lbl">Interes Mensual</label>
+            <input class="caja" [(ngModel)]="interesMensual" name="interesMensual" type="number" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="interesTotal" name="interesTotal" type="number" required />
-            <label>Interes Total</label>
+            <label class="lbl">Interes Total</label>
+            <input class="caja" [(ngModel)]="interesTotal" name="interesTotal" type="number" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="debitoMensual" name="debitoMensual" type="number" required />
-            <label>Debito Mensual</label>
+            <label class="lbl">Debito Mensual</label>
+            <input class="caja" [(ngModel)]="debitoMensual" name="debitoMensual" type="number" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="tipo" name="tipo" type="text" required />
-            <label>tipo</label>
+            <label class="lbl">tipo</label>
+            <input class="caja" [(ngModel)]="tipo" name="tipo" type="text" required />
         </div>
-        <button type="submit" class="register-button">Agregar</button>
-        </form>
+    </form>
+    <div class="button-group">
+        <button type="submit" id="agregar" class="submit-button" (click)="crearcredito()">Agregar</button>
+    </div>
     </div>
 </div>

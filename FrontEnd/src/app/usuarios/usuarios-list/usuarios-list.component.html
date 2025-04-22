@@ -10,7 +10,6 @@
   </button>
   
   <div class="tabla">
-    <!-- Aquí iría el contenido específico para usuarios, como tablas, formularios, etc. -->
     <table class="usuarios-table">
       <thead class="usuarios-table-header">
         <tr>
@@ -41,15 +40,8 @@
           <td class="valores">{{ usuario.correo }}</td>
           <td class="valores">{{ usuario.direccion }}</td>
           <td class="valores">{{ usuario.celular }}</td>
-          
-          <td class="valores estado" [ngClass]="usuario.estado ? 'estado-activo' : 'estado-inactivo'">
-            {{ usuario.estado }}
-          </td>
-          
-          <td class="valores genero" [ngClass]="usuario.genero.toLowerCase() === 'masculino' ? 'genero-masculino' : 'genero-femenino'">
-            {{ usuario.genero }}
-          </td>
-          
+          <td class="valores estado">{{ usuario.estado }}</td>
+          <td class="valores genero"> {{ usuario.genero }} </td>
           <td class="valores">{{ usuario.createdAt }}</td>
           <td class="valores">{{ usuario.rol.nombreRol }}</td>
           <td class="valores botones-acciones ultimov">

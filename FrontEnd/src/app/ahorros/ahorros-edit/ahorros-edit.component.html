@@ -1,34 +1,79 @@
 <app-navbar-authenticate></app-navbar-authenticate>
 
-<div class="register-container">
-    <div class="register-box">
-        <h2>Registro</h2>
-        <form (ngSubmit)="actualizarahorro()">
-        <div class="input-group">
-            <input [(ngModel)]="nombre" name="nombre" type="text" required />
-            <label>Nombre</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="fechaMeta" name="fechaMeta" type="date" required />
-            <label>Fecha Meta</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="cantidadCuotas" name="cantidadCuotas" type="number" required />
-            <label>Cantidad Cuotas</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="montoMeta" name="montoMeta" type="number" required />
-            <label>Monto Meta</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="ahorroMensual" name="ahorroMensual" type="number" required />
-            <label>Ahorro Mensual</label>
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="tipo" name="tipo" type="text" required />
-            <label>tipo</label>
-        </div>
-        <button type="submit" class="register-button">Actualizar</button>
-        </form>
+<div class="ahorro-contenedor">
+  <div class="ahorro-contenido">
+    <h1>Actualizar Ahorro</h1>
+    <form (ngSubmit)="actualizarahorro()">
+      <div class="input-group">
+        <label class="lbl">Nombre</label>
+        <input
+          class="caja"
+          [(ngModel)]="nombre"
+          name="nombre"
+          type="text"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Fecha Meta</label>
+        <input
+          class="caja"
+          [(ngModel)]="fechaMeta"
+          name="fechaMeta"
+          type="date"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Cantidad Cuotas</label>
+        <input
+          class="caja"
+          [(ngModel)]="cantidadCuotas"
+          name="cantidadCuotas"
+          type="number"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">Monto Meta</label>
+        <input
+          class="caja"
+          [(ngModel)]="montoMeta"
+          name="montoMeta"
+          type="number"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="" lbl>Ahorro Mensual</label>
+        <input
+          class="caja"
+          [(ngModel)]="ahorroMensual"
+          name="ahorroMensual"
+          type="number"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label class="lbl">tipo</label>
+        <input
+          class="caja"
+          [(ngModel)]="tipo"
+          name="tipo"
+          type="text"
+          required
+        />
+      </div>
+    </form>
+    <div class="button-group">
+      <button
+        type="submit"
+        id="actualizar"
+        class="submit-button"
+        (click)="actualizarahorro()"
+      >
+        Actualizar
+      </button>
     </div>
+  </div>
 </div>

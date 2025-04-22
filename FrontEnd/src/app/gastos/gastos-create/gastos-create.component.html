@@ -1,22 +1,23 @@
 <app-navbar-authenticate></app-navbar-authenticate>
 
-<div class="register-container">
-    <div class="register-box">
-        <h2>Registro</h2>
+<div class="gastos-contenedor">
+  <div class="gastos-contenido">
+        <h1>Agregar Gasto</h1>
         <form (ngSubmit)="creargasto()">
         <div class="input-group">
-            <input [(ngModel)]="nombreGasto" name="numeroGasto" type="text" required />
-            <label>Nombre Gasto</label>
+            <label class="lbl">Nombre Gasto</label>
+            <input class="caja" [(ngModel)]="nombreGasto" name="numeroGasto" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="valorPago" name="valorPago" type="text" required />
-            <label>Valor Pago</label>
+            <label class="lbl">Valor Pago</label>
+            <input class="caja" [(ngModel)]="valorPago" name="valorPago" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="valorFinal" name="valorFinal" type="text" required />
-            <label>Valor Final</label>
+            <label class="lbl">Valor Final</label>
+            <input class="caja" [(ngModel)]="valorFinal" name="valorFinal" type="text" required />
         </div>
-        <button type="submit" class="register-button">Agregar</button>
         </form>
+        <div class="button-group">
+        <button type="submit" id="actualizar" class="submit-button" (click)="creargasto()">Actualizar</button>
     </div>
 </div>

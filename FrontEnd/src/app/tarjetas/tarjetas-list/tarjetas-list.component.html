@@ -8,51 +8,60 @@
     <fa-icon [icon]="faPlus"></fa-icon>Agregar tarjeta
   </button>
 
-  <!-- Aquí iría el contenido específico para tarjetas, como tablas, formularios, etc. -->
-  <table class="tarjetas-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Número</th>
-        <th>Código</th>
-        <th>Fecha Expira</th>
-        <th>Cupo Total</th>
-        <th>Cupo Disponible</th>
-        <th>Deuda</th>
-        <th>Saldo Debito</th>
-        <th>Tipo</th>
-        <th>Fecha Pagos</th>
-        <th>Fecha Compra</th>
-        <th>Estado</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let tarjeta of tarjetas">
-        <td>{{ tarjeta.id }}</td>
-        <td>{{ tarjeta.numero }}</td>
-        <td>{{ tarjeta.codigo }}</td>
-        <td>{{ tarjeta.fechaExpira | date }}</td>
-        <td>{{ tarjeta.cupoTotal | currency: 'COP'  }}</td>
-        <td>{{ tarjeta.cupoDisponible | currency: 'COP'  }}</td>
-        <td>{{ tarjeta.deuda | currency: 'COP'  }}</td>
-        <td>{{ tarjeta.saldoDebito | currency: 'COP'  }}</td>
-        <td>{{ tarjeta.tipo }}</td>
-        <td>{{ tarjeta.fechaPagos | date }}</td>
-        <td>{{ tarjeta.fechaCompra | date }}</td>
-        <td>{{ tarjeta.estado }}</td>
-        <td>
-          <!-- boton para actualizar -->
-          <button (click)="FormularioEditar(tarjeta.id)" class="action-button">
-            <fa-icon [icon]="faEdit"></fa-icon>
-          </button>
+  <div class="tabla">
+    <table class="tarjetas-table">
+      <thead class="tarjetas-table-header">
+        <tr>
+          <th class="columnas primero">ID</th>
+          <th class="columnas">Número</th>
+          <th class="columnas">Código</th>
+          <th class="columnas">Fecha Expira</th>
+          <th class="columnas">Cupo Total</th>
+          <th class="columnas">Cupo Disponible</th>
+          <th class="columnas">Deuda</th>
+          <th class="columnas">Saldo Debito</th>
+          <th class="columnas">Tipo</th>
+          <th class="columnas">Fecha Pagos</th>
+          <th class="columnas">Fecha Compra</th>
+          <th class="columnas">Estado</th>
+          <th class="columnas ultimo">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tarjeta of tarjetas">
+          <td class="valores primerov">{{ tarjeta.id }}</td>
+          <td class="valores">{{ tarjeta.numero }}</td>
+          <td class="valores">{{ tarjeta.codigo }}</td>
+          <td class="valores">{{ tarjeta.fechaExpira | date }}</td>
+          <td class="valores">{{ tarjeta.cupoTotal | currency : "COP" }}</td>
+          <td class="valores">
+            {{ tarjeta.cupoDisponible | currency : "COP" }}
+          </td>
+          <td class="valores">{{ tarjeta.deuda | currency : "COP" }}</td>
+          <td class="valores">{{ tarjeta.saldoDebito | currency : "COP" }}</td>
+          <td class="valores">{{ tarjeta.tipo }}</td>
+          <td class="valores">{{ tarjeta.fechaPagos | date }}</td>
+          <td class="valores">{{ tarjeta.fechaCompra | date }}</td>
+          <td class="valores">{{ tarjeta.estado }}</td>
+          <td class="valores botones-acciones ultimov">
+            <!-- boton para actualizar -->
+            <button
+              (click)="FormularioEditar(tarjeta.id)"
+              class="action-button edit-button"
+            >
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
 
-          <!-- Botón para eliminar -->
-          <button (click)="eliminartarjeta(tarjeta.id)" class="action-button">
-            <fa-icon [icon]="faTrash"></fa-icon>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+            <!-- Botón para eliminar -->
+            <button
+              (click)="eliminartarjeta(tarjeta.id)"
+              class="action-button remove-button"
+            >
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

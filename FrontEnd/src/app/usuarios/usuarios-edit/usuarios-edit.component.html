@@ -1,58 +1,60 @@
 <app-navbar-authenticate></app-navbar-authenticate>
 
-<div class="register-container">
-    <div class="register-box">
-        <h2>Actualizar Usuario</h2>
+<div class="usuario-contenedor">
+  <div class="usuario-contenido">
+        <h1>Actualizar Usuario</h1>
         <form (ngSubmit)="actualizarUsuario()" class="usuario-form">
         <div class="input-group">
-            <input [(ngModel)]="primerNombre" name="primerNombre" type="text" required />
-            <label>Primer Nombre</label>
+            <label  class="lbl">Primer Nombre</label>
+            <input  class="caja"  [(ngModel)]="primerNombre" name="primerNombre" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="segundoNombre" name="segundoNombre" type="text" required />
-            <label>Segundo Nombre</label>
+            <label  class="lbl">Segundo Nombre</label>
+            <input  class="caja"  [(ngModel)]="segundoNombre" name="segundoNombre" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="primerApellido" name="primerApellido" type="text" required />
-            <label>Primer Apellido</label>
+            <label  class="lbl">Primer Apellido</label>
+            <input  class="caja"  [(ngModel)]="primerApellido" name="primerApellido" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="segundoApellido" name="segundoApellido" type="text" required />
-            <label>Segundo Apellido</label>
+            <label  class="lbl">Segundo Apellido</label>
+            <input  class="caja"  [(ngModel)]="segundoApellido" name="segundoApellido" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="nombreUsuario" name="nombreUsuario" type="text" required />
-            <label>Nombre de Usuario</label>
+            <label  class="lbl">Nombre de Usuario</label>
+            <input  class="caja"  [(ngModel)]="nombreUsuario" name="nombreUsuario" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="correo" name="correo" type="email" required />
-            <label>Correo</label>
+            <label  class="lbl">Correo</label>
+            <input  class="caja"  [(ngModel)]="correo" name="correo" type="email" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="clave" name="clave" type="password" required />
-            <label>Contraseña</label>
+            <label  class="lbl">Contraseña</label>
+            <input  class="caja"  [(ngModel)]="clave" disabled="" name="clave" type="password" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="direccion" name="direccion" type="text" required />
-            <label>Dirección</label>
+            <label  class="lbl">Dirección</label>
+            <input  class="caja"  [(ngModel)]="direccion" name="direccion" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="celular" name="celular" type="text" required />
-            <label>Celular</label>
+            <label  class="lbl">Celular</label>
+            <input  class="caja"  [(ngModel)]="celular" name="celular" type="text" required />
         </div>
         <div class="input-group">
-            <select [(ngModel)]="genero" name="genero" required>
+            <label  class="lbl">Genero</label>
+            <select  class="caja"  [(ngModel)]="genero" name="genero" required>
                 <option value="Masculino">Masculino</option>
                 <option value="Femenino">Femenino</option>
                 <option value="Otro">Otro</option>
             </select>
-            <label>Genero</label>
         </div>
         <div class="input-group">
-            <input [(ngModel)]="rolId" name="rolId" type="number" required />
-            <label>RolID</label>
+            <label  class="lbl">RolID</label>
+            <input  class="caja"  [(ngModel)]="rolId" name="rolId" type="number" required />
         </div>
-        <button type="submit" class="submit-button">Actualizar</button>
         </form>
+        <div class="button-group">
+        <button type="submit" id="actualizar" class="submit-button" (click)="actualizarUsuario()">Agregar</button>
+    </div>
     </div>
 </div>

@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.tarjeta-contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    background: #f3f4f6;
+    height: 91vh;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.tarjeta-contenido {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 75%;
+    max-width: 900px;
+    box-sizing: border-box;
+}
+
+/* Título */
+.tarjeta-contenido h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+    text-align: center;
+    color: #111827;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* Formulario en 2 columnas */
+.tarjeta-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    justify-items: center;
+}
+
+/* Grupo de inputs */
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Etiquetas */
+.lbl {
+    font-weight: 600;
+    margin-bottom: 1px;
+    color: #374151;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Inputs */
+.caja {
+    padding: 0.6rem 0.9rem;
+    border: 1px solid #d1d5db;
+    border-radius: 25px;
+    font-size: 1rem;
+    background-color: #f9fafb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    transition: all 0.2s ease;
+    max-width: 100%;
+    font-weight: 700;
+    text-align: center;
+}
+
+.caja:focus {
+    border: #3e3e3f 2px solid;
+    outline: none;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Botones */
+.submit-button {
+    padding: 14px 25px;
+    margin: 0.3rem;
+    border: none;
+    border-radius: 20px;
+    background-color: #f3f4f6;
+    color: black;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    width: fit-content;
+}
+
+.submit-button:hover:not(:disabled) {
+    background-color: #f3f4f6;
+    transform: translateX(1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+
+
+/* Responsive: Una columna en pantallas pequeñas */
+@media (max-width: 768px) {
+    .tarjeta-form {
+        grid-template-columns: 1fr;
+    }
+
+    .submit-button {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+}

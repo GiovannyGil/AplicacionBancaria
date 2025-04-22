@@ -9,47 +9,48 @@
     <fa-icon [icon]="faPlus"></fa-icon>Agregar credito
   </button>
 
-  <!-- Aquí iría el contenido específico para creditos, como tablas, formularios, etc. -->
+<div class="tabla">
   <table class="creditos-table">
-    <thead>
+    <thead class="creditos-table-header">
       <tr>
-        <th>ID</th>
-        <th>Número</th>
-        <th>Nombre</th>
-        <th>Fecha Expira</th>
-        <th>Cantidad Cuotas</th>
-        <th>Monto Final</th>
-        <th>Interes Mensual</th>
-        <th>Interes Total</th>
-        <th>Debito Mensual</th>
-        <th>Tipo</th>
-        <th>Acciones</th>
+        <th class="columnas primero">ID</th>
+        <th class="columnas">Número</th>
+        <th class="columnas">Nombre</th>
+        <th class="columnas">Fecha Expira</th>
+        <th class="columnas">Cantidad Cuotas</th>
+        <th class="columnas">Monto Final</th>
+        <th class="columnas">Interes Mensual</th>
+        <th class="columnas">Interes Total</th>
+        <th class="columnas">Debito Mensual</th>
+        <th class="columnas">Tipo</th>
+        <th class="columnas ultimo">Acciones</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody  class="creditos-table-body">
       <tr *ngFor="let credito of creditos">
-        <td>{{ credito.id }}</td>
-        <td>{{ credito.numero }}</td>
-        <td>{{ credito.nombre }}</td>
-        <td>{{ credito.fechaExpira | date }}</td>
-        <td>{{ credito.cantidadCuotas }}</td>
-        <td>{{ credito.montoFinal | currency: 'COP' }}</td>
-        <td>{{ credito.interesMensual | currency: 'COP' }}</td>
-        <td>{{ credito.interesTotal | currency: 'COP' }}</td>
-        <td>{{ credito.debitoMensual | currency: 'COP' }}</td>
-        <td>{{ credito.tipo }}</td>
-        <td>
+        <td class="valores primerov">{{ credito.id }}</td>
+        <td class="valores">{{ credito.numero }}</td>
+        <td class="valores">{{ credito.nombre }}</td>
+        <td class="valores">{{ credito.fechaExpira | date }}</td>
+        <td class="valores">{{ credito.cantidadCuotas }}</td>
+        <td class="valores">{{ credito.montoFinal | currency: 'COP' }}</td>
+        <td class="valores">{{ credito.interesMensual | currency: 'COP' }}</td>
+        <td class="valores">{{ credito.interesTotal | currency: 'COP' }}</td>
+        <td class="valores">{{ credito.debitoMensual | currency: 'COP' }}</td>
+        <td class="valores">{{ credito.tipo }}</td>
+        <td class="valores botones-acciones ultimov">
           <!-- boton para actualizar -->
-          <button (click)="FormularioEditar(credito.id)" class="action-button">
+          <button (click)="FormularioEditar(credito.id)" class="action-button edit-button">
             <fa-icon [icon]="faEdit"></fa-icon>
           </button>
 
           <!-- Botón para eliminar -->
-          <button (click)="eliminarcredito(credito.id)" class="action-button">
+          <button (click)="eliminarcredito(credito.id)" class="action-button remove-button">
             <fa-icon [icon]="faTrash"></fa-icon>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+  </div>
 </div>

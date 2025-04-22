@@ -1,57 +1,59 @@
 <app-navbar-authenticate></app-navbar-authenticate>
 
-<div class="register-container">
-    <div class="register-box">
-        <h2>Registro</h2>
-        <form (ngSubmit)="creartarjeta()">
+<div class="tarjeta-contenedor">
+  <div class="tarjeta-contenido">
+        <h1>Agregar Tarjeta</h1>
+        <form (ngSubmit)="creartarjeta()" class="tarjeta-form">
         <div class="input-group">
-            <input [(ngModel)]="numero" name="numero" type="text" required />
-            <label>Número</label>
+            <label  class="lbl">Número</label>
+            <input class="caja" [(ngModel)]="numero" name="numero" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="codigo" name="codigo" type="text" required />
-            <label>Código</label>
+            <label  class="lbl">Código</label>
+            <input class="caja" [(ngModel)]="codigo" name="codigo" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="fechaExpira" name="fechaExpira" type="date" required />
-            <label>Fecha Expira</label>
+            <label  class="lbl">Fecha Expira</label>
+            <input class="caja" [(ngModel)]="fechaExpira" name="fechaExpira" type="date" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="cupoTotal" name="cupoTotal" type="number" required />
-            <label>Cupo Total</label>
+            <label  class="lbl">Cupo Total</label>
+            <input class="caja" [(ngModel)]="cupoTotal" name="cupoTotal" type="number" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="cupoDisponible" name="cupoDisponible" type="number" required />
-            <label>Cupo Disponible</label>
+            <label  class="lbl">Cupo Disponible</label>
+            <input class="caja" [(ngModel)]="cupoDisponible" name="cupoDisponible" type="number" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="deuda" name="deuda" type="number" required />
-            <label>Deuda</label>
+            <label  class="lbl">Deuda</label>
+            <input class="caja" [(ngModel)]="deuda" name="deuda" type="number" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="saldoDebito" name="saldoDebito" type="number" required />
-            <label>Saldo Debito</label>
+            <label  class="lbl">Saldo Debito</label>
+            <input class="caja" [(ngModel)]="saldoDebito" name="saldoDebito" type="number" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="tipo" name="tipo" type="text" required />
-            <label>tipo</label>
+            <label  class="lbl">tipo</label>
+            <input class="caja" [(ngModel)]="tipo" name="tipo" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="fechaPagos" name="fechaPagos" type="date" required />
-            <label>Fecha Pagos</label>
+            <label  class="lbl">Fecha Pagos</label>
+            <input class="caja" [(ngModel)]="fechaPagos" name="fechaPagos" type="date" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="fechaCompra" name="fechaCompra" type="date" required />
-            <label>Fecha Compra</label>
+            <label  class="lbl">Fecha Compra</label>
+            <input class="caja" [(ngModel)]="fechaCompra" name="fechaCompra" type="date" required />
         </div>
         <div class="input-group">
-            <select [(ngModel)]="estado" name="esatado" required>
+            <label  class="lbl">Estado</label>
+            <select class="caja" [(ngModel)]="estado" name="esatado" required>
                 <option value="1">Activo</option>
                 <option value="0">Inactivo</option>
             </select>
-            <label>Estado</label>
         </div>
-        <button type="submit" class="register-button">Agregar</button>
         </form>
+        <div class="button-group">
+        <button type="submit" id="agregar" class="submit-button" (click)="creartarjeta()">Agregar</button>
+    </div>
     </div>
 </div>

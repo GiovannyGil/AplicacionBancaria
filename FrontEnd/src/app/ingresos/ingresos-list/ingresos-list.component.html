@@ -7,37 +7,38 @@
   <button (click)="FomularioCrear()" class="add-button">
     <fa-icon [icon]="faPlus"></fa-icon>Agregar ingreso
   </button>
-  
-  <!-- Aquí iría el contenido específico para ingresos, como tablas, formularios, etc. -->
+
+  <div class="table">
   <table class="ingresos-table">
-    <thead>
+    <thead class="ingresos-table-header">
       <tr>
-        <th>ID</th>
-        <th>Nombre Ingreso</th>
-        <th>Valor Ingreso</th>
-        <th>Valor Final</th>
-        <th>Acciones</th>
+        <th class="columnas primero">ID</th>
+        <th class="columnas">Nombre Ingreso</th>
+        <th class="columnas">Valor Ingreso</th>
+        <th class="columnas">Valor Final</th>
+        <th class="columnas ultimo">Acciones</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody  class="ingresos-table-body">
       <tr *ngFor="let ingreso of ingresos">
-        <td>{{ ingreso.id }}</td>
-        <td>{{ ingreso.nombreIngreso }}</td>
-        <td>{{ ingreso.valorIngreso | currency: 'COP'  }}</td>
-        <td>{{ ingreso.valorFinal | currency: 'COP'  }}</td>
-        <td>
+        <td class="valores primerov">{{ ingreso.id }}</td>
+        <td class="valores">{{ ingreso.nombreIngreso }}</td>
+        <td class="valores">{{ ingreso.valorIngreso | currency: 'COP'  }}</td>
+        <td class="valores">{{ ingreso.valorFinal | currency: 'COP'  }}</td>
+        <td class="valores botones-acciones ultimov">
           <!-- boton para actualizar -->
-          <button (click)="FormularioEditar(ingreso.id)" class="action-button">
+          <button (click)="FormularioEditar(ingreso.id)" class="action-button edit-button">
             <fa-icon [icon]="faEdit"></fa-icon>
           </button>
 
           <!-- Botón para eliminar -->
-          <button (click)="eliminaringreso(ingreso.id)" class="action-button">
+          <button (click)="eliminaringreso(ingreso.id)" class="action-button remove-button">
             <fa-icon [icon]="faTrash"></fa-icon>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+  </div>
 
 </div>

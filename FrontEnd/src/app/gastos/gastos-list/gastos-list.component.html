@@ -8,35 +8,36 @@
     <fa-icon [icon]="faPlus"></fa-icon>Agregar gasto
   </button>
 
-  <!-- Aquí iría el contenido específico para gastos, como tablas, formularios, etc. -->
+<div class="tabla">
   <table class="gastos-table">
-    <thead>
+    <thead class="gastos-table-header">
       <tr>
-        <th>ID</th>
-        <th>Nombre Gasto</th>
-        <th>Valor Pago</th>
-        <th>Valor Final</th>
-        <th>Acciones</th>
+        <th class="columnas primero">ID</th>
+        <th class="columnas">Nombre Gasto</th>
+        <th class="columnas">Valor Pago</th>
+        <th class="columnas">Valor Final</th>
+        <th class="columnas ultimo">Acciones</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="gastos-table-body">
       <tr *ngFor="let gasto of gastos">
-        <td>{{ gasto.id }}</td>
-        <td>{{ gasto.nombreGasto }}</td>
-        <td>{{ gasto.valorPago | currency: 'COP' }}</td>
-        <td>{{ gasto.valorFinal | currency: 'COP' }}</td>
-        <td>
+        <td class="valores primerov">{{ gasto.id }}</td>
+        <td class="valores">{{ gasto.nombreGasto }}</td>
+        <td class="valores">{{ gasto.valorPago | currency: 'COP' }}</td>
+        <td class="valores">{{ gasto.valorFinal | currency: 'COP' }}</td>
+        <td class="valores botones-acciones ultimov">
           <!-- boton para actualizar -->
-          <button (click)="FormularioEditar(gasto.id)" class="action-button">
+          <button (click)="FormularioEditar(gasto.id)" class="action-button edit-button">
             <fa-icon [icon]="faEdit"></fa-icon>
           </button>
 
           <!-- Botón para eliminar -->
-          <button (click)="eliminargasto(gasto.id)" class="action-button">
+          <button (click)="eliminargasto(gasto.id)" class="action-button remove-button">
             <fa-icon [icon]="faTrash"></fa-icon>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+  </div>
 </div>

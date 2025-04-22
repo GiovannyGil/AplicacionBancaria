@@ -1,25 +1,27 @@
 <app-navbar-authenticate></app-navbar-authenticate>
 
-<div class="register-container">
-    <div class="register-box">
-        <h2>Agregar Usuario</h2>
+<div class="rol-contenedor">
+  <div class="rol-contenido">
+        <h2>Actualizar Rol</h2>
         <form (ngSubmit)="actualizarRol()" class="ROL-form">
         <div class="input-group">
-            <input [(ngModel)]="nombreRol" name="nombreRol" type="text" required />
-            <label>Nombre Rol</label>
+            <label class="lbl">Nombre Rol</label>
+            <input class="caja" [(ngModel)]="nombreRol" name="nombreRol" type="text" required />
         </div>
         <div class="input-group">
-            <input [(ngModel)]="descripcion" name="descripcion" type="text" required />
-            <label>Descripción</label>
+            <label class="lbl">Descripción</label>
+            <input class="caja" [(ngModel)]="descripcion" name="descripcion" type="text" required />
         </div>
         <div class="input-group">
-            <select [(ngModel)]="estado" name="estado" required>
+            <label class="lbl">Estado</label>
+            <select class="caja" [(ngModel)]="estado" name="esatado" required>
                 <option value="1">Activo</option>
                 <option value="0">Inactivo</option>
             </select>
-            <label>Estado</label>
         </div>
-        <button type="submit" class="submit-button">Actualizar</button>
-        </form>
+    </form>
+    <div class="button-group">
+        <button type="submit" id="actualizar" class="submit-button" (click)="actualizarRol()">Agregar</button>
+    </div>
     </div>
 </div>
