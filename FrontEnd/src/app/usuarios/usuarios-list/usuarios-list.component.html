@@ -40,10 +40,21 @@
           <td class="valores">{{ usuario.correo }}</td>
           <td class="valores">{{ usuario.direccion }}</td>
           <td class="valores">{{ usuario.celular }}</td>
-          <td class="valores estado">{{ usuario.estado }}</td>
-          <td class="valores genero"> {{ usuario.genero }} </td>
+          <td class="valores">
+            <span class="estado {{ usuario.estado ? 'estado-true' : 'estado-false' }}">
+              {{ usuario.estado }}
+            </span>
+          </td>
+          
+          <td class="valores">
+            <span class="genero {{ usuario.genero == 'masculino' ? 'masculino' : 'femenino' }}"> {{ usuario.genero }} </span>
+          </td>
           <td class="valores">{{ usuario.createdAt }}</td>
-          <td class="valores">{{ usuario.rol.nombreRol }}</td>
+          <td class="valores ">
+            <span class="rol {{ usuario.rol.nombreRol == 'Administrador' ? 'Administrador' : 'otro' }}">
+              {{ usuario.rol.nombreRol }}
+            </span>
+          </td>
           <td class="valores botones-acciones ultimov">
             <!-- boton para actualizar -->
             <button (click)="FormularioEditar(usuario.id)" class="action-button edit-button">

@@ -24,8 +24,6 @@ export class AuthService {
     // método para iniciar sesión
     async login(nombreUsuario: string, clave: string): Promise<{ token: string }> {
         try {
-            console.log('Intentando iniciar sesión con:', nombreUsuario);
-
             // Buscar usuario
             const usuario = await this.usuariosService.findOneByNombreUsuario(nombreUsuario);
             if (!usuario) {
@@ -33,16 +31,12 @@ export class AuthService {
                 throw new NotFoundException(`El usuario con NombreUsuario "${nombreUsuario}" no existe o ya fue eliminado.`);
             }
 
-            console.log('Usuario encontrado:', usuario);
-
             // Verificar contraseña
             const isPasswordValid = await bcrypt.compare(clave, usuario.clave);
             if (!isPasswordValid) {
                 console.log('Clave incorrecta');
                 throw new UnauthorizedException('Clave inválida');
             }
-
-            console.log('Clave correcta');
 
             // Cargar el rol
             const rol = usuario.rol?.nombreRol || 'Sin rol';
@@ -54,15 +48,11 @@ export class AuthService {
                 rol: rol
             };
 
-            console.log('Payload para el token:', payload);
-
             // Generar el token
             const token = await this.jwtService.signAsync(payload, {
                 secret: process.env.JWT_SECRET || 'SECRET-KEY',
                 expiresIn: '1h'
             });
-
-            console.log('Token generado correctamente');
 
             return { token: token };
         } catch (error) {
@@ -136,10 +126,6 @@ export class AuthService {
                 throw new NotFoundException(`El correo "${correo}" no está registrado.`);
             }
 
-            // mostrar el usuario encontrado
-            console.log('Usuario encontrado:', usuario);
-        
-
             // Enviar correo con el token (implementa tu lógica de envío de correo aquí)
             // await this.sendResetPasswordEmail(usuario.correo);
 
@@ -175,9 +161,7 @@ export class AuthService {
 
             // retornar un true si el usuario y correo son del mismo usuario
             const coincidencia = usuarioCorreo.nombreUsuario === nombreUsuario && usuarioCorreo.correo === correo;
-            console.log('Coincidencia encontrada:', coincidencia);
             return coincidencia;
-
         } catch (error) {
             throw new UnauthorizedException(`Error al reestablecer la clave: ${error.message}`);
         }
@@ -185,7 +169,6 @@ export class AuthService {
     async reestablecerClave(nombreUsuario: string, correo: string, clave: string, confirmarClave: string): Promise<any> {
         try {
             // verificar si las coincidencias son correctas
-
             const coincidencias = await this.buscarCoincidencias(nombreUsuario, correo);
             if (!coincidencias) {
                 throw new UnauthorizedException('El usuario y correo no coinciden');
@@ -211,7 +194,6 @@ export class AuthService {
             usuario.clave = hashedClave;
             usuario.updatedAt = new Date(); // Actualizar la fecha de modificación
             const updatedUser = await this.usuarioRepository.save(usuario); // Guardar el usuario actualizado
-            console.log('Clave reestablecida correctamente');
             return { message: 'Clave reestablecida correctamente' };
         } catch (error) {
             throw new UnauthorizedException(`Error al reestablecer la clave: ${error.message}`);

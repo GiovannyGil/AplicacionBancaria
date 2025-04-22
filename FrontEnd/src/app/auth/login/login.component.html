@@ -1,31 +1,22 @@
 <app-navbar></app-navbar>
 
-<div class="login-container">
-  <div class="login-box">
-    <h2>Iniciar Sesión</h2>
+<body>
+  <div class="login-container">
     <form (ngSubmit)="login()">
-      <div class="input-group">
-        <input
-          [(ngModel)]="nombreUsuario"
-          name="nombreUsuario"
-          type="text"
-          required
-          placeholder="Nombre de Usuario"
-        />
-        <label>Nombre de Usuario</label>
-      </div>
-      <div class="input-group">
-        <input [(ngModel)]="clave" name="clave" type="password" required placeholder="Contraseña" />
-        <label>Contraseña</label>
-      </div>
-      <button type="submit" class="login-button">Entrar</button>
+      <h1 class="title">Iniciar Sesión</h1>
 
-      <div class="details">
-        <a href="#" class="noCuenta" (click)="irARegistro($event)">¿No tienes cuenta?</a>
-        <a href="#" class="recuperar" (click)="irARecuperarUsuario($event)">¿Olvidaste tu Usuario?</a>
-        <a href="#" class="recuperar" (click)="irAReestablecerClave($event)">¿Olvidaste tu Contraseña?</a>
-      </div>
-    
+        <label class="tituloInput">Nombre de Usuario</label>
+        <input class="caja" [(ngModel)]="nombreUsuario" name="nombreUsuario" type="text" required placeholder="Nombre de Usuario" />
+
+        <label class="tituloInput">Contraseña</label>
+        <input class="caja" [(ngModel)]="clave" name="clave" type="password" required placeholder="Contraseña" />
+
+        <button type="submit" class="boton">Entrar</button>
     </form>
+    <div class="details">
+      <a class="noCuenta" routerLink="/auth/register">¿No tienes cuenta?</a>
+      <a class="recuperar" routerLink="/auth/recuperarUsuario">¿Olvidaste tu Usuario?</a>
+      <a class="recuperar" routerLink="/auth/reestablecerClave">¿Olvidaste tu Contraseña?</a>
+    </div>
   </div>
-</div>
+</body>

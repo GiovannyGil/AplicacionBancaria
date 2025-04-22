@@ -1,26 +1,21 @@
 <app-navbar></app-navbar>
 
-<div class="container">
-    <h2>Restablecer Contraseña</h2>
+<div class="login-container">
 
-    <form action="">
-        <div class="item">
-            <input type="text" placeholder="Nombre Usuario" name="nombreUsuario" [(ngModel)]="nombreUsuario" required />
-            <label for="">Nombre Usuario</label>
-        </div>
-        <div class="item">
-            <input type="email" placeholder="Correo Electronico" required name="correo" [(ngModel)]="correo" />
-            <label for="">Correo Electronico</label>
-        </div>
-        <div class="item">
-            <input type="password" placeholder="Clave" required name="clave" [(ngModel)]="clave"/>
-            <label for="">Clave</label>
-        </div>
-        <div class="item">
-            <input type="password" placeholder="Confirmar Clave" required name="confirmarClave" [(ngModel)]="confirmarClave"/>
-            <label for="">Correo Electronico</label>
-        </div>
+    <form action="" class="formulario" (ngSubmit)="reestablecerClave()">
+        <h1 class="title">Restablecer Contraseña</h1>
+        <label class="tituloInput" for="">Nombre Usuario</label>
+        <input class="caja" type="text" placeholder="Nombre Usuario" name="nombreUsuario" [(ngModel)]="nombreUsuario" required />
 
-        <button (click)="reestablecerClave()">Recordar</button>
+        <label class="tituloInput" for="">Correo Electronico</label>
+        <input class="caja" type="email" placeholder="Correo Electronico" required name="correo" [(ngModel)]="correo" />
+
+        <label class="tituloInput" for="">Clave</label>
+        <input class="caja" type="password" placeholder="Clave" required name="clave" [(ngModel)]="clave"/>
+
+        <label class="tituloInput" for="">Correo Electronico</label>
+        <input class="caja" type="password" placeholder="Confirmar Clave" required name="confirmarClave" [(ngModel)]="confirmarClave"/>
+
+        <button class="boton" (click)="reestablecerClave()">Recordar</button>
     </form>
 </div>

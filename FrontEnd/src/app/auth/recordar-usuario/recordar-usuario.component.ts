@@ -22,10 +22,12 @@ export class RecordarUsuarioComponent {
     this.authService.recordarUsuario(this.correo).subscribe({
       next: (response) => {
         // Mostrar los datos que devuelve el backend
-        alert(`
-          ${response.message}\n
-          Usuario: ${response.usuario}
-        `)
+        // alert(`
+        //   ${response.message}\n
+        //   Usuario: ${response.usuario}
+        // `)
+
+        this.usuarioEncontrado = response.usuario; // Guardar el usuario encontrado
       },
       error: (error) => {
         console.error('Error al recordar usuario', error);
